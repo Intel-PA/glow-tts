@@ -28,13 +28,13 @@ waveglow = waveglow.remove_weightnorm(waveglow)
 _ = waveglow.cuda().eval()
 
 # If you are using your own trained model
-# model_dir = "./logs/your_dir/"
-# hps = utils.get_hparams_from_dir(model_dir)
-# checkpoint_path = utils.latest_checkpoint_path(model_dir)
+model_dir = "./logs/base/"
+hps = utils.get_hparams_from_dir(model_dir)
+checkpoint_path = utils.latest_checkpoint_path(model_dir)
 
 # If you are using a provided pretrained model
-hps = utils.get_hparams_from_file("./configs/base.json")
-checkpoint_path = "../glow_tts_pretrained_models/glow_tts_pretrained.pt"
+#hps = utils.get_hparams_from_file("./configs/base.json")
+#checkpoint_path = "../glow_tts_pretrained_models/glow_tts_pretrained.pt"
 
 model = models.FlowGenerator(
     len(symbols) + getattr(hps.data, "add_blank", False),
@@ -52,7 +52,7 @@ def normalize_audio(x, max_wav_value=hps.data.max_wav_value):
     return np.clip((x / np.abs(x).max()) * max_wav_value, -32768, 32767).astype("int16")
 
 
-tst_stn = "Glow TTS is really awesome !" 
+tst_stn = "This was trained for one hundred and twelve epochs with no data augmentation." 
 
 if getattr(hps.data, "add_blank", False):
     text_norm = text_to_sequence(tst_stn.strip(), ['english_cleaners'], cmu_dict)
