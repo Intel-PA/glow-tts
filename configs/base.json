@@ -3,7 +3,7 @@
     "use_cuda": true,
     "log_interval": 20,
     "seed": 1234,
-    "epochs": 160,
+    "epochs": 112,
     "learning_rate": 1e0,
     "betas": [0.9, 0.98],
     "eps": 1e-9,
@@ -14,9 +14,9 @@
     "fp16_run": true
   },
   "data": {
-    "load_mel_from_disk": false,
-    "training_files":"filelists/ljs_audio_text_train_filelist.txt",
-    "validation_files":"filelists/ljs_audio_text_val_filelist.txt",
+    "load_mel_from_disk": true,
+    "training_files":"filelists/train_mels_masking.txt",
+    "validation_files":"filelists/val_mels_masking.txt",
     "text_cleaners":["english_cleaners"],
     "max_wav_value": 32768.0,
     "sampling_rate": 22050,
