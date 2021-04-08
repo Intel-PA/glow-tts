@@ -18,7 +18,9 @@ import models
 import utils
 
 
-outfile = "./generated_wavs/test.wav"
+
+def get_output_filename(index):
+  return f"./generated_wavs/speech_{index}.wav"
 
 
 # load WaveGlow
@@ -51,32 +53,33 @@ cmu_dict = cmudict.CMUDict(hps.data.cmudict_path)
 def normalize_audio(x, max_wav_value=hps.data.max_wav_value):
     return np.clip((x / np.abs(x).max()) * max_wav_value, -32768, 32767).astype("int16")
 
-
-tst_stn = "This was trained for one hundred and twelve epochs with no data augmentation." 
-
-if getattr(hps.data, "add_blank", False):
-    text_norm = text_to_sequence(tst_stn.strip(), ['english_cleaners'], cmu_dict)
-    text_norm = commons.intersperse(text_norm, len(symbols))
-else: # If not using "add_blank" option during training, adding spaces at the beginning and the end of utterance improves quality
-    tst_stn = " " + tst_stn.strip() + " "
-    text_norm = text_to_sequence(tst_stn.strip(), ['english_cleaners'], cmu_dict)
-sequence = np.array(text_norm)[None, :]
-print("".join([symbols[c] if c < len(symbols) else "<BNK>" for c in sequence[0]]))
-x_tst = torch.autograd.Variable(torch.from_numpy(sequence)).cuda().long()
-x_tst_lengths = torch.tensor([x_tst.shape[1]]).cuda()
-
-with torch.no_grad():
-  noise_scale = .667
-  length_scale = 1.0
-  (y_gen_tst, *_), *_, (attn_gen, *_) = model(x_tst, x_tst_lengths, gen=True, noise_scale=noise_scale, length_scale=length_scale)
-  try:
-    audio = waveglow.infer(y_gen_tst.half(), sigma=.666)
-  except:
-    audio = waveglow.infer(y_gen_tst, sigma=.666)
-
-
-audio = normalize_audio(audio[0].clamp(-1,1).data.cpu().float().numpy())
+strings = ["What kind of symptoms are you experiencing ?", "Do you have a high temperature ?", "What can I do for you today ?", "Based on what you have told me , I think you need to get checked for diabetes ."]
+# tst_stn = "This was trained for one hundred and twelve epochs with no data augmentation." 
 
 from scipy.io.wavfile import write
 
-write(outfile, hps.data.sampling_rate, audio)
+for index, test_stn in enumerate(strings):
+    if getattr(hps.data, "add_blank", False):
+        text_norm = text_to_sequence(tst_stn.strip(), ['english_cleaners'], cmu_dict)
+        text_norm = commons.intersperse(text_norm, len(symbols))
+    else: # If not using "add_blank" option during training, adding spaces at the beginning and the end of utterance improves quality
+        tst_stn = " " + tst_stn.strip() + " "
+        text_norm = text_to_sequence(tst_stn.strip(), ['english_cleaners'], cmu_dict)
+    sequence = np.array(text_norm)[None, :]
+    print("".join([symbols[c] if c < len(symbols) else "<BNK>" for c in sequence[0]]))
+    x_tst = torch.autograd.Variable(torch.from_numpy(sequence)).cuda().long()
+    x_tst_lengths = torch.tensor([x_tst.shape[1]]).cuda()
+
+    with torch.no_grad():
+        noise_scale = .667
+        length_scale = 1.0
+        (y_gen_tst, *_), *_, (attn_gen, *_) = model(x_tst, x_tst_lengths, gen=True, noise_scale=noise_scale, length_scale=length_scale)
+        try:
+            audio = waveglow.infer(y_gen_tst.half(), sigma=.666)
+        except:
+            audio = waveglow.infer(y_gen_tst, sigma=.666)
+
+
+    audio = normalize_audio(audio[0].clamp(-1,1).data.cpu().float().numpy())
+    outfile = get_output_filename(index)
+    write(outfile, hps.data.sampling_rate, audio)
