@@ -58,7 +58,7 @@ strings = ["What kind of symptoms are you experiencing ?", "Do you have a high t
 
 from scipy.io.wavfile import write
 
-for index, test_stn in enumerate(strings):
+for index, tst_stn in enumerate(strings):
     if getattr(hps.data, "add_blank", False):
         text_norm = text_to_sequence(tst_stn.strip(), ['english_cleaners'], cmu_dict)
         text_norm = commons.intersperse(text_norm, len(symbols))
