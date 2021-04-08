@@ -19,8 +19,8 @@ import utils
 
 
 
-def get_output_filename(index):
-  return f"./generated_wavs/speech_{index}.wav"
+def get_output_filename(prefix, index):
+  return f"./generated_wavs/{prefix}_speech_{index}.wav"
 
 
 # load WaveGlow
@@ -30,7 +30,7 @@ waveglow = waveglow.remove_weightnorm(waveglow)
 _ = waveglow.cuda().eval()
 
 # If you are using your own trained model
-model_dir = "./logs/base/"
+model_dir = "./logs/augmented_model/"
 hps = utils.get_hparams_from_dir(model_dir)
 checkpoint_path = utils.latest_checkpoint_path(model_dir)
 
@@ -81,5 +81,5 @@ for index, tst_stn in enumerate(strings):
 
 
     audio = normalize_audio(audio[0].clamp(-1,1).data.cpu().float().numpy())
-    outfile = get_output_filename(index)
+    outfile = get_output_filename("aug", index)
     write(outfile, hps.data.sampling_rate, audio)
