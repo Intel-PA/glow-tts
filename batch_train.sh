@@ -4,9 +4,10 @@ dataset_name=""
 full_dataset_filelist=""
 num_iterations=""
 gamma=""
+epochs="100"
 
 function print_usage(){
-	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n"
+	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n-e number of epochs per training run (defaults to 100)\n"
 	printf "$help_text"
 }
 
@@ -18,13 +19,14 @@ function clean_checkpoints(){
     rm $1/G_* && mv tmp/* $1
 }
 
-while getopts "hd:f:n:g:" flag; do
+while getopts "hd:f:n:g:e:" flag; do
 	case "${flag}" in
 		h) print_usage; exit ;;
 		d) dataset_name="${OPTARG}" ;;
 		f) full_dataset_filelist="${OPTARG}" ;;
 		n) num_iterations="${OPTARG}" ;;
 		g) gamma="${OPTARG}" ;;
+		e) epochs="${OPTARG}" ;;
 		:) echo "Missing option argument for -$OPTARG"; exit 1;;
 		*) print_usage; exit 1 ;;
 	esac 
@@ -56,8 +58,9 @@ echo "Dataset name: $dataset_name"
 echo "Path:         $full_dataset_filelist"
 echo "Gamma:        $gamma"
 echo "No. of runs:  $num_iterations"
+echo "Epochs/run:   $epochs"
 
-python generate_filelists.py $dataset_name $full_dataset_filelist $gamma $num_iterations | tee return_file
+python generate_filelists.py $dataset_name $full_dataset_filelist $gamma $num_iterations $epochs | tee return_file
 new_dir=`cat return_file | tail -1`
 model_prefix=`echo "$new_dir" | cut -d '/' -f 2`
 rm return_file
