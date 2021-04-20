@@ -70,7 +70,7 @@ while read -r run ; do
 		echo "Model for $run has already been trained - skipping..."
 	else
 		model_name="${model_prefix}_${run}"
-	    ./ddi_train.sh $new_dir/$run/config.json $model_name
+	    ./train_ddi.sh $new_dir/$run/config.json $model_name
 	    cp logs/$model_name/train.log $new_dir/$run/
 	    python extract_loss.py filelists/$model_prefix/$run/train.log filelists/$model_prefix/$run/$run
 	    clean_checkpoints logs/$model_name
