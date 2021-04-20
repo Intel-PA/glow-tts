@@ -12,10 +12,9 @@ function print_usage(){
 }
 
 function clean_checkpoints(){
-	# gets rid of all but the last 2 checkpoints
+	# gets rid of all but the last checkpoint
 	num_checkpoints=`ls -1 $1/G_* | wc -l`
 	mv $1/G_${num_checkpoints}.pth tmp &&
-	mv $1/G_$((num_checkpoints-1)).pth tmp &&
     rm $1/G_* && mv tmp/* $1
 }
 
