@@ -14,3 +14,6 @@ monotonic_align/monotonic_align
 
 generated_wavs
 *.pt
+
+tmp
+test_clean
