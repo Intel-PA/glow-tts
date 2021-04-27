@@ -6,7 +6,6 @@ pitch_range="-200;200" #semitones
 speed_range="0.8;1.2"
 
 aug_methods="pitchshift, speed"
-augs_arr=()
 filelist=""
 
 function clean_dir_name(){
@@ -114,7 +113,7 @@ echo "Augmentated dataset name:                 $dataset_name"
 echo "Augmentations to apply:                   $augs"
 echo "Number of new wav files per augmentation: $num_wavs"
 
-make_augs_arr
+augs_arr=( $augs )
 
 curr="1"
 total=`cat "$wav_filelist" | wc -l`
