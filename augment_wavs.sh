@@ -2,8 +2,8 @@ augs=""
 num_wavs=""
 dataset_name=""
 wav_filelist=""
-pitch_range="-300;300" #semitones
-speed_range="0.75;1.25"
+pitch_range="-200;200" #semitones
+speed_range="0.8;1.2"
 
 aug_methods="pitchshift, speed"
 augs_arr=()
