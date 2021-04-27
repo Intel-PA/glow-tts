@@ -37,7 +37,7 @@ function get_filename(){
 
 
 function print_usage(){
-	help_text=$"OPTIONS\n-d name of the dataset (required)\n-w directory of wav files (required)\n-n number of new wavs to generate per augmentation method (required)\n-a list of augmentation methods to apply. Must be from: $aug_methods (required)\n"
+	help_text=$"OPTIONS\n-d name of the dataset (required)\n-w text file containing locations of wav files (required)\n-n number of new wavs to generate per augmentation method (required)\n-a list of augmentation methods to apply. Must be from: $aug_methods (required)\n"
 	printf "$help_text"
 }
 
@@ -96,7 +96,7 @@ fi
 
 
 if [ -z "$wav_filelist"  ]; then
-	echo "Path to wavs cannot be empty."
+	echo "Path to filelist cannot be empty."
 	print_usage; exit 1 
 fi
 
