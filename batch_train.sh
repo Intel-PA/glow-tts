@@ -74,7 +74,7 @@ while read -r run ; do
 	    ./train_ddi.sh $new_dir/$run/config.json $model_name
 	    cp train_logs/$model_name/train.log $new_dir/$run/
 	    python extract_loss.py filelists/$model_prefix/$run/train.log filelists/$model_prefix/$run/$run
-	    clean_checkpoints logs/$model_name
+	    clean_checkpoints train_logs/$model_name
 	    touch $new_dir/$run/checkpoint.complete
 	    echo ""
 	    echo "------------$run complete------------"
