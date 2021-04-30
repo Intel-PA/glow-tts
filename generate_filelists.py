@@ -22,7 +22,7 @@ def sample_dataset(full_dataset: [str], gamma: float) -> list:
     indices_seen = []
 
     while len(resized_dataset) < resized_dataset_len:
-        index = random.randint(0, resized_dataset_len - 1)
+        index = random.randint(0, len(full_dataset) - 1)
         if index not in indices_seen:
             resized_dataset.append(full_dataset[index])
             indices_seen.append(index)
@@ -123,12 +123,11 @@ def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
         json.dump(config, fh, indent=4)
 
 if __name__ == "__main__":
-    random.seed(SEED)
+    # random.seed(SEED)
     dataset_name = sys.argv[1]
     dataset_path = sys.argv[2]
     gamma = float(sys.argv[3])
     num_iterations = int(sys.argv[4])
-    EPOCHS = int(sys.argv[5])
 
     with open(dataset_path, "r") as fh:
         lines = fh.readlines()
@@ -139,6 +138,5 @@ if __name__ == "__main__":
         train, val, test = split_dataset(s, SPLIT)
         out = make_dir_name(iteration, gamma, dataset_name)
         write_files(out, train, val, test)
-        print(f"Completed {iteration+1}/{num_iterations} runs." , end='\r' if iteration+1 < num_iterations else '\n', flush=True)
-    main_dir = '/'.join(out.split('/')[:-1])
-    print(f"Created directory:\n{main_dir}")
+        print(f"Completed {iteration+1}/{num_iterations} runs." , end='\r', flush=True)
+    
