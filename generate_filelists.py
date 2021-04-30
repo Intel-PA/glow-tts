@@ -123,7 +123,7 @@ def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
         json.dump(config, fh, indent=4)
 
 if __name__ == "__main__":
-    # random.seed(SEED)
+    random.seed(SEED)
     dataset_name = sys.argv[1]
     dataset_path = sys.argv[2]
     gamma = float(sys.argv[3])
@@ -138,5 +138,7 @@ if __name__ == "__main__":
         train, val, test = split_dataset(s, SPLIT)
         out = make_dir_name(iteration, gamma, dataset_name)
         write_files(out, train, val, test)
-        print(f"Completed {iteration+1}/{num_iterations} runs." , end='\r', flush=True)
+        print(f"Completed {iteration+1}/{num_iterations} runs." , end='\r' if iteration+1 < num_iterations else '\n', flush=True)
+    main_dir = '/'.join(out.split('/')[:-1])
+    print(f"Created directory:\n{main_dir}")
     
