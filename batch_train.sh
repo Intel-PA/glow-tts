@@ -84,6 +84,9 @@ while read -r run ; do
 		echo ""
 		model_name="${model_prefix}_${run}"
 	    ./train_ddi.sh $new_dir/$run/config.json $model_name
+	    if [ $? -ne 0 ]; then 
+	    	exit $?
+	    fi
 	    cp train_logs/$model_name/train.log $new_dir/$run/
 	    python extract_loss.py filelists/$model_prefix/$run/train.log filelists/$model_prefix/$run/$run
 	    clean_checkpoints train_logs/$model_name $epochs $keep_interval
