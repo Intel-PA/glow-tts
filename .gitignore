@@ -1,6 +1,7 @@
 DATASETS
 DUMMY
 AUGMENTED
+SOX_AUGMENT
 samples
 logs
 __pycache__
