@@ -15,7 +15,8 @@ function clean_checkpoints(){
 	# gets rid of all but the last checkpoint
 	num_checkpoints=`ls -1 $1/G_* | wc -l`
 	mv $1/G_${num_checkpoints}.pth tmp &&
-    rm $1/G_* && mv tmp/* $1
+	rm $1/G_* && mv tmp/* $1
+	echo "kept $1/G_${num_checkpoints}.pth, deleted others."
 }
 
 while getopts "hd:f:n:g:e:" flag; do
