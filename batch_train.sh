@@ -5,7 +5,7 @@ full_dataset_filelist=""
 num_iterations=""
 gamma=""
 epochs="100"
-keep_interval="20" #keep every nth checkpoint
+keep_interval="20" # keep every nth checkpoint
 
 function print_usage(){
 	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n-e number of epochs per training run (defaults to 100)\n-k skipping interval for training checkpoints to keep (defaults to 20)\n"
