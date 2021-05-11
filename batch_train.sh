@@ -6,9 +6,11 @@ num_iterations=""
 gamma=""
 epochs="100"
 keep_interval="20" # keep every nth checkpoint
+inflate="none"
+use_mels="False"
 
 function print_usage(){
-	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n-e number of epochs per training run (defaults to 100)\n-k skipping interval for training checkpoints to keep (defaults to 20)\n"
+	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n-e number of epochs per training run (defaults to 100)\n-k skipping interval for training checkpoints to keep (defaults to 20)\n-i the name of the inflated dataset. If set, the input filelist will be inflated to size 1/gamma\n"
 	printf "$help_text"
 }
 
@@ -28,7 +30,7 @@ function clean_checkpoints(){
 	mv tmp/G_${num_checkpoints}.pth $directory
 }
 
-while getopts "hd:f:n:g:e:k:" flag; do
+while getopts "hmd:f:n:g:e:k:i:" flag; do
 	case "${flag}" in
 		h) print_usage; exit ;;
 		d) dataset_name="${OPTARG}" ;;
@@ -37,10 +39,13 @@ while getopts "hd:f:n:g:e:k:" flag; do
 		g) gamma="${OPTARG}" ;;
 		e) epochs="${OPTARG}" ;;
 		k) keep_interval="${OPTARG}" ;;
+		i) inflate="${OPTARG}" ;;
+		m) use_mels="True" ;;
 		:) echo "Missing option argument for -$OPTARG"; exit 1;;
 		*) print_usage; exit 1 ;;
 	esac 
 done
+
 
 if [ -z $dataset_name  ]; then
 	echo "Dataset name cannot be empty."
@@ -70,8 +75,9 @@ echo "Gamma:        $gamma"
 echo "No. of runs:  $num_iterations"
 echo "Epochs/run:   $epochs"
 echo "Keep every:   $keep_interval"
+echo "inflate:      $inflate"
 
-python generate_filelists.py $dataset_name $full_dataset_filelist $gamma $num_iterations $epochs | tee return_file
+python generate_filelists.py $dataset_name $full_dataset_filelist $gamma $num_iterations $epochs $inflate $use_mels| tee return_file
 new_dir=`cat return_file | tail -1`
 model_prefix=`echo "$new_dir" | cut -d '/' -f 2`
 rm return_file
