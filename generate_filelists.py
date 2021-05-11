@@ -10,6 +10,9 @@ SEED = 1234
 EPOCHS = 100
 SPLIT = {"train": 0.9542, "val": 0.0076, "test": 0.0382}
 
+augmentations = ["pitch", "speed"]
+wavs_per_aug = 2
+aug_mels_per_wav = 4
 
 def make_dir_name(iteration: int, gamma: float, dataset_name: str) -> str:
     gamma = str(gamma).replace(".", "g")
@@ -96,6 +99,46 @@ def make_json(train_files: str, val_files: str, epochs: int, load_mels: bool) ->
         },
     }
 
+def inflate(dataset: [str], factor: int, dataset_dir: str, use_mels: bool) -> [str]:
+    inflated_dataset = []
+
+    for line in dataset:
+
+        filepath = line.split("|")[0]
+        label = line.split("|")[1]
+        filename = filepath.split("/")[1]
+        filename_no_ext = filename.split(".")[0]
+        ext = filename.split(".")[-1]
+
+
+        suffixes = []
+        if not use_mels:
+            inflated_dataset.append(f"{dataset_dir}/{filename}|{label}")
+            for aug in augmentations:
+                for i in range(1, wavs_per_aug+1):
+                    suffixes.append(f"{aug}-{i}")
+            random.shuffle(suffixes)
+
+            for x in range(factor-1):
+                suffix = suffixes.pop()
+                new_entry = f"{dataset_dir}/{filename_no_ext}-{suffix}.wav|{label}"
+                inflated_dataset.append(new_entry)
+        else:
+            inflated_dataset.append(f"{dataset_dir}/{filename}.org|{label}")
+            for i in range(aug_mels_per_wav):
+                suffixes.append(f"wav_{i}")
+            random.shuffle(suffixes)
+
+            for x in range(factor-1):
+                suffix = suffixes.pop()
+                new_entry = f"{dataset_dir}/{filename_no_ext}.{suffix}.aug|{label}"
+                inflated_dataset.append(new_entry)
+
+    return inflated_dataset
+
+
+
+
 
 def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
     os.makedirs(directory, exist_ok=True)
@@ -123,12 +166,11 @@ def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
         json.dump(config, fh, indent=4)
 
 if __name__ == "__main__":
-   # random.seed(SEED)
     dataset_name = sys.argv[1]
     dataset_path = sys.argv[2]
     gamma = float(sys.argv[3])
     num_iterations = int(sys.argv[4])
-    EPOCHS = int(sys.argv[5])
+    inflate_dataset = sys.argv[5]
 
     with open(dataset_path, "r") as fh:
         lines = fh.readlines()
@@ -136,10 +178,11 @@ if __name__ == "__main__":
     print(f"Preparing {num_iterations} subsets with gamma={gamma} from {dataset_path} .")
     for iteration in range(num_iterations):
         s = sample_dataset(lines, gamma)
+        if inflate_dataset != "none":
+            s = inflate(s, int(1/gamma), inflate_dataset, use_mels=False)
         train, val, test = split_dataset(s, SPLIT)
         out = make_dir_name(iteration, gamma, dataset_name)
         write_files(out, train, val, test)
         print(f"Completed {iteration+1}/{num_iterations} runs." , end='\r' if iteration+1 < num_iterations else '\n', flush=True)
     main_dir = '/'.join(out.split('/')[:-1])
     print(f"Created directory:\n{main_dir}")
-
