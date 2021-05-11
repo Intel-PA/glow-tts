@@ -166,18 +166,13 @@ def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
         json.dump(config, fh, indent=4)
 
 if __name__ == "__main__":
-    # with open("test_wavs/file_list.txt", "r") as fh:
-    #     lines = fh.readlines()
-    # inf = inflate(lines, 2, "SOX_AUGMENT", use_mels=True)
-    # [print(a) for a in inf]
-    # random.seed(SEED)
     dataset_name = sys.argv[1]
     dataset_path = sys.argv[2]
     gamma = float(sys.argv[3])
     num_iterations = int(sys.argv[4])
     EPOCHS = sys.argv[5]
     inflate_dataset = sys.argv[6]
-    use_mels = bool(sys.argv[7])
+    use_mels = sys.argv[7] == "True"
 
     with open(dataset_path, "r") as fh:
         lines = fh.readlines()

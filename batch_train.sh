@@ -76,6 +76,7 @@ echo "No. of runs:  $num_iterations"
 echo "Epochs/run:   $epochs"
 echo "Keep every:   $keep_interval"
 echo "inflate:      $inflate"
+echo "Use mels:     $use_mels"
 
 python generate_filelists.py $dataset_name $full_dataset_filelist $gamma $num_iterations $epochs $inflate $use_mels| tee return_file
 new_dir=`cat return_file | tail -1`
