@@ -104,7 +104,7 @@ def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
     test_files = f"{directory}/test.txt"
 
     typical_filename = train[0].strip().split("|")[0]
-    load_mel_from_disk = False if typical_filename.endswith(".wav") else True 
+    load_mel_from_disk = False if typical_filename.endswith(".wav") else True
 
     with open(train_files, "w") as fh:
         for line in train:
@@ -123,7 +123,7 @@ def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
         json.dump(config, fh, indent=4)
 
 if __name__ == "__main__":
-    random.seed(SEED)
+   # random.seed(SEED)
     dataset_name = sys.argv[1]
     dataset_path = sys.argv[2]
     gamma = float(sys.argv[3])
@@ -142,4 +142,4 @@ if __name__ == "__main__":
         print(f"Completed {iteration+1}/{num_iterations} runs." , end='\r' if iteration+1 < num_iterations else '\n', flush=True)
     main_dir = '/'.join(out.split('/')[:-1])
     print(f"Created directory:\n{main_dir}")
-    
+
