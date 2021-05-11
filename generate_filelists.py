@@ -172,7 +172,7 @@ if __name__ == "__main__":
     num_iterations = int(sys.argv[4])
     EPOCHS = sys.argv[5]
     inflate_dataset = sys.argv[6]
-    use_mels = bool(sys.argv[7])
+    use_mels = sys.argv[7] == "True"
 
     with open(dataset_path, "r") as fh:
         lines = fh.readlines()
