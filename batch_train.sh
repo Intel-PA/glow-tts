@@ -10,7 +10,7 @@ inflate="none"
 use_mels="False"
 
 function print_usage(){
-	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n-e number of epochs per training run (defaults to 100)\n-k skipping interval for training checkpoints to keep (defaults to 20)\n-i the name of the inflated dataset. If set, the input filelist will be inflated to size 1/gamma\n"
+	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n-e number of epochs per training run (defaults to 100)\n-k skipping interval for training checkpoints to keep (defaults to 20)\n-i the name of the inflated dataset. If set, the input filelist will be inflated to size 1/gamma\n-m flag to set inflated filelists to mel files\n"
 	printf "$help_text"
 }
 
