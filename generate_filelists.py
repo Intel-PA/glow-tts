@@ -175,7 +175,8 @@ if __name__ == "__main__":
     dataset_path = sys.argv[2]
     gamma = float(sys.argv[3])
     num_iterations = int(sys.argv[4])
-    inflate_dataset = sys.argv[5]
+    EPOCHS = sys.argv[5]
+    inflate_dataset = sys.argv[6]
 
     with open(dataset_path, "r") as fh:
         lines = fh.readlines()
