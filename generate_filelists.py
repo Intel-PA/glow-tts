@@ -170,7 +170,7 @@ if __name__ == "__main__":
     dataset_path = sys.argv[2]
     gamma = float(sys.argv[3])
     num_iterations = int(sys.argv[4])
-    EPOCHS = sys.argv[5]
+    EPOCHS = int(sys.argv[5])
     inflate_dataset = sys.argv[6]
     use_mels = sys.argv[7] == "True"
 
