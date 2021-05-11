@@ -172,6 +172,7 @@ if __name__ == "__main__":
     num_iterations = int(sys.argv[4])
     EPOCHS = sys.argv[5]
     inflate_dataset = sys.argv[6]
+    use_mels = bool(sys.argv[7])
 
     with open(dataset_path, "r") as fh:
         lines = fh.readlines()
@@ -180,7 +181,7 @@ if __name__ == "__main__":
     for iteration in range(num_iterations):
         s = sample_dataset(lines, gamma)
         if inflate_dataset != "none":
-            s = inflate(s, int(1/gamma), inflate_dataset, use_mels=False)
+            s = inflate(s, int(1/gamma), inflate_dataset, use_mels)
         train, val, test = split_dataset(s, SPLIT)
         out = make_dir_name(iteration, gamma, dataset_name)
         write_files(out, train, val, test)
