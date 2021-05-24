@@ -6,7 +6,7 @@ import random
 from random import shuffle
 
 OUT_DIR = "filelists"
-SEED = 1234
+SEED = 4321
 EPOCHS = 100
 SPLIT = {"train": 0.9542, "val": 0.0076, "test": 0.0382}
 
@@ -124,7 +124,7 @@ def inflate(dataset: [str], factor: int, dataset_dir: str, use_mels: bool) -> [s
                 new_entry = f"{dataset_dir}/{filename_no_ext}-{suffix}.wav|{label}"
                 inflated_dataset.append(new_entry)
         else:
-            inflated_dataset.append(f"{dataset_dir}/{filename}.org|{label}")
+            inflated_dataset.append(f"{dataset_dir}/{filename}|{label}")
             for i in range(aug_mels_per_wav):
                 suffixes.append(f"wav_{i}")
             random.shuffle(suffixes)
@@ -166,6 +166,7 @@ def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
         json.dump(config, fh, indent=4)
 
 if __name__ == "__main__":
+    random.seed(SEED)
     dataset_name = sys.argv[1]
     dataset_path = sys.argv[2]
     gamma = float(sys.argv[3])
