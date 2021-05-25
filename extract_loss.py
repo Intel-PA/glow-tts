@@ -30,14 +30,16 @@ def get_losses(infile):
 
 
 def prune_losses(losses):
-    # only keep the first loss value for each epoch
+    # only keep the last loss value for each epoch
     pruned_losses = []
-    curr_epoch = 0
+    curr_epoch = 999
+    losses.reverse()
     for epoch, loss in losses:
         if epoch != curr_epoch:
             curr_epoch = epoch
             pruned_losses.append((epoch, loss))
 
+    pruned_losses.reverse()
     return pruned_losses
 
 
