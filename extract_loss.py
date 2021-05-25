@@ -14,14 +14,16 @@ def get_losses(infile):
 
         while line:
             if "Train Epoch:" in line:
-                epoch = re.search(EPOCH_EXP, line).group(0)
-                loss = re.search(LOSS_EXP, line).group(0)
-                losses.append((epoch, loss))
+                try:
+                    epoch = re.search(EPOCH_EXP, line).group(0)
+                    loss = re.search(LOSS_EXP, line).group(0)
+                    losses.append((epoch, loss))
 
-                lr_line = fh.readline()
-                lr = re.search(LR_EXP, lr_line).group(0)
-                lrates.append((epoch, lr))
-
+                    lr_line = fh.readline()
+                    lr = re.search(LR_EXP, lr_line).group(0)
+                    lrates.append((epoch, lr))
+                except Exception :
+                    print(line)
             line = fh.readline()
 
     return losses, lrates
