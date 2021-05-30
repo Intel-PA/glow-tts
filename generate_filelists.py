@@ -101,7 +101,8 @@ def make_json(train_files: str, val_files: str, epochs: int, load_mels: bool) ->
 
 def inflate(dataset: [str], factor: int, dataset_dir: str, use_mels: bool) -> [str]:
     inflated_dataset = []
-
+    if factor == 1:
+        return dataset
     for line in dataset:
 
         filepath = line.split("|")[0]
