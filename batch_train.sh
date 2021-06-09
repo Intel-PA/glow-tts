@@ -8,9 +8,10 @@ epochs="100"
 keep_interval="20" # keep every nth checkpoint
 inflate="none"
 use_mels="False"
+filelist_dir=""
 
 function print_usage(){
-	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n-e number of epochs per training run (defaults to 100)\n-k skipping interval for training checkpoints to keep (defaults to 20)\n-i the name of the inflated dataset. If set, the input filelist will be inflated to size 1/gamma\n-m flag to set inflated filelists to mel files\n"
+	help_text=$"OPTIONS\n-d name of the dataset (required)\n-f path to txt file containing dataset file listing (required)\n-n number of training runs (required)\n-g gamma(required)\n-e number of epochs per training run (defaults to 100)\n-k skipping interval for training checkpoints to keep (defaults to 20)\n-i the name of the inflated dataset. If set, the input filelist will be inflated to size 1/gamma\n-m flag to set inflated filelists to mel files\n-l directory containing previously generated filelists\n"
 	printf "$help_text"
 }
 
@@ -30,7 +31,7 @@ function clean_checkpoints(){
 	mv tmp/G_${num_checkpoints}.pth $directory
 }
 
-while getopts "hmd:f:n:g:e:k:i:" flag; do
+while getopts "hmd:f:n:g:e:k:i:l:" flag; do
 	case "${flag}" in
 		h) print_usage; exit ;;
 		d) dataset_name="${OPTARG}" ;;
@@ -41,6 +42,7 @@ while getopts "hmd:f:n:g:e:k:i:" flag; do
 		k) keep_interval="${OPTARG}" ;;
 		i) inflate="${OPTARG}" ;;
 		m) use_mels="True" ;;
+		l) filelist_dir="${OPTARG}" ;;
 		:) echo "Missing option argument for -$OPTARG"; exit 1;;
 		*) print_usage; exit 1 ;;
 	esac 
@@ -69,19 +71,24 @@ if [ -z $gamma  ]; then
 fi
 
 
-echo "Dataset name: $dataset_name"
-echo "Path:         $full_dataset_filelist"
-echo "Gamma:        $gamma"
-echo "No. of runs:  $num_iterations"
-echo "Epochs/run:   $epochs"
-echo "Keep every:   $keep_interval"
-echo "inflate:      $inflate"
-echo "Use mels:     $use_mels"
+echo "Dataset name:  $dataset_name"
+echo "Path:          $full_dataset_filelist"
+echo "Gamma:         $gamma"
+echo "No. of runs:   $num_iterations"
+echo "Epochs/run:    $epochs"
+echo "Keep every:    $keep_interval"
+echo "inflate:       $inflate"
+echo "Use mels:      $use_mels"
 
-python generate_filelists.py $dataset_name $full_dataset_filelist $gamma $num_iterations $epochs $inflate $use_mels| tee return_file
-new_dir=`cat return_file | tail -1`
+if [ -z $filelist_dir  ]; then
+	python generate_filelists.py $dataset_name $full_dataset_filelist $gamma $num_iterations $epochs $inflate $use_mels| tee return_file
+	new_dir=`cat return_file | tail -1`
+	rm return_file
+else
+	new_dir="$filelist_dir"
+fi
+
 model_prefix=`echo "$new_dir" | cut -d '/' -f 2`
-rm return_file
 
 while read -r run ; do
 	if [ -f  $new_dir/$run/checkpoint.complete ]; then
