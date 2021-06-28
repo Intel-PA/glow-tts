@@ -135,7 +135,10 @@ def inflate(dataset: [str], factor: int, dataset_dir: str, use_mels: bool) -> [s
                 new_entry = f"{dataset_dir}/{filename_no_ext}.{suffix}.aug|{label}"
                 inflated_dataset.append(new_entry)
 
-    return inflated_dataset
+
+        random.shuffle(inflated_dataset)
+
+    return inflated_dataset 
 
 
 
@@ -182,9 +185,9 @@ if __name__ == "__main__":
     print(f"Preparing {num_iterations} subsets with gamma={gamma} from {dataset_path} .")
     for iteration in range(num_iterations):
         s = sample_dataset(lines, gamma)
-        if inflate_dataset != "none":
-            s = inflate(s, int(1/gamma), inflate_dataset, use_mels)
         train, val, test = split_dataset(s, SPLIT)
+        if inflate_dataset != "none":
+            train = inflate(train, int(1/gamma), inflate_dataset, use_mels)
         out = make_dir_name(iteration, gamma, dataset_name)
         write_files(out, train, val, test)
         print(f"Completed {iteration+1}/{num_iterations} runs." , end='\r' if iteration+1 < num_iterations else '\n', flush=True)
