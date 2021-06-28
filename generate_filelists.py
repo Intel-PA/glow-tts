@@ -8,7 +8,7 @@ from random import shuffle
 OUT_DIR = "filelists"
 SEED = 4321
 EPOCHS = 100
-SPLIT = {"train": 0.9542, "val": 0.0076, "test": 0.0382}
+SPLIT = {"train": 0.9500, "val": 0.0250, "test": 0.0250}
 
 augmentations = ["pitch", "speed"]
 wavs_per_aug = 2
