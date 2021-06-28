@@ -168,12 +168,17 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
         else:
           losses_tot = [x + y for (x, y) in zip(losses_tot, loss_gs)]
 
-        if batch_idx % hps.train.log_interval == 0:
-          logger.info('Eval Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-            epoch, batch_idx * len(x), len(val_loader.dataset),
-            100. * batch_idx / len(val_loader),
-            loss_g.item()))
-          logger.info([x.item() for x in loss_gs])
+        # if batch_idx % hps.train.log_interval == 0:
+        #   logger.info('Eval Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+        #     epoch, batch_idx * len(x), len(val_loader.dataset),
+        #     100. * batch_idx / len(val_loader),
+        #     loss_g.item()))
+        #   logger.info([x.item() for x in loss_gs])
+        logger.info('Eval Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
+          epoch, batch_idx * len(x), len(val_loader.dataset),
+          100. * batch_idx / len(val_loader),
+          loss_g.item()))
+        logger.info([x.item() for x in loss_gs])
            
     
     losses_tot = [x/len(val_loader) for x in losses_tot]
