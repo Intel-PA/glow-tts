@@ -140,6 +140,14 @@ def inflate(dataset: [str], factor: int, dataset_dir: str, use_mels: bool) -> [s
 
     return inflated_dataset 
 
+def make_mel(dataset: [str], new_name: str) -> [str]:
+    mel_dataset = []
+    for s in dataset:
+
+        path, transcript = s.split('|')
+        cleaned_path = '/'.join(path.split('/')[1:])
+        mel_dataset.append(f"{new_name}/{cleaned_path}.org|{transcript}")
+    return mel_dataset
 
 
 
@@ -186,8 +194,13 @@ if __name__ == "__main__":
     for iteration in range(num_iterations):
         s = sample_dataset(lines, gamma)
         train, val, test = split_dataset(s, SPLIT)
+
         if inflate_dataset != "none":
+            if use_mels:
+                val = make_mel(val, inflate_dataset)
+                test = make_mel(test, inflate_dataset)
             train = inflate(train, int(1/gamma), inflate_dataset, use_mels)
+
         out = make_dir_name(iteration, gamma, dataset_name)
         write_files(out, train, val, test)
         print(f"Completed {iteration+1}/{num_iterations} runs." , end='\r' if iteration+1 < num_iterations else '\n', flush=True)
