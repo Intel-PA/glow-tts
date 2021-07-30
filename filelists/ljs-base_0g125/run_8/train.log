@@ -1,0 +1,904 @@
+2021-04-21 11:27:58,577	ljs-base_0g125_run_8	INFO	{'train': {'use_cuda': True, 'log_interval': 20, 'seed': 1234, 'epochs': 100, 'learning_rate': 1.0, 'betas': [0.9, 0.98], 'eps': 1e-09, 'warmup_steps': 4000, 'scheduler': 'noam', 'batch_size': 32, 'ddi': True, 'fp16_run': True}, 'data': {'load_mel_from_disk': False, 'training_files': 'filelists/ljs-base_0g125/run_8/train.txt', 'validation_files': 'filelists/ljs-base_0g125/run_8/val.txt', 'text_cleaners': ['english_cleaners'], 'max_wav_value': 32768.0, 'sampling_rate': 22050, 'filter_length': 1024, 'hop_length': 256, 'win_length': 1024, 'n_mel_channels': 80, 'mel_fmin': 0.0, 'mel_fmax': 8000.0, 'add_noise': True, 'cmudict_path': 'data/cmu_dictionary'}, 'model': {'hidden_channels': 192, 'filter_channels': 768, 'filter_channels_dp': 256, 'kernel_size': 3, 'p_dropout': 0.1, 'n_blocks_dec': 12, 'n_layers_enc': 6, 'n_heads': 2, 'p_dropout_dec': 0.05, 'dilation_rate': 1, 'kernel_size_dec': 5, 'n_block_layers': 4, 'n_sqz': 2, 'prenet': True, 'mean_only': True, 'hidden_channels_enc': 192, 'hidden_channels_dec': 192, 'window_size': 4}, 'model_dir': './logs/ljs-base_0g125_run_8'}
+2021-04-21 11:28:03,222	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 0 to ./logs/ljs-base_0g125_run_8/ddi_G.pth
+2021-04-21 11:28:08,534	ljs-base_0g125_run_8	INFO	{'train': {'use_cuda': True, 'log_interval': 20, 'seed': 1234, 'epochs': 100, 'learning_rate': 1.0, 'betas': [0.9, 0.98], 'eps': 1e-09, 'warmup_steps': 4000, 'scheduler': 'noam', 'batch_size': 32, 'ddi': True, 'fp16_run': True}, 'data': {'load_mel_from_disk': False, 'training_files': 'filelists/ljs-base_0g125/run_8/train.txt', 'validation_files': 'filelists/ljs-base_0g125/run_8/val.txt', 'text_cleaners': ['english_cleaners'], 'max_wav_value': 32768.0, 'sampling_rate': 22050, 'filter_length': 1024, 'hop_length': 256, 'win_length': 1024, 'n_mel_channels': 80, 'mel_fmin': 0.0, 'mel_fmax': 8000.0, 'add_noise': True, 'cmudict_path': 'data/cmu_dictionary'}, 'model': {'hidden_channels': 192, 'filter_channels': 768, 'filter_channels_dp': 256, 'kernel_size': 3, 'p_dropout': 0.1, 'n_blocks_dec': 12, 'n_layers_enc': 6, 'n_heads': 2, 'p_dropout_dec': 0.05, 'dilation_rate': 1, 'kernel_size_dec': 5, 'n_block_layers': 4, 'n_sqz': 2, 'prenet': True, 'mean_only': True, 'hidden_channels_enc': 192, 'hidden_channels_dec': 192, 'window_size': 4}, 'model_dir': './logs/ljs-base_0g125_run_8'}
+2021-04-21 11:28:11,671	ljs-base_0g125_run_8	INFO	Loaded checkpoint './logs/ljs-base_0g125_run_8/ddi_G.pth' (iteration 0)
+2021-04-21 11:28:30,666	ljs-base_0g125_run_8	INFO	Train Epoch: 1 [0/1562 (0%)]	Loss: 3.180774
+2021-04-21 11:28:30,667	ljs-base_0g125_run_8	INFO	[1.2416050434112549, 1.9391690492630005, 0, 5.70544330734548e-07]
+2021-04-21 11:28:51,709	ljs-base_0g125_run_8	INFO	Train Epoch: 1 [640/1562 (42%)]	Loss: 2.637013
+2021-04-21 11:28:51,710	ljs-base_0g125_run_8	INFO	[1.1896746158599854, 1.4473381042480469, 20, 6.2759876380800285e-06]
+2021-04-21 11:29:11,978	ljs-base_0g125_run_8	INFO	Train Epoch: 1 [1280/1562 (83%)]	Loss: 2.181297
+2021-04-21 11:29:11,979	ljs-base_0g125_run_8	INFO	[1.1411606073379517, 1.0401368141174316, 40, 1.1981430945425508e-05]
+2021-04-21 11:29:19,880	ljs-base_0g125_run_8	INFO	====> Epoch: 1
+2021-04-21 11:29:38,449	ljs-base_0g125_run_8	INFO	====> Epoch: 1
+2021-04-21 11:29:38,450	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 1 to ./logs/ljs-base_0g125_run_8/G_1.pth
+2021-04-21 11:29:59,795	ljs-base_0g125_run_8	INFO	Train Epoch: 2 [0/1562 (0%)]	Loss: 2.193366
+2021-04-21 11:29:59,795	ljs-base_0g125_run_8	INFO	[1.1263909339904785, 1.0669745206832886, 48, 1.42636082683637e-05]
+2021-04-21 11:30:20,544	ljs-base_0g125_run_8	INFO	Train Epoch: 2 [640/1562 (42%)]	Loss: 2.307633
+2021-04-21 11:30:20,545	ljs-base_0g125_run_8	INFO	[1.0691932439804077, 1.2384395599365234, 68, 1.9969051575709183e-05]
+2021-04-21 11:30:40,768	ljs-base_0g125_run_8	INFO	Train Epoch: 2 [1280/1562 (83%)]	Loss: 2.349567
+2021-04-21 11:30:40,769	ljs-base_0g125_run_8	INFO	[0.9938250780105591, 1.3557419776916504, 88, 2.5674494883054663e-05]
+2021-04-21 11:30:48,774	ljs-base_0g125_run_8	INFO	====> Epoch: 2
+2021-04-21 11:31:07,530	ljs-base_0g125_run_8	INFO	====> Epoch: 2
+2021-04-21 11:31:07,531	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 2 to ./logs/ljs-base_0g125_run_8/G_2.pth
+2021-04-21 11:31:29,026	ljs-base_0g125_run_8	INFO	Train Epoch: 3 [0/1562 (0%)]	Loss: 2.284253
+2021-04-21 11:31:29,027	ljs-base_0g125_run_8	INFO	[0.9618558287620544, 1.3223973512649536, 96, 2.7956672205992852e-05]
+2021-04-21 11:31:49,526	ljs-base_0g125_run_8	INFO	Train Epoch: 3 [640/1562 (42%)]	Loss: 2.209567
+2021-04-21 11:31:49,527	ljs-base_0g125_run_8	INFO	[0.8993226289749146, 1.310243844985962, 116, 3.366211551333833e-05]
+2021-04-21 11:32:10,289	ljs-base_0g125_run_8	INFO	Train Epoch: 3 [1280/1562 (83%)]	Loss: 2.133666
+2021-04-21 11:32:10,290	ljs-base_0g125_run_8	INFO	[0.8349325060844421, 1.2987333536148071, 136, 3.9367558820683816e-05]
+2021-04-21 11:32:17,884	ljs-base_0g125_run_8	INFO	====> Epoch: 3
+2021-04-21 11:32:36,532	ljs-base_0g125_run_8	INFO	====> Epoch: 3
+2021-04-21 11:32:36,533	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 3 to ./logs/ljs-base_0g125_run_8/G_3.pth
+2021-04-21 11:32:58,028	ljs-base_0g125_run_8	INFO	Train Epoch: 4 [0/1562 (0%)]	Loss: 2.133390
+2021-04-21 11:32:58,029	ljs-base_0g125_run_8	INFO	[0.809033215045929, 1.3243571519851685, 144, 4.164973614362201e-05]
+2021-04-21 11:33:18,433	ljs-base_0g125_run_8	INFO	Train Epoch: 4 [640/1562 (42%)]	Loss: 2.096875
+2021-04-21 11:33:18,434	ljs-base_0g125_run_8	INFO	[0.7617892026901245, 1.3350855112075806, 164, 4.735517945096749e-05]
+2021-04-21 11:33:38,743	ljs-base_0g125_run_8	INFO	Train Epoch: 4 [1280/1562 (83%)]	Loss: 1.998674
+2021-04-21 11:33:38,743	ljs-base_0g125_run_8	INFO	[0.7221959829330444, 1.2764779329299927, 184, 5.306062275831297e-05]
+2021-04-21 11:33:46,711	ljs-base_0g125_run_8	INFO	====> Epoch: 4
+2021-04-21 11:34:05,681	ljs-base_0g125_run_8	INFO	====> Epoch: 4
+2021-04-21 11:34:05,682	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 4 to ./logs/ljs-base_0g125_run_8/G_4.pth
+2021-04-21 11:34:26,908	ljs-base_0g125_run_8	INFO	Train Epoch: 5 [0/1562 (0%)]	Loss: 2.035105
+2021-04-21 11:34:26,909	ljs-base_0g125_run_8	INFO	[0.7074026465415955, 1.3277024030685425, 192, 5.5342800081251156e-05]
+2021-04-21 11:34:47,408	ljs-base_0g125_run_8	INFO	Train Epoch: 5 [640/1562 (42%)]	Loss: 1.983735
+2021-04-21 11:34:47,409	ljs-base_0g125_run_8	INFO	[0.6694254279136658, 1.3143094778060913, 212, 6.104824338859665e-05]
+2021-04-21 11:35:07,568	ljs-base_0g125_run_8	INFO	Train Epoch: 5 [1280/1562 (83%)]	Loss: 1.877139
+2021-04-21 11:35:07,569	ljs-base_0g125_run_8	INFO	[0.6251842975616455, 1.2519545555114746, 232, 6.675368669594212e-05]
+2021-04-21 11:35:15,471	ljs-base_0g125_run_8	INFO	====> Epoch: 5
+2021-04-21 11:35:34,500	ljs-base_0g125_run_8	INFO	====> Epoch: 5
+2021-04-21 11:35:34,501	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 5 to ./logs/ljs-base_0g125_run_8/G_5.pth
+2021-04-21 11:35:55,787	ljs-base_0g125_run_8	INFO	Train Epoch: 6 [0/1562 (0%)]	Loss: 1.880865
+2021-04-21 11:35:55,788	ljs-base_0g125_run_8	INFO	[0.6073832511901855, 1.2734814882278442, 240, 6.90358640188803e-05]
+2021-04-21 11:36:16,322	ljs-base_0g125_run_8	INFO	Train Epoch: 6 [640/1562 (42%)]	Loss: 1.831800
+2021-04-21 11:36:16,323	ljs-base_0g125_run_8	INFO	[0.5614444017410278, 1.270355224609375, 260, 7.474130732622578e-05]
+2021-04-21 11:36:36,568	ljs-base_0g125_run_8	INFO	Train Epoch: 6 [1280/1562 (83%)]	Loss: 1.753519
+2021-04-21 11:36:36,569	ljs-base_0g125_run_8	INFO	[0.5392831563949585, 1.214235544204712, 280, 8.044675063357127e-05]
+2021-04-21 11:36:44,564	ljs-base_0g125_run_8	INFO	====> Epoch: 6
+2021-04-21 11:37:03,531	ljs-base_0g125_run_8	INFO	====> Epoch: 6
+2021-04-21 11:37:03,531	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 6 to ./logs/ljs-base_0g125_run_8/G_6.pth
+2021-04-21 11:37:25,189	ljs-base_0g125_run_8	INFO	Train Epoch: 7 [0/1562 (0%)]	Loss: 1.754712
+2021-04-21 11:37:25,190	ljs-base_0g125_run_8	INFO	[0.5345685482025146, 1.2201429605484009, 288, 8.272892795650947e-05]
+2021-04-21 11:37:45,674	ljs-base_0g125_run_8	INFO	Train Epoch: 7 [640/1562 (42%)]	Loss: 1.738173
+2021-04-21 11:37:45,675	ljs-base_0g125_run_8	INFO	[0.4981265068054199, 1.2400468587875366, 308, 8.843437126385495e-05]
+2021-04-21 11:38:05,825	ljs-base_0g125_run_8	INFO	Train Epoch: 7 [1280/1562 (83%)]	Loss: 1.717277
+2021-04-21 11:38:05,826	ljs-base_0g125_run_8	INFO	[0.48688843846321106, 1.2303889989852905, 328, 9.413981457120044e-05]
+2021-04-21 11:38:13,709	ljs-base_0g125_run_8	INFO	====> Epoch: 7
+2021-04-21 11:38:32,557	ljs-base_0g125_run_8	INFO	====> Epoch: 7
+2021-04-21 11:38:32,558	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 7 to ./logs/ljs-base_0g125_run_8/G_7.pth
+2021-04-21 11:38:54,009	ljs-base_0g125_run_8	INFO	Train Epoch: 8 [0/1562 (0%)]	Loss: 1.649680
+2021-04-21 11:38:54,010	ljs-base_0g125_run_8	INFO	[0.4657805860042572, 1.1838996410369873, 336, 9.642199189413862e-05]
+2021-04-21 11:39:14,469	ljs-base_0g125_run_8	INFO	Train Epoch: 8 [640/1562 (42%)]	Loss: 1.666986
+2021-04-21 11:39:14,470	ljs-base_0g125_run_8	INFO	[0.4561208486557007, 1.2108652591705322, 356, 0.0001021274352014841]
+2021-04-21 11:39:35,171	ljs-base_0g125_run_8	INFO	Train Epoch: 8 [1280/1562 (83%)]	Loss: 1.607988
+2021-04-21 11:39:35,172	ljs-base_0g125_run_8	INFO	[0.4361950755119324, 1.1717925071716309, 376, 0.00010783287850882957]
+2021-04-21 11:39:42,908	ljs-base_0g125_run_8	INFO	====> Epoch: 8
+2021-04-21 11:40:01,850	ljs-base_0g125_run_8	INFO	====> Epoch: 8
+2021-04-21 11:40:01,851	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 8 to ./logs/ljs-base_0g125_run_8/G_8.pth
+2021-04-21 11:40:23,843	ljs-base_0g125_run_8	INFO	Train Epoch: 9 [0/1562 (0%)]	Loss: 1.588747
+2021-04-21 11:40:23,843	ljs-base_0g125_run_8	INFO	[0.4282063841819763, 1.1605409383773804, 384, 0.00011011505583176777]
+2021-04-21 11:40:43,750	ljs-base_0g125_run_8	INFO	Train Epoch: 9 [640/1562 (42%)]	Loss: 1.606277
+2021-04-21 11:40:43,751	ljs-base_0g125_run_8	INFO	[0.41850799322128296, 1.1877692937850952, 404, 0.00011582049913911326]
+2021-04-21 11:41:04,332	ljs-base_0g125_run_8	INFO	Train Epoch: 9 [1280/1562 (83%)]	Loss: 1.524228
+2021-04-21 11:41:04,333	ljs-base_0g125_run_8	INFO	[0.40330302715301514, 1.1209251880645752, 424, 0.00012152594244645874]
+2021-04-21 11:41:12,061	ljs-base_0g125_run_8	INFO	====> Epoch: 9
+2021-04-21 11:41:30,496	ljs-base_0g125_run_8	INFO	====> Epoch: 9
+2021-04-21 11:41:30,496	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 9 to ./logs/ljs-base_0g125_run_8/G_9.pth
+2021-04-21 11:41:51,727	ljs-base_0g125_run_8	INFO	Train Epoch: 10 [0/1562 (0%)]	Loss: 1.559264
+2021-04-21 11:41:51,728	ljs-base_0g125_run_8	INFO	[0.39209967851638794, 1.1671648025512695, 432, 0.00012380811976939692]
+2021-04-21 11:42:12,423	ljs-base_0g125_run_8	INFO	Train Epoch: 10 [640/1562 (42%)]	Loss: 1.579393
+2021-04-21 11:42:12,424	ljs-base_0g125_run_8	INFO	[0.3796471357345581, 1.199745535850525, 452, 0.0001295135630767424]
+2021-04-21 11:42:32,787	ljs-base_0g125_run_8	INFO	Train Epoch: 10 [1280/1562 (83%)]	Loss: 1.497947
+2021-04-21 11:42:32,788	ljs-base_0g125_run_8	INFO	[0.37459778785705566, 1.1233491897583008, 472, 0.00013521900638408787]
+2021-04-21 11:42:40,511	ljs-base_0g125_run_8	INFO	====> Epoch: 10
+2021-04-21 11:42:59,270	ljs-base_0g125_run_8	INFO	====> Epoch: 10
+2021-04-21 11:42:59,270	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 10 to ./logs/ljs-base_0g125_run_8/G_10.pth
+2021-04-21 11:43:20,569	ljs-base_0g125_run_8	INFO	Train Epoch: 11 [0/1562 (0%)]	Loss: 1.484854
+2021-04-21 11:43:20,570	ljs-base_0g125_run_8	INFO	[0.3641815185546875, 1.1206719875335693, 480, 0.00013750118370702607]
+2021-04-21 11:43:40,897	ljs-base_0g125_run_8	INFO	Train Epoch: 11 [640/1562 (42%)]	Loss: 1.461185
+2021-04-21 11:43:40,899	ljs-base_0g125_run_8	INFO	[0.36887502670288086, 1.092309594154358, 500, 0.00014320662701437155]
+2021-04-21 11:44:01,302	ljs-base_0g125_run_8	INFO	Train Epoch: 11 [1280/1562 (83%)]	Loss: 1.453920
+2021-04-21 11:44:01,303	ljs-base_0g125_run_8	INFO	[0.35770440101623535, 1.0962152481079102, 520, 0.00014891207032171705]
+2021-04-21 11:44:08,987	ljs-base_0g125_run_8	INFO	====> Epoch: 11
+2021-04-21 11:44:27,300	ljs-base_0g125_run_8	INFO	====> Epoch: 11
+2021-04-21 11:44:27,301	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 11 to ./logs/ljs-base_0g125_run_8/G_11.pth
+2021-04-21 11:44:48,781	ljs-base_0g125_run_8	INFO	Train Epoch: 12 [0/1562 (0%)]	Loss: 1.447144
+2021-04-21 11:44:48,781	ljs-base_0g125_run_8	INFO	[0.3430023789405823, 1.1041419506072998, 528, 0.00015119424764465525]
+2021-04-21 11:45:09,439	ljs-base_0g125_run_8	INFO	Train Epoch: 12 [640/1562 (42%)]	Loss: 1.429449
+2021-04-21 11:45:09,440	ljs-base_0g125_run_8	INFO	[0.3360496163368225, 1.0933990478515625, 548, 0.0001568996909520007]
+2021-04-21 11:45:29,995	ljs-base_0g125_run_8	INFO	Train Epoch: 12 [1280/1562 (83%)]	Loss: 1.427844
+2021-04-21 11:45:29,996	ljs-base_0g125_run_8	INFO	[0.32517552375793457, 1.1026687622070312, 568, 0.00016260513425934617]
+2021-04-21 11:45:37,770	ljs-base_0g125_run_8	INFO	====> Epoch: 12
+2021-04-21 11:45:56,862	ljs-base_0g125_run_8	INFO	====> Epoch: 12
+2021-04-21 11:45:56,862	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 12 to ./logs/ljs-base_0g125_run_8/G_12.pth
+2021-04-21 11:46:18,713	ljs-base_0g125_run_8	INFO	Train Epoch: 13 [0/1562 (0%)]	Loss: 1.430803
+2021-04-21 11:46:18,714	ljs-base_0g125_run_8	INFO	[0.32816964387893677, 1.1026328802108765, 576, 0.00016488731158228437]
+2021-04-21 11:46:39,222	ljs-base_0g125_run_8	INFO	Train Epoch: 13 [640/1562 (42%)]	Loss: 1.431774
+2021-04-21 11:46:39,223	ljs-base_0g125_run_8	INFO	[0.32333141565322876, 1.108442783355713, 596, 0.00017059275488962987]
+2021-04-21 11:46:59,358	ljs-base_0g125_run_8	INFO	Train Epoch: 13 [1280/1562 (83%)]	Loss: 1.427681
+2021-04-21 11:46:59,359	ljs-base_0g125_run_8	INFO	[0.31003886461257935, 1.1176421642303467, 616, 0.00017629819819697535]
+2021-04-21 11:47:07,086	ljs-base_0g125_run_8	INFO	====> Epoch: 13
+2021-04-21 11:47:25,695	ljs-base_0g125_run_8	INFO	====> Epoch: 13
+2021-04-21 11:47:25,695	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 13 to ./logs/ljs-base_0g125_run_8/G_13.pth
+2021-04-21 11:47:47,373	ljs-base_0g125_run_8	INFO	Train Epoch: 14 [0/1562 (0%)]	Loss: 1.376940
+2021-04-21 11:47:47,374	ljs-base_0g125_run_8	INFO	[0.30829936265945435, 1.068640112876892, 624, 0.00017858037551991355]
+2021-04-21 11:48:07,171	ljs-base_0g125_run_8	INFO	Train Epoch: 14 [640/1562 (42%)]	Loss: 1.387192
+2021-04-21 11:48:07,172	ljs-base_0g125_run_8	INFO	[0.30715227127075195, 1.080039620399475, 644, 0.000184285818827259]
+2021-04-21 11:48:27,658	ljs-base_0g125_run_8	INFO	Train Epoch: 14 [1280/1562 (83%)]	Loss: 1.388597
+2021-04-21 11:48:27,659	ljs-base_0g125_run_8	INFO	[0.29997289180755615, 1.088624119758606, 664, 0.0001899912621346045]
+2021-04-21 11:48:35,635	ljs-base_0g125_run_8	INFO	====> Epoch: 14
+2021-04-21 11:48:54,562	ljs-base_0g125_run_8	INFO	====> Epoch: 14
+2021-04-21 11:48:54,563	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 14 to ./logs/ljs-base_0g125_run_8/G_14.pth
+2021-04-21 11:49:15,931	ljs-base_0g125_run_8	INFO	Train Epoch: 15 [0/1562 (0%)]	Loss: 1.370812
+2021-04-21 11:49:15,931	ljs-base_0g125_run_8	INFO	[0.2898094654083252, 1.0810024738311768, 672, 0.0001922734394575427]
+2021-04-21 11:49:36,500	ljs-base_0g125_run_8	INFO	Train Epoch: 15 [640/1562 (42%)]	Loss: 1.383114
+2021-04-21 11:49:36,501	ljs-base_0g125_run_8	INFO	[0.2893451452255249, 1.093768835067749, 692, 0.00019797888276488817]
+2021-04-21 11:49:56,888	ljs-base_0g125_run_8	INFO	Train Epoch: 15 [1280/1562 (83%)]	Loss: 1.374482
+2021-04-21 11:49:56,889	ljs-base_0g125_run_8	INFO	[0.2841891646385193, 1.0902929306030273, 712, 0.00020368432607223365]
+2021-04-21 11:50:04,645	ljs-base_0g125_run_8	INFO	====> Epoch: 15
+2021-04-21 11:50:23,326	ljs-base_0g125_run_8	INFO	====> Epoch: 15
+2021-04-21 11:50:23,326	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 15 to ./logs/ljs-base_0g125_run_8/G_15.pth
+2021-04-21 11:50:44,630	ljs-base_0g125_run_8	INFO	Train Epoch: 16 [0/1562 (0%)]	Loss: 1.358576
+2021-04-21 11:50:44,630	ljs-base_0g125_run_8	INFO	[0.27671778202056885, 1.0818582773208618, 720, 0.00020596650339517185]
+2021-04-21 11:51:05,328	ljs-base_0g125_run_8	INFO	Train Epoch: 16 [640/1562 (42%)]	Loss: 1.344159
+2021-04-21 11:51:05,329	ljs-base_0g125_run_8	INFO	[0.2721415162086487, 1.0720170736312866, 740, 0.00021167194670251732]
+2021-04-21 11:51:25,586	ljs-base_0g125_run_8	INFO	Train Epoch: 16 [1280/1562 (83%)]	Loss: 1.357510
+2021-04-21 11:51:25,588	ljs-base_0g125_run_8	INFO	[0.2725878357887268, 1.0849217176437378, 760, 0.0002173773900098628]
+2021-04-21 11:51:33,362	ljs-base_0g125_run_8	INFO	====> Epoch: 16
+2021-04-21 11:51:52,423	ljs-base_0g125_run_8	INFO	====> Epoch: 16
+2021-04-21 11:51:52,424	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 16 to ./logs/ljs-base_0g125_run_8/G_16.pth
+2021-04-21 11:52:13,664	ljs-base_0g125_run_8	INFO	Train Epoch: 17 [0/1562 (0%)]	Loss: 1.321742
+2021-04-21 11:52:13,665	ljs-base_0g125_run_8	INFO	[0.27233994007110596, 1.0494016408920288, 768, 0.000219659567332801]
+2021-04-21 11:52:34,056	ljs-base_0g125_run_8	INFO	Train Epoch: 17 [640/1562 (42%)]	Loss: 1.294548
+2021-04-21 11:52:34,057	ljs-base_0g125_run_8	INFO	[0.2609042525291443, 1.0336434841156006, 788, 0.00022536501064014647]
+2021-04-21 11:52:54,356	ljs-base_0g125_run_8	INFO	Train Epoch: 17 [1280/1562 (83%)]	Loss: 1.284483
+2021-04-21 11:52:54,357	ljs-base_0g125_run_8	INFO	[0.2599494457244873, 1.0245333909988403, 808, 0.00023107045394749195]
+2021-04-21 11:53:02,104	ljs-base_0g125_run_8	INFO	====> Epoch: 17
+2021-04-21 11:53:20,650	ljs-base_0g125_run_8	INFO	====> Epoch: 17
+2021-04-21 11:53:20,650	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 17 to ./logs/ljs-base_0g125_run_8/G_17.pth
+2021-04-21 11:53:42,438	ljs-base_0g125_run_8	INFO	Train Epoch: 18 [0/1562 (0%)]	Loss: 1.281657
+2021-04-21 11:53:42,438	ljs-base_0g125_run_8	INFO	[0.25860434770584106, 1.0230529308319092, 816, 0.00023335263127043015]
+2021-04-21 11:54:02,587	ljs-base_0g125_run_8	INFO	Train Epoch: 18 [640/1562 (42%)]	Loss: 1.232688
+2021-04-21 11:54:02,588	ljs-base_0g125_run_8	INFO	[0.2558410167694092, 0.9768473505973816, 836, 0.00023905807457777562]
+2021-04-21 11:54:23,212	ljs-base_0g125_run_8	INFO	Train Epoch: 18 [1280/1562 (83%)]	Loss: 1.262939
+2021-04-21 11:54:23,213	ljs-base_0g125_run_8	INFO	[0.24668842554092407, 1.016250491142273, 856, 0.00024476351788512113]
+2021-04-21 11:54:31,040	ljs-base_0g125_run_8	INFO	====> Epoch: 18
+2021-04-21 11:54:49,630	ljs-base_0g125_run_8	INFO	====> Epoch: 18
+2021-04-21 11:54:49,630	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 18 to ./logs/ljs-base_0g125_run_8/G_18.pth
+2021-04-21 11:55:11,045	ljs-base_0g125_run_8	INFO	Train Epoch: 19 [0/1562 (0%)]	Loss: 1.253597
+2021-04-21 11:55:11,045	ljs-base_0g125_run_8	INFO	[0.24565118551254272, 1.0079461336135864, 864, 0.0002470456952080593]
+2021-04-21 11:55:31,398	ljs-base_0g125_run_8	INFO	Train Epoch: 19 [640/1562 (42%)]	Loss: 1.197669
+2021-04-21 11:55:31,400	ljs-base_0g125_run_8	INFO	[0.24845993518829346, 0.9492089748382568, 884, 0.0002527511385154048]
+2021-04-21 11:55:51,497	ljs-base_0g125_run_8	INFO	Train Epoch: 19 [1280/1562 (83%)]	Loss: 1.153771
+2021-04-21 11:55:51,498	ljs-base_0g125_run_8	INFO	[0.24251925945281982, 0.9112522006034851, 904, 0.00025845658182275025]
+2021-04-21 11:55:59,153	ljs-base_0g125_run_8	INFO	====> Epoch: 19
+2021-04-21 11:56:17,812	ljs-base_0g125_run_8	INFO	====> Epoch: 19
+2021-04-21 11:56:17,813	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 19 to ./logs/ljs-base_0g125_run_8/G_19.pth
+2021-04-21 11:56:39,475	ljs-base_0g125_run_8	INFO	Train Epoch: 20 [0/1562 (0%)]	Loss: 1.171310
+2021-04-21 11:56:39,476	ljs-base_0g125_run_8	INFO	[0.23385179042816162, 0.9374586343765259, 912, 0.0002607387591456884]
+2021-04-21 11:56:59,939	ljs-base_0g125_run_8	INFO	Train Epoch: 20 [640/1562 (42%)]	Loss: 1.148462
+2021-04-21 11:56:59,940	ljs-base_0g125_run_8	INFO	[0.23663556575775146, 0.9118260145187378, 932, 0.00026644420245303395]
+2021-04-21 11:57:20,402	ljs-base_0g125_run_8	INFO	Train Epoch: 20 [1280/1562 (83%)]	Loss: 1.176238
+2021-04-21 11:57:20,403	ljs-base_0g125_run_8	INFO	[0.2225845456123352, 0.9536536931991577, 952, 0.00027214964576037943]
+2021-04-21 11:57:28,148	ljs-base_0g125_run_8	INFO	====> Epoch: 20
+2021-04-21 11:57:46,489	ljs-base_0g125_run_8	INFO	====> Epoch: 20
+2021-04-21 11:57:46,490	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 20 to ./logs/ljs-base_0g125_run_8/G_20.pth
+2021-04-21 11:58:07,688	ljs-base_0g125_run_8	INFO	Train Epoch: 21 [0/1562 (0%)]	Loss: 1.160639
+2021-04-21 11:58:07,689	ljs-base_0g125_run_8	INFO	[0.2359483242034912, 0.9246904850006104, 960, 0.0002744318230833176]
+2021-04-21 11:58:28,072	ljs-base_0g125_run_8	INFO	Train Epoch: 21 [640/1562 (42%)]	Loss: 1.152841
+2021-04-21 11:58:28,073	ljs-base_0g125_run_8	INFO	[0.22901993989944458, 0.9238212704658508, 980, 0.0002801372663906631]
+2021-04-21 11:58:48,413	ljs-base_0g125_run_8	INFO	Train Epoch: 21 [1280/1562 (83%)]	Loss: 1.061411
+2021-04-21 11:58:48,414	ljs-base_0g125_run_8	INFO	[0.22330015897750854, 0.8381112217903137, 1000, 0.00028584270969800855]
+2021-04-21 11:58:56,263	ljs-base_0g125_run_8	INFO	====> Epoch: 21
+2021-04-21 11:59:14,386	ljs-base_0g125_run_8	INFO	====> Epoch: 21
+2021-04-21 11:59:14,387	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 21 to ./logs/ljs-base_0g125_run_8/G_21.pth
+2021-04-21 11:59:35,709	ljs-base_0g125_run_8	INFO	Train Epoch: 22 [0/1562 (0%)]	Loss: 1.037543
+2021-04-21 11:59:35,710	ljs-base_0g125_run_8	INFO	[0.21533054113388062, 0.8222125768661499, 1008, 0.0002881248870209468]
+2021-04-21 11:59:56,389	ljs-base_0g125_run_8	INFO	Train Epoch: 22 [640/1562 (42%)]	Loss: 1.060109
+2021-04-21 11:59:56,390	ljs-base_0g125_run_8	INFO	[0.21851181983947754, 0.8415975570678711, 1028, 0.00029383033032829225]
+2021-04-21 12:00:16,570	ljs-base_0g125_run_8	INFO	Train Epoch: 22 [1280/1562 (83%)]	Loss: 1.038238
+2021-04-21 12:00:16,571	ljs-base_0g125_run_8	INFO	[0.21830159425735474, 0.8199359178543091, 1048, 0.00029953577363563773]
+2021-04-21 12:00:24,572	ljs-base_0g125_run_8	INFO	====> Epoch: 22
+2021-04-21 12:00:43,317	ljs-base_0g125_run_8	INFO	====> Epoch: 22
+2021-04-21 12:00:43,318	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 22 to ./logs/ljs-base_0g125_run_8/G_22.pth
+2021-04-21 12:01:04,738	ljs-base_0g125_run_8	INFO	Train Epoch: 23 [0/1562 (0%)]	Loss: 1.014914
+2021-04-21 12:01:04,739	ljs-base_0g125_run_8	INFO	[0.21199047565460205, 0.8029232025146484, 1056, 0.00030181795095857595]
+2021-04-21 12:01:25,238	ljs-base_0g125_run_8	INFO	Train Epoch: 23 [640/1562 (42%)]	Loss: 0.981892
+2021-04-21 12:01:25,239	ljs-base_0g125_run_8	INFO	[0.2053278088569641, 0.7765644788742065, 1076, 0.0003075233942659214]
+2021-04-21 12:01:45,466	ljs-base_0g125_run_8	INFO	Train Epoch: 23 [1280/1562 (83%)]	Loss: 1.031482
+2021-04-21 12:01:45,467	ljs-base_0g125_run_8	INFO	[0.21140974760055542, 0.8200726509094238, 1096, 0.00031322883757326685]
+2021-04-21 12:01:53,577	ljs-base_0g125_run_8	INFO	====> Epoch: 23
+2021-04-21 12:02:12,637	ljs-base_0g125_run_8	INFO	====> Epoch: 23
+2021-04-21 12:02:12,638	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 23 to ./logs/ljs-base_0g125_run_8/G_23.pth
+2021-04-21 12:02:33,811	ljs-base_0g125_run_8	INFO	Train Epoch: 24 [0/1562 (0%)]	Loss: 0.950291
+2021-04-21 12:02:33,812	ljs-base_0g125_run_8	INFO	[0.20179641246795654, 0.7484947443008423, 1104, 0.0003155110148962051]
+2021-04-21 12:02:54,189	ljs-base_0g125_run_8	INFO	Train Epoch: 24 [640/1562 (42%)]	Loss: 0.963591
+2021-04-21 12:02:54,191	ljs-base_0g125_run_8	INFO	[0.20002365112304688, 0.7635678052902222, 1124, 0.00032121645820355055]
+2021-04-21 12:03:14,356	ljs-base_0g125_run_8	INFO	Train Epoch: 24 [1280/1562 (83%)]	Loss: 0.930585
+2021-04-21 12:03:14,358	ljs-base_0g125_run_8	INFO	[0.20147383213043213, 0.7291113138198853, 1144, 0.00032692190151089603]
+2021-04-21 12:03:22,186	ljs-base_0g125_run_8	INFO	====> Epoch: 24
+2021-04-21 12:03:41,502	ljs-base_0g125_run_8	INFO	====> Epoch: 24
+2021-04-21 12:03:41,503	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 24 to ./logs/ljs-base_0g125_run_8/G_24.pth
+2021-04-21 12:04:03,089	ljs-base_0g125_run_8	INFO	Train Epoch: 25 [0/1562 (0%)]	Loss: 0.968546
+2021-04-21 12:04:03,090	ljs-base_0g125_run_8	INFO	[0.195756733417511, 0.7727891802787781, 1152, 0.0003292040788338342]
+2021-04-21 12:04:23,145	ljs-base_0g125_run_8	INFO	Train Epoch: 25 [640/1562 (42%)]	Loss: 0.932196
+2021-04-21 12:04:23,146	ljs-base_0g125_run_8	INFO	[0.19118762016296387, 0.7410082817077637, 1172, 0.0003349095221411797]
+2021-04-21 12:04:43,408	ljs-base_0g125_run_8	INFO	Train Epoch: 25 [1280/1562 (83%)]	Loss: 0.946898
+2021-04-21 12:04:43,409	ljs-base_0g125_run_8	INFO	[0.1948542594909668, 0.7520436644554138, 1192, 0.0003406149654485252]
+2021-04-21 12:04:51,281	ljs-base_0g125_run_8	INFO	====> Epoch: 25
+2021-04-21 12:05:10,409	ljs-base_0g125_run_8	INFO	====> Epoch: 25
+2021-04-21 12:05:10,410	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 25 to ./logs/ljs-base_0g125_run_8/G_25.pth
+2021-04-21 12:05:32,508	ljs-base_0g125_run_8	INFO	Train Epoch: 26 [0/1562 (0%)]	Loss: 0.977137
+2021-04-21 12:05:32,509	ljs-base_0g125_run_8	INFO	[0.19191622734069824, 0.7852211594581604, 1200, 0.0003428971427714634]
+2021-04-21 12:05:52,894	ljs-base_0g125_run_8	INFO	Train Epoch: 26 [640/1562 (42%)]	Loss: 0.864270
+2021-04-21 12:05:52,895	ljs-base_0g125_run_8	INFO	[0.18309372663497925, 0.6811760663986206, 1220, 0.00034860258607880885]
+2021-04-21 12:06:13,314	ljs-base_0g125_run_8	INFO	Train Epoch: 26 [1280/1562 (83%)]	Loss: 0.891156
+2021-04-21 12:06:13,315	ljs-base_0g125_run_8	INFO	[0.18838077783584595, 0.7027756571769714, 1240, 0.00035430802938615433]
+2021-04-21 12:06:21,059	ljs-base_0g125_run_8	INFO	====> Epoch: 26
+2021-04-21 12:06:41,153	ljs-base_0g125_run_8	INFO	====> Epoch: 26
+2021-04-21 12:06:41,154	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 26 to ./logs/ljs-base_0g125_run_8/G_26.pth
+2021-04-21 12:07:02,753	ljs-base_0g125_run_8	INFO	Train Epoch: 27 [0/1562 (0%)]	Loss: 0.910116
+2021-04-21 12:07:02,754	ljs-base_0g125_run_8	INFO	[0.18006348609924316, 0.73005211353302, 1248, 0.0003565902067090925]
+2021-04-21 12:07:23,174	ljs-base_0g125_run_8	INFO	Train Epoch: 27 [640/1562 (42%)]	Loss: 0.876887
+2021-04-21 12:07:23,175	ljs-base_0g125_run_8	INFO	[0.18346166610717773, 0.6934252977371216, 1268, 0.00036229565001643803]
+2021-04-21 12:07:43,270	ljs-base_0g125_run_8	INFO	Train Epoch: 27 [1280/1562 (83%)]	Loss: 0.835074
+2021-04-21 12:07:43,271	ljs-base_0g125_run_8	INFO	[0.1868993043899536, 0.6481749415397644, 1288, 0.0003680010933237835]
+2021-04-21 12:07:51,142	ljs-base_0g125_run_8	INFO	====> Epoch: 27
+2021-04-21 12:08:09,979	ljs-base_0g125_run_8	INFO	====> Epoch: 27
+2021-04-21 12:08:09,979	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 27 to ./logs/ljs-base_0g125_run_8/G_27.pth
+2021-04-21 12:08:31,802	ljs-base_0g125_run_8	INFO	Train Epoch: 28 [0/1562 (0%)]	Loss: 0.901457
+2021-04-21 12:08:31,802	ljs-base_0g125_run_8	INFO	[0.17961740493774414, 0.7218397259712219, 1296, 0.0003702832706467217]
+2021-04-21 12:08:52,461	ljs-base_0g125_run_8	INFO	Train Epoch: 28 [640/1562 (42%)]	Loss: 0.875912
+2021-04-21 12:08:52,462	ljs-base_0g125_run_8	INFO	[0.17544054985046387, 0.700471043586731, 1316, 0.00037598871395406715]
+2021-04-21 12:09:13,134	ljs-base_0g125_run_8	INFO	Train Epoch: 28 [1280/1562 (83%)]	Loss: 0.855721
+2021-04-21 12:09:13,136	ljs-base_0g125_run_8	INFO	[0.17709124088287354, 0.6786300539970398, 1336, 0.00038169415726141263]
+2021-04-21 12:09:20,868	ljs-base_0g125_run_8	INFO	====> Epoch: 28
+2021-04-21 12:09:39,674	ljs-base_0g125_run_8	INFO	====> Epoch: 28
+2021-04-21 12:09:39,674	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 28 to ./logs/ljs-base_0g125_run_8/G_28.pth
+2021-04-21 12:10:00,982	ljs-base_0g125_run_8	INFO	Train Epoch: 29 [0/1562 (0%)]	Loss: 0.806947
+2021-04-21 12:10:00,982	ljs-base_0g125_run_8	INFO	[0.16493523120880127, 0.6420120596885681, 1344, 0.00038397633458435085]
+2021-04-21 12:10:21,342	ljs-base_0g125_run_8	INFO	Train Epoch: 29 [640/1562 (42%)]	Loss: 0.847458
+2021-04-21 12:10:21,344	ljs-base_0g125_run_8	INFO	[0.16530555486679077, 0.6821521520614624, 1364, 0.00038968177789169633]
+2021-04-21 12:10:42,137	ljs-base_0g125_run_8	INFO	Train Epoch: 29 [1280/1562 (83%)]	Loss: 0.778350
+2021-04-21 12:10:42,139	ljs-base_0g125_run_8	INFO	[0.172895610332489, 0.6054543852806091, 1384, 0.00039538722119904175]
+2021-04-21 12:10:49,950	ljs-base_0g125_run_8	INFO	====> Epoch: 29
+2021-04-21 12:11:08,665	ljs-base_0g125_run_8	INFO	====> Epoch: 29
+2021-04-21 12:11:08,665	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 29 to ./logs/ljs-base_0g125_run_8/G_29.pth
+2021-04-21 12:11:29,852	ljs-base_0g125_run_8	INFO	Train Epoch: 30 [0/1562 (0%)]	Loss: 0.781609
+2021-04-21 12:11:29,853	ljs-base_0g125_run_8	INFO	[0.16370296478271484, 0.6179064512252808, 1392, 0.00039766939852198]
+2021-04-21 12:11:50,367	ljs-base_0g125_run_8	INFO	Train Epoch: 30 [640/1562 (42%)]	Loss: 0.773500
+2021-04-21 12:11:50,368	ljs-base_0g125_run_8	INFO	[0.16512763500213623, 0.6083722710609436, 1412, 0.00040337484182932545]
+2021-04-21 12:12:10,734	ljs-base_0g125_run_8	INFO	Train Epoch: 30 [1280/1562 (83%)]	Loss: 0.762764
+2021-04-21 12:12:10,734	ljs-base_0g125_run_8	INFO	[0.15974241495132446, 0.603022038936615, 1432, 0.00040908028513667093]
+2021-04-21 12:12:18,704	ljs-base_0g125_run_8	INFO	====> Epoch: 30
+2021-04-21 12:12:37,476	ljs-base_0g125_run_8	INFO	====> Epoch: 30
+2021-04-21 12:12:37,476	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 30 to ./logs/ljs-base_0g125_run_8/G_30.pth
+2021-04-21 12:12:58,741	ljs-base_0g125_run_8	INFO	Train Epoch: 31 [0/1562 (0%)]	Loss: 0.739907
+2021-04-21 12:12:58,742	ljs-base_0g125_run_8	INFO	[0.14858156442642212, 0.5913252234458923, 1440, 0.00041136246245960915]
+2021-04-21 12:13:18,990	ljs-base_0g125_run_8	INFO	Train Epoch: 31 [640/1562 (42%)]	Loss: 0.792568
+2021-04-21 12:13:18,991	ljs-base_0g125_run_8	INFO	[0.16114217042922974, 0.6314260959625244, 1460, 0.0004170679057669546]
+2021-04-21 12:13:39,240	ljs-base_0g125_run_8	INFO	Train Epoch: 31 [1280/1562 (83%)]	Loss: 0.765935
+2021-04-21 12:13:39,241	ljs-base_0g125_run_8	INFO	[0.16194289922714233, 0.6039919257164001, 1480, 0.0004227733490743001]
+2021-04-21 12:13:47,217	ljs-base_0g125_run_8	INFO	====> Epoch: 31
+2021-04-21 12:14:05,429	ljs-base_0g125_run_8	INFO	====> Epoch: 31
+2021-04-21 12:14:05,430	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 31 to ./logs/ljs-base_0g125_run_8/G_31.pth
+2021-04-21 12:14:26,678	ljs-base_0g125_run_8	INFO	Train Epoch: 32 [0/1562 (0%)]	Loss: 0.731283
+2021-04-21 12:14:26,679	ljs-base_0g125_run_8	INFO	[0.14643162488937378, 0.5848516821861267, 1488, 0.00042505552639723833]
+2021-04-21 12:14:47,363	ljs-base_0g125_run_8	INFO	Train Epoch: 32 [640/1562 (42%)]	Loss: 0.728100
+2021-04-21 12:14:47,364	ljs-base_0g125_run_8	INFO	[0.1493140459060669, 0.5787860155105591, 1508, 0.00043076096970458375]
+2021-04-21 12:15:07,513	ljs-base_0g125_run_8	INFO	Train Epoch: 32 [1280/1562 (83%)]	Loss: 0.768992
+2021-04-21 12:15:07,514	ljs-base_0g125_run_8	INFO	[0.15571856498718262, 0.613273024559021, 1528, 0.0004364664130119293]
+2021-04-21 12:15:15,555	ljs-base_0g125_run_8	INFO	====> Epoch: 32
+2021-04-21 12:15:34,459	ljs-base_0g125_run_8	INFO	====> Epoch: 32
+2021-04-21 12:15:34,460	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 32 to ./logs/ljs-base_0g125_run_8/G_32.pth
+2021-04-21 12:15:55,935	ljs-base_0g125_run_8	INFO	Train Epoch: 33 [0/1562 (0%)]	Loss: 0.740515
+2021-04-21 12:15:55,935	ljs-base_0g125_run_8	INFO	[0.1494956612586975, 0.5910195708274841, 1536, 0.0004387485903348674]
+2021-04-21 12:16:16,227	ljs-base_0g125_run_8	INFO	Train Epoch: 33 [640/1562 (42%)]	Loss: 0.706566
+2021-04-21 12:16:16,229	ljs-base_0g125_run_8	INFO	[0.14817041158676147, 0.558395266532898, 1556, 0.00044445403364221293]
+2021-04-21 12:16:36,424	ljs-base_0g125_run_8	INFO	Train Epoch: 33 [1280/1562 (83%)]	Loss: 0.697912
+2021-04-21 12:16:36,425	ljs-base_0g125_run_8	INFO	[0.14113914966583252, 0.5567725300788879, 1576, 0.0004501594769495584]
+2021-04-21 12:16:44,256	ljs-base_0g125_run_8	INFO	====> Epoch: 33
+2021-04-21 12:17:03,684	ljs-base_0g125_run_8	INFO	====> Epoch: 33
+2021-04-21 12:17:03,685	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 33 to ./logs/ljs-base_0g125_run_8/G_33.pth
+2021-04-21 12:17:25,777	ljs-base_0g125_run_8	INFO	Train Epoch: 34 [0/1562 (0%)]	Loss: 0.722535
+2021-04-21 12:17:25,778	ljs-base_0g125_run_8	INFO	[0.13869929313659668, 0.5838361382484436, 1584, 0.0004524416542724966]
+2021-04-21 12:17:46,084	ljs-base_0g125_run_8	INFO	Train Epoch: 34 [640/1562 (42%)]	Loss: 0.673229
+2021-04-21 12:17:46,086	ljs-base_0g125_run_8	INFO	[0.13892841339111328, 0.5343003273010254, 1604, 0.0004581470975798421]
+2021-04-21 12:18:06,515	ljs-base_0g125_run_8	INFO	Train Epoch: 34 [1280/1562 (83%)]	Loss: 0.686814
+2021-04-21 12:18:06,516	ljs-base_0g125_run_8	INFO	[0.1337490677833557, 0.5530651807785034, 1624, 0.0004638525408871876]
+2021-04-21 12:18:14,210	ljs-base_0g125_run_8	INFO	====> Epoch: 34
+2021-04-21 12:18:33,167	ljs-base_0g125_run_8	INFO	====> Epoch: 34
+2021-04-21 12:18:33,167	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 34 to ./logs/ljs-base_0g125_run_8/G_34.pth
+2021-04-21 12:18:54,706	ljs-base_0g125_run_8	INFO	Train Epoch: 35 [0/1562 (0%)]	Loss: 0.698204
+2021-04-21 12:18:54,707	ljs-base_0g125_run_8	INFO	[0.1309415102005005, 0.5672622919082642, 1632, 0.00046613471821012575]
+2021-04-21 12:19:15,154	ljs-base_0g125_run_8	INFO	Train Epoch: 35 [640/1562 (42%)]	Loss: 0.684306
+2021-04-21 12:19:15,154	ljs-base_0g125_run_8	INFO	[0.1329435110092163, 0.5513620972633362, 1652, 0.00047184016151747123]
+2021-04-21 12:19:35,377	ljs-base_0g125_run_8	INFO	Train Epoch: 35 [1280/1562 (83%)]	Loss: 0.677249
+2021-04-21 12:19:35,378	ljs-base_0g125_run_8	INFO	[0.13492166996002197, 0.5423275232315063, 1672, 0.0004775456048248167]
+2021-04-21 12:19:43,114	ljs-base_0g125_run_8	INFO	====> Epoch: 35
+2021-04-21 12:20:01,617	ljs-base_0g125_run_8	INFO	====> Epoch: 35
+2021-04-21 12:20:01,618	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 35 to ./logs/ljs-base_0g125_run_8/G_35.pth
+2021-04-21 12:20:22,908	ljs-base_0g125_run_8	INFO	Train Epoch: 36 [0/1562 (0%)]	Loss: 0.686627
+2021-04-21 12:20:22,909	ljs-base_0g125_run_8	INFO	[0.13293242454528809, 0.5536942481994629, 1680, 0.00047982778214775493]
+2021-04-21 12:20:43,605	ljs-base_0g125_run_8	INFO	Train Epoch: 36 [640/1562 (42%)]	Loss: 0.645667
+2021-04-21 12:20:43,606	ljs-base_0g125_run_8	INFO	[0.12311410903930664, 0.5225531458854675, 1700, 0.0004855332254551004]
+2021-04-21 12:21:03,787	ljs-base_0g125_run_8	INFO	Train Epoch: 36 [1280/1562 (83%)]	Loss: 0.692347
+2021-04-21 12:21:03,788	ljs-base_0g125_run_8	INFO	[0.1283852458000183, 0.5639613270759583, 1720, 0.0004912386687624459]
+2021-04-21 12:21:11,581	ljs-base_0g125_run_8	INFO	====> Epoch: 36
+2021-04-21 12:21:30,441	ljs-base_0g125_run_8	INFO	====> Epoch: 36
+2021-04-21 12:21:30,441	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 36 to ./logs/ljs-base_0g125_run_8/G_36.pth
+2021-04-21 12:21:51,843	ljs-base_0g125_run_8	INFO	Train Epoch: 37 [0/1562 (0%)]	Loss: 0.636509
+2021-04-21 12:21:51,844	ljs-base_0g125_run_8	INFO	[0.13093382120132446, 0.5055754780769348, 1728, 0.000493520846085384]
+2021-04-21 12:22:12,143	ljs-base_0g125_run_8	INFO	Train Epoch: 37 [640/1562 (42%)]	Loss: 0.655349
+2021-04-21 12:22:12,144	ljs-base_0g125_run_8	INFO	[0.13435280323028564, 0.5209957957267761, 1748, 0.0004992262893927295]
+2021-04-21 12:22:32,482	ljs-base_0g125_run_8	INFO	Train Epoch: 37 [1280/1562 (83%)]	Loss: 0.622533
+2021-04-21 12:22:32,484	ljs-base_0g125_run_8	INFO	[0.12229269742965698, 0.5002403259277344, 1768, 0.000504931732700075]
+2021-04-21 12:22:40,266	ljs-base_0g125_run_8	INFO	====> Epoch: 37
+2021-04-21 12:22:58,474	ljs-base_0g125_run_8	INFO	====> Epoch: 37
+2021-04-21 12:22:58,475	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 37 to ./logs/ljs-base_0g125_run_8/G_37.pth
+2021-04-21 12:23:19,839	ljs-base_0g125_run_8	INFO	Train Epoch: 38 [0/1562 (0%)]	Loss: 0.591780
+2021-04-21 12:23:19,839	ljs-base_0g125_run_8	INFO	[0.11688286066055298, 0.4748970568180084, 1776, 0.0005072139100230132]
+2021-04-21 12:23:40,324	ljs-base_0g125_run_8	INFO	Train Epoch: 38 [640/1562 (42%)]	Loss: 0.600487
+2021-04-21 12:23:40,325	ljs-base_0g125_run_8	INFO	[0.12415379285812378, 0.47633296251296997, 1796, 0.0005129193533303587]
+2021-04-21 12:24:00,508	ljs-base_0g125_run_8	INFO	Train Epoch: 38 [1280/1562 (83%)]	Loss: 0.612900
+2021-04-21 12:24:00,509	ljs-base_0g125_run_8	INFO	[0.12220299243927002, 0.4906967282295227, 1816, 0.0005186247966377041]
+2021-04-21 12:24:08,412	ljs-base_0g125_run_8	INFO	====> Epoch: 38
+2021-04-21 12:24:26,520	ljs-base_0g125_run_8	INFO	====> Epoch: 38
+2021-04-21 12:24:26,521	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 38 to ./logs/ljs-base_0g125_run_8/G_38.pth
+2021-04-21 12:24:47,846	ljs-base_0g125_run_8	INFO	Train Epoch: 39 [0/1562 (0%)]	Loss: 0.608738
+2021-04-21 12:24:47,847	ljs-base_0g125_run_8	INFO	[0.11854588985443115, 0.4901925325393677, 1824, 0.0005209069739606424]
+2021-04-21 12:25:08,621	ljs-base_0g125_run_8	INFO	Train Epoch: 39 [640/1562 (42%)]	Loss: 0.616906
+2021-04-21 12:25:08,622	ljs-base_0g125_run_8	INFO	[0.1179000735282898, 0.4990060031414032, 1844, 0.0005266124172679878]
+2021-04-21 12:25:28,583	ljs-base_0g125_run_8	INFO	Train Epoch: 39 [1280/1562 (83%)]	Loss: 0.576840
+2021-04-21 12:25:28,584	ljs-base_0g125_run_8	INFO	[0.12063050270080566, 0.456209659576416, 1864, 0.0005323178605753334]
+2021-04-21 12:25:36,476	ljs-base_0g125_run_8	INFO	====> Epoch: 39
+2021-04-21 12:25:55,570	ljs-base_0g125_run_8	INFO	====> Epoch: 39
+2021-04-21 12:25:55,570	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 39 to ./logs/ljs-base_0g125_run_8/G_39.pth
+2021-04-21 12:26:17,746	ljs-base_0g125_run_8	INFO	Train Epoch: 40 [0/1562 (0%)]	Loss: 0.623077
+2021-04-21 12:26:17,747	ljs-base_0g125_run_8	INFO	[0.1096448302268982, 0.5134317874908447, 1872, 0.0005346000378982715]
+2021-04-21 12:26:38,294	ljs-base_0g125_run_8	INFO	Train Epoch: 40 [640/1562 (42%)]	Loss: 0.593227
+2021-04-21 12:26:38,295	ljs-base_0g125_run_8	INFO	[0.11750924587249756, 0.47571802139282227, 1892, 0.000540305481205617]
+2021-04-21 12:26:58,523	ljs-base_0g125_run_8	INFO	Train Epoch: 40 [1280/1562 (83%)]	Loss: 0.593604
+2021-04-21 12:26:58,524	ljs-base_0g125_run_8	INFO	[0.11568760871887207, 0.4779166877269745, 1912, 0.0005460109245129625]
+2021-04-21 12:27:06,597	ljs-base_0g125_run_8	INFO	====> Epoch: 40
+2021-04-21 12:27:25,479	ljs-base_0g125_run_8	INFO	====> Epoch: 40
+2021-04-21 12:27:25,480	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 40 to ./logs/ljs-base_0g125_run_8/G_40.pth
+2021-04-21 12:27:46,827	ljs-base_0g125_run_8	INFO	Train Epoch: 41 [0/1562 (0%)]	Loss: 0.600895
+2021-04-21 12:27:46,828	ljs-base_0g125_run_8	INFO	[0.11598008871078491, 0.484915167093277, 1920, 0.0005482931018359007]
+2021-04-21 12:28:07,329	ljs-base_0g125_run_8	INFO	Train Epoch: 41 [640/1562 (42%)]	Loss: 0.560889
+2021-04-21 12:28:07,330	ljs-base_0g125_run_8	INFO	[0.11270594596862793, 0.4481830894947052, 1940, 0.0005539985451432462]
+2021-04-21 12:28:27,782	ljs-base_0g125_run_8	INFO	Train Epoch: 41 [1280/1562 (83%)]	Loss: 0.602587
+2021-04-21 12:28:27,783	ljs-base_0g125_run_8	INFO	[0.1099158525466919, 0.49267154932022095, 1960, 0.0005597039884505916]
+2021-04-21 12:28:35,495	ljs-base_0g125_run_8	INFO	====> Epoch: 41
+2021-04-21 12:28:54,245	ljs-base_0g125_run_8	INFO	====> Epoch: 41
+2021-04-21 12:28:54,245	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 41 to ./logs/ljs-base_0g125_run_8/G_41.pth
+2021-04-21 12:29:15,659	ljs-base_0g125_run_8	INFO	Train Epoch: 42 [0/1562 (0%)]	Loss: 0.570065
+2021-04-21 12:29:15,660	ljs-base_0g125_run_8	INFO	[0.10699021816253662, 0.4630752205848694, 1968, 0.0005619861657735298]
+2021-04-21 12:29:36,209	ljs-base_0g125_run_8	INFO	Train Epoch: 42 [640/1562 (42%)]	Loss: 0.619811
+2021-04-21 12:29:36,211	ljs-base_0g125_run_8	INFO	[0.10974252223968506, 0.5100682973861694, 1988, 0.0005676916090808752]
+2021-04-21 12:29:56,465	ljs-base_0g125_run_8	INFO	Train Epoch: 42 [1280/1562 (83%)]	Loss: 0.595036
+2021-04-21 12:29:56,466	ljs-base_0g125_run_8	INFO	[0.10313063859939575, 0.4919048845767975, 2008, 0.0005733970523882208]
+2021-04-21 12:30:04,246	ljs-base_0g125_run_8	INFO	====> Epoch: 42
+2021-04-21 12:30:22,530	ljs-base_0g125_run_8	INFO	====> Epoch: 42
+2021-04-21 12:30:22,530	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 42 to ./logs/ljs-base_0g125_run_8/G_42.pth
+2021-04-21 12:30:43,573	ljs-base_0g125_run_8	INFO	Train Epoch: 43 [0/1562 (0%)]	Loss: 0.567499
+2021-04-21 12:30:43,573	ljs-base_0g125_run_8	INFO	[0.09677231311798096, 0.47072634100914, 2016, 0.0005756792297111589]
+2021-04-21 12:31:04,276	ljs-base_0g125_run_8	INFO	Train Epoch: 43 [640/1562 (42%)]	Loss: 0.579720
+2021-04-21 12:31:04,277	ljs-base_0g125_run_8	INFO	[0.10385298728942871, 0.47586703300476074, 2036, 0.0005813846730185044]
+2021-04-21 12:31:24,607	ljs-base_0g125_run_8	INFO	Train Epoch: 43 [1280/1562 (83%)]	Loss: 0.583782
+2021-04-21 12:31:24,608	ljs-base_0g125_run_8	INFO	[0.1052621603012085, 0.4785195291042328, 2056, 0.00058709011632585]
+2021-04-21 12:31:32,539	ljs-base_0g125_run_8	INFO	====> Epoch: 43
+2021-04-21 12:31:51,469	ljs-base_0g125_run_8	INFO	====> Epoch: 43
+2021-04-21 12:31:51,469	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 43 to ./logs/ljs-base_0g125_run_8/G_43.pth
+2021-04-21 12:32:12,956	ljs-base_0g125_run_8	INFO	Train Epoch: 44 [0/1562 (0%)]	Loss: 0.524021
+2021-04-21 12:32:12,956	ljs-base_0g125_run_8	INFO	[0.09480583667755127, 0.42921528220176697, 2064, 0.0005893722936487881]
+2021-04-21 12:32:33,387	ljs-base_0g125_run_8	INFO	Train Epoch: 44 [640/1562 (42%)]	Loss: 0.532605
+2021-04-21 12:32:33,388	ljs-base_0g125_run_8	INFO	[0.10185319185256958, 0.4307517409324646, 2084, 0.0005950777369561336]
+2021-04-21 12:32:54,168	ljs-base_0g125_run_8	INFO	Train Epoch: 44 [1280/1562 (83%)]	Loss: 0.569007
+2021-04-21 12:32:54,169	ljs-base_0g125_run_8	INFO	[0.1034860610961914, 0.4655206799507141, 2104, 0.0006007831802634791]
+2021-04-21 12:33:02,142	ljs-base_0g125_run_8	INFO	====> Epoch: 44
+2021-04-21 12:33:20,795	ljs-base_0g125_run_8	INFO	====> Epoch: 44
+2021-04-21 12:33:20,795	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 44 to ./logs/ljs-base_0g125_run_8/G_44.pth
+2021-04-21 12:33:42,247	ljs-base_0g125_run_8	INFO	Train Epoch: 45 [0/1562 (0%)]	Loss: 0.536535
+2021-04-21 12:33:42,248	ljs-base_0g125_run_8	INFO	[0.08986008167266846, 0.44667521119117737, 2112, 0.0006030653575864173]
+2021-04-21 12:34:02,304	ljs-base_0g125_run_8	INFO	Train Epoch: 45 [640/1562 (42%)]	Loss: 0.555375
+2021-04-21 12:34:02,305	ljs-base_0g125_run_8	INFO	[0.09583580493927002, 0.45953935384750366, 2132, 0.0006087708008937628]
+2021-04-21 12:34:22,903	ljs-base_0g125_run_8	INFO	Train Epoch: 45 [1280/1562 (83%)]	Loss: 0.582255
+2021-04-21 12:34:22,905	ljs-base_0g125_run_8	INFO	[0.10034960508346558, 0.4819050431251526, 2152, 0.0006144762442011082]
+2021-04-21 12:34:30,784	ljs-base_0g125_run_8	INFO	====> Epoch: 45
+2021-04-21 12:34:49,758	ljs-base_0g125_run_8	INFO	====> Epoch: 45
+2021-04-21 12:34:49,758	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 45 to ./logs/ljs-base_0g125_run_8/G_45.pth
+2021-04-21 12:35:10,958	ljs-base_0g125_run_8	INFO	Train Epoch: 46 [0/1562 (0%)]	Loss: 0.555785
+2021-04-21 12:35:10,959	ljs-base_0g125_run_8	INFO	[0.08952486515045166, 0.46626004576683044, 2160, 0.0006167584215240465]
+2021-04-21 12:35:31,300	ljs-base_0g125_run_8	INFO	Train Epoch: 46 [640/1562 (42%)]	Loss: 0.528804
+2021-04-21 12:35:31,301	ljs-base_0g125_run_8	INFO	[0.08403873443603516, 0.4447651505470276, 2180, 0.0006224638648313919]
+2021-04-21 12:35:51,572	ljs-base_0g125_run_8	INFO	Train Epoch: 46 [1280/1562 (83%)]	Loss: 0.557189
+2021-04-21 12:35:51,573	ljs-base_0g125_run_8	INFO	[0.0930892825126648, 0.464100182056427, 2200, 0.0006281693081387373]
+2021-04-21 12:35:59,424	ljs-base_0g125_run_8	INFO	====> Epoch: 46
+2021-04-21 12:36:17,717	ljs-base_0g125_run_8	INFO	====> Epoch: 46
+2021-04-21 12:36:17,717	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 46 to ./logs/ljs-base_0g125_run_8/G_46.pth
+2021-04-21 12:36:38,973	ljs-base_0g125_run_8	INFO	Train Epoch: 47 [0/1562 (0%)]	Loss: 0.513770
+2021-04-21 12:36:38,974	ljs-base_0g125_run_8	INFO	[0.08094066381454468, 0.43282949924468994, 2208, 0.0006304514854616756]
+2021-04-21 12:36:59,700	ljs-base_0g125_run_8	INFO	Train Epoch: 47 [640/1562 (42%)]	Loss: 0.561028
+2021-04-21 12:36:59,701	ljs-base_0g125_run_8	INFO	[0.08833372592926025, 0.47269442677497864, 2228, 0.0006361569287690211]
+2021-04-21 12:37:20,197	ljs-base_0g125_run_8	INFO	Train Epoch: 47 [1280/1562 (83%)]	Loss: 0.501144
+2021-04-21 12:37:20,198	ljs-base_0g125_run_8	INFO	[0.08886551856994629, 0.41227826476097107, 2248, 0.0006418623720763666]
+2021-04-21 12:37:27,764	ljs-base_0g125_run_8	INFO	====> Epoch: 47
+2021-04-21 12:37:46,352	ljs-base_0g125_run_8	INFO	====> Epoch: 47
+2021-04-21 12:37:46,352	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 47 to ./logs/ljs-base_0g125_run_8/G_47.pth
+2021-04-21 12:38:07,704	ljs-base_0g125_run_8	INFO	Train Epoch: 48 [0/1562 (0%)]	Loss: 0.491531
+2021-04-21 12:38:07,705	ljs-base_0g125_run_8	INFO	[0.08380568027496338, 0.4077253043651581, 2256, 0.0006441445493993047]
+2021-04-21 12:38:28,448	ljs-base_0g125_run_8	INFO	Train Epoch: 48 [640/1562 (42%)]	Loss: 0.528739
+2021-04-21 12:38:28,449	ljs-base_0g125_run_8	INFO	[0.08397436141967773, 0.44476479291915894, 2276, 0.0006498499927066503]
+2021-04-21 12:38:48,849	ljs-base_0g125_run_8	INFO	Train Epoch: 48 [1280/1562 (83%)]	Loss: 0.506631
+2021-04-21 12:38:48,851	ljs-base_0g125_run_8	INFO	[0.08101195096969604, 0.42561909556388855, 2296, 0.0006555554360139957]
+2021-04-21 12:38:56,744	ljs-base_0g125_run_8	INFO	====> Epoch: 48
+2021-04-21 12:39:15,501	ljs-base_0g125_run_8	INFO	====> Epoch: 48
+2021-04-21 12:39:15,502	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 48 to ./logs/ljs-base_0g125_run_8/G_48.pth
+2021-04-21 12:39:37,235	ljs-base_0g125_run_8	INFO	Train Epoch: 49 [0/1562 (0%)]	Loss: 0.488545
+2021-04-21 12:39:37,236	ljs-base_0g125_run_8	INFO	[0.07407772541046143, 0.41446682810783386, 2304, 0.0006578376133369339]
+2021-04-21 12:39:57,759	ljs-base_0g125_run_8	INFO	Train Epoch: 49 [640/1562 (42%)]	Loss: 0.486165
+2021-04-21 12:39:57,760	ljs-base_0g125_run_8	INFO	[0.07987117767333984, 0.4062938690185547, 2324, 0.0006635430566442793]
+2021-04-21 12:40:18,144	ljs-base_0g125_run_8	INFO	Train Epoch: 49 [1280/1562 (83%)]	Loss: 0.491603
+2021-04-21 12:40:18,145	ljs-base_0g125_run_8	INFO	[0.08134675025939941, 0.4102562367916107, 2344, 0.0006692484999516249]
+2021-04-21 12:40:25,876	ljs-base_0g125_run_8	INFO	====> Epoch: 49
+2021-04-21 12:40:44,517	ljs-base_0g125_run_8	INFO	====> Epoch: 49
+2021-04-21 12:40:44,517	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 49 to ./logs/ljs-base_0g125_run_8/G_49.pth
+2021-04-21 12:41:05,791	ljs-base_0g125_run_8	INFO	Train Epoch: 50 [0/1562 (0%)]	Loss: 0.511443
+2021-04-21 12:41:05,792	ljs-base_0g125_run_8	INFO	[0.07552814483642578, 0.43591463565826416, 2352, 0.000671530677274563]
+2021-04-21 12:41:26,419	ljs-base_0g125_run_8	INFO	Train Epoch: 50 [640/1562 (42%)]	Loss: 0.510924
+2021-04-21 12:41:26,420	ljs-base_0g125_run_8	INFO	[0.08172589540481567, 0.4291982352733612, 2372, 0.0006772361205819085]
+2021-04-21 12:41:46,937	ljs-base_0g125_run_8	INFO	Train Epoch: 50 [1280/1562 (83%)]	Loss: 0.484441
+2021-04-21 12:41:46,938	ljs-base_0g125_run_8	INFO	[0.07698845863342285, 0.40745243430137634, 2392, 0.0006829415638892539]
+2021-04-21 12:41:54,740	ljs-base_0g125_run_8	INFO	====> Epoch: 50
+2021-04-21 12:42:13,296	ljs-base_0g125_run_8	INFO	====> Epoch: 50
+2021-04-21 12:42:13,297	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 50 to ./logs/ljs-base_0g125_run_8/G_50.pth
+2021-04-21 12:42:34,757	ljs-base_0g125_run_8	INFO	Train Epoch: 51 [0/1562 (0%)]	Loss: 0.517747
+2021-04-21 12:42:34,758	ljs-base_0g125_run_8	INFO	[0.07655298709869385, 0.4411942660808563, 2400, 0.0006852237412121922]
+2021-04-21 12:42:55,405	ljs-base_0g125_run_8	INFO	Train Epoch: 51 [640/1562 (42%)]	Loss: 0.474236
+2021-04-21 12:42:55,406	ljs-base_0g125_run_8	INFO	[0.07699525356292725, 0.39724037051200867, 2420, 0.0006909291845195376]
+2021-04-21 12:43:15,729	ljs-base_0g125_run_8	INFO	Train Epoch: 51 [1280/1562 (83%)]	Loss: 0.500494
+2021-04-21 12:43:15,730	ljs-base_0g125_run_8	INFO	[0.0758475661277771, 0.4246459901332855, 2440, 0.0006966346278268832]
+2021-04-21 12:43:23,622	ljs-base_0g125_run_8	INFO	====> Epoch: 51
+2021-04-21 12:43:42,387	ljs-base_0g125_run_8	INFO	====> Epoch: 51
+2021-04-21 12:43:42,388	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 51 to ./logs/ljs-base_0g125_run_8/G_51.pth
+2021-04-21 12:44:03,706	ljs-base_0g125_run_8	INFO	Train Epoch: 52 [0/1562 (0%)]	Loss: 0.452949
+2021-04-21 12:44:03,707	ljs-base_0g125_run_8	INFO	[0.06353837251663208, 0.3894111216068268, 2448, 0.0006989168051498213]
+2021-04-21 12:44:24,171	ljs-base_0g125_run_8	INFO	Train Epoch: 52 [640/1562 (42%)]	Loss: 0.480966
+2021-04-21 12:44:24,173	ljs-base_0g125_run_8	INFO	[0.07589012384414673, 0.40507635474205017, 2468, 0.0007046222484571669]
+2021-04-21 12:44:44,468	ljs-base_0g125_run_8	INFO	Train Epoch: 52 [1280/1562 (83%)]	Loss: 0.491859
+2021-04-21 12:44:44,469	ljs-base_0g125_run_8	INFO	[0.08535462617874146, 0.40650418400764465, 2488, 0.0007103276917645123]
+2021-04-21 12:44:52,286	ljs-base_0g125_run_8	INFO	====> Epoch: 52
+2021-04-21 12:45:10,975	ljs-base_0g125_run_8	INFO	====> Epoch: 52
+2021-04-21 12:45:10,975	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 52 to ./logs/ljs-base_0g125_run_8/G_52.pth
+2021-04-21 12:45:32,572	ljs-base_0g125_run_8	INFO	Train Epoch: 53 [0/1562 (0%)]	Loss: 0.466462
+2021-04-21 12:45:32,573	ljs-base_0g125_run_8	INFO	[0.06497478485107422, 0.4014875292778015, 2496, 0.0007126098690874506]
+2021-04-21 12:45:53,328	ljs-base_0g125_run_8	INFO	Train Epoch: 53 [640/1562 (42%)]	Loss: 0.485088
+2021-04-21 12:45:53,329	ljs-base_0g125_run_8	INFO	[0.062142789363861084, 0.4229455292224884, 2516, 0.000718315312394796]
+2021-04-21 12:46:13,562	ljs-base_0g125_run_8	INFO	Train Epoch: 53 [1280/1562 (83%)]	Loss: 0.518873
+2021-04-21 12:46:13,563	ljs-base_0g125_run_8	INFO	[0.07517814636230469, 0.4436948597431183, 2536, 0.0007240207557021414]
+2021-04-21 12:46:21,245	ljs-base_0g125_run_8	INFO	====> Epoch: 53
+2021-04-21 12:46:39,866	ljs-base_0g125_run_8	INFO	====> Epoch: 53
+2021-04-21 12:46:39,866	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 53 to ./logs/ljs-base_0g125_run_8/G_53.pth
+2021-04-21 12:47:02,071	ljs-base_0g125_run_8	INFO	Train Epoch: 54 [0/1562 (0%)]	Loss: 0.427583
+2021-04-21 12:47:02,072	ljs-base_0g125_run_8	INFO	[0.0599902868270874, 0.36759287118911743, 2544, 0.0007263029330250796]
+2021-04-21 12:47:22,174	ljs-base_0g125_run_8	INFO	Train Epoch: 54 [640/1562 (42%)]	Loss: 0.466487
+2021-04-21 12:47:22,175	ljs-base_0g125_run_8	INFO	[0.05250585079193115, 0.41398096084594727, 2564, 0.0007320083763324252]
+2021-04-21 12:47:42,850	ljs-base_0g125_run_8	INFO	Train Epoch: 54 [1280/1562 (83%)]	Loss: 0.446577
+2021-04-21 12:47:42,851	ljs-base_0g125_run_8	INFO	[0.0661916732788086, 0.38038545846939087, 2584, 0.0007377138196397706]
+2021-04-21 12:47:50,780	ljs-base_0g125_run_8	INFO	====> Epoch: 54
+2021-04-21 12:48:09,543	ljs-base_0g125_run_8	INFO	====> Epoch: 54
+2021-04-21 12:48:09,544	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 54 to ./logs/ljs-base_0g125_run_8/G_54.pth
+2021-04-21 12:48:30,954	ljs-base_0g125_run_8	INFO	Train Epoch: 55 [0/1562 (0%)]	Loss: 0.461572
+2021-04-21 12:48:30,954	ljs-base_0g125_run_8	INFO	[0.060505032539367676, 0.40106695890426636, 2592, 0.0007399959969627088]
+2021-04-21 12:48:51,416	ljs-base_0g125_run_8	INFO	Train Epoch: 55 [640/1562 (42%)]	Loss: 0.445726
+2021-04-21 12:48:51,417	ljs-base_0g125_run_8	INFO	[0.06257134675979614, 0.3831543028354645, 2612, 0.0007457014402700543]
+2021-04-21 12:49:11,827	ljs-base_0g125_run_8	INFO	Train Epoch: 55 [1280/1562 (83%)]	Loss: 0.466279
+2021-04-21 12:49:11,828	ljs-base_0g125_run_8	INFO	[0.060897648334503174, 0.4053814113140106, 2632, 0.0007514068835773998]
+2021-04-21 12:49:19,780	ljs-base_0g125_run_8	INFO	====> Epoch: 55
+2021-04-21 12:49:38,517	ljs-base_0g125_run_8	INFO	====> Epoch: 55
+2021-04-21 12:49:38,517	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 55 to ./logs/ljs-base_0g125_run_8/G_55.pth
+2021-04-21 12:49:59,818	ljs-base_0g125_run_8	INFO	Train Epoch: 56 [0/1562 (0%)]	Loss: 0.453730
+2021-04-21 12:49:59,819	ljs-base_0g125_run_8	INFO	[0.05431795120239258, 0.3994123637676239, 2640, 0.0007536890609003379]
+2021-04-21 12:50:20,189	ljs-base_0g125_run_8	INFO	Train Epoch: 56 [640/1562 (42%)]	Loss: 0.467930
+2021-04-21 12:50:20,190	ljs-base_0g125_run_8	INFO	[0.06092458963394165, 0.40700533986091614, 2660, 0.0007593945042076834]
+2021-04-21 12:50:40,191	ljs-base_0g125_run_8	INFO	Train Epoch: 56 [1280/1562 (83%)]	Loss: 0.466731
+2021-04-21 12:50:40,192	ljs-base_0g125_run_8	INFO	[0.06414592266082764, 0.40258485078811646, 2680, 0.000765099947515029]
+2021-04-21 12:50:47,868	ljs-base_0g125_run_8	INFO	====> Epoch: 56
+2021-04-21 12:51:06,569	ljs-base_0g125_run_8	INFO	====> Epoch: 56
+2021-04-21 12:51:06,570	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 56 to ./logs/ljs-base_0g125_run_8/G_56.pth
+2021-04-21 12:51:27,879	ljs-base_0g125_run_8	INFO	Train Epoch: 57 [0/1562 (0%)]	Loss: 0.435945
+2021-04-21 12:51:27,880	ljs-base_0g125_run_8	INFO	[0.05712980031967163, 0.3788151144981384, 2688, 0.000767382124837967]
+2021-04-21 12:51:48,507	ljs-base_0g125_run_8	INFO	Train Epoch: 57 [640/1562 (42%)]	Loss: 0.458849
+2021-04-21 12:51:48,508	ljs-base_0g125_run_8	INFO	[0.06398308277130127, 0.39486563205718994, 2708, 0.0007730875681453126]
+2021-04-21 12:52:09,236	ljs-base_0g125_run_8	INFO	Train Epoch: 57 [1280/1562 (83%)]	Loss: 0.445590
+2021-04-21 12:52:09,237	ljs-base_0g125_run_8	INFO	[0.060979604721069336, 0.3846103549003601, 2728, 0.000778793011452658]
+2021-04-21 12:52:16,723	ljs-base_0g125_run_8	INFO	====> Epoch: 57
+2021-04-21 12:52:35,385	ljs-base_0g125_run_8	INFO	====> Epoch: 57
+2021-04-21 12:52:35,386	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 57 to ./logs/ljs-base_0g125_run_8/G_57.pth
+2021-04-21 12:52:56,810	ljs-base_0g125_run_8	INFO	Train Epoch: 58 [0/1562 (0%)]	Loss: 0.419041
+2021-04-21 12:52:56,810	ljs-base_0g125_run_8	INFO	[0.049443185329437256, 0.36959776282310486, 2736, 0.0007810751887755963]
+2021-04-21 12:53:17,188	ljs-base_0g125_run_8	INFO	Train Epoch: 58 [640/1562 (42%)]	Loss: 0.437942
+2021-04-21 12:53:17,189	ljs-base_0g125_run_8	INFO	[0.06097477674484253, 0.3769668936729431, 2756, 0.0007867806320829417]
+2021-04-21 12:53:37,669	ljs-base_0g125_run_8	INFO	Train Epoch: 58 [1280/1562 (83%)]	Loss: 0.470679
+2021-04-21 12:53:37,669	ljs-base_0g125_run_8	INFO	[0.06240212917327881, 0.40827667713165283, 2776, 0.0007924860753902872]
+2021-04-21 12:53:45,553	ljs-base_0g125_run_8	INFO	====> Epoch: 58
+2021-04-21 12:54:04,423	ljs-base_0g125_run_8	INFO	====> Epoch: 58
+2021-04-21 12:54:04,424	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 58 to ./logs/ljs-base_0g125_run_8/G_58.pth
+2021-04-21 12:54:25,760	ljs-base_0g125_run_8	INFO	Train Epoch: 59 [0/1562 (0%)]	Loss: 0.443750
+2021-04-21 12:54:25,760	ljs-base_0g125_run_8	INFO	[0.060669660568237305, 0.383080393075943, 2784, 0.0007947682527132254]
+2021-04-21 12:54:46,116	ljs-base_0g125_run_8	INFO	Train Epoch: 59 [640/1562 (42%)]	Loss: 0.426688
+2021-04-21 12:54:46,117	ljs-base_0g125_run_8	INFO	[0.0453646183013916, 0.38132354617118835, 2804, 0.0008004736960205709]
+2021-04-21 12:55:06,391	ljs-base_0g125_run_8	INFO	Train Epoch: 59 [1280/1562 (83%)]	Loss: 0.433025
+2021-04-21 12:55:06,392	ljs-base_0g125_run_8	INFO	[0.048786818981170654, 0.3842378556728363, 2824, 0.0008061791393279164]
+2021-04-21 12:55:14,177	ljs-base_0g125_run_8	INFO	====> Epoch: 59
+2021-04-21 12:55:32,741	ljs-base_0g125_run_8	INFO	====> Epoch: 59
+2021-04-21 12:55:32,742	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 59 to ./logs/ljs-base_0g125_run_8/G_59.pth
+2021-04-21 12:55:53,991	ljs-base_0g125_run_8	INFO	Train Epoch: 60 [0/1562 (0%)]	Loss: 0.445778
+2021-04-21 12:55:53,991	ljs-base_0g125_run_8	INFO	[0.048475027084350586, 0.39730337262153625, 2832, 0.0008084613166508546]
+2021-04-21 12:56:14,626	ljs-base_0g125_run_8	INFO	Train Epoch: 60 [640/1562 (42%)]	Loss: 0.403734
+2021-04-21 12:56:14,627	ljs-base_0g125_run_8	INFO	[0.04028189182281494, 0.36345258355140686, 2852, 0.0008141667599582001]
+2021-04-21 12:56:34,577	ljs-base_0g125_run_8	INFO	Train Epoch: 60 [1280/1562 (83%)]	Loss: 0.452004
+2021-04-21 12:56:34,578	ljs-base_0g125_run_8	INFO	[0.0583803653717041, 0.393623948097229, 2872, 0.0008198722032655455]
+2021-04-21 12:56:42,494	ljs-base_0g125_run_8	INFO	====> Epoch: 60
+2021-04-21 12:57:01,555	ljs-base_0g125_run_8	INFO	====> Epoch: 60
+2021-04-21 12:57:01,556	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 60 to ./logs/ljs-base_0g125_run_8/G_60.pth
+2021-04-21 12:57:22,901	ljs-base_0g125_run_8	INFO	Train Epoch: 61 [0/1562 (0%)]	Loss: 0.421481
+2021-04-21 12:57:22,902	ljs-base_0g125_run_8	INFO	[0.03784400224685669, 0.383637011051178, 2880, 0.0008221543805884837]
+2021-04-21 12:57:43,149	ljs-base_0g125_run_8	INFO	Train Epoch: 61 [640/1562 (42%)]	Loss: 0.422567
+2021-04-21 12:57:43,151	ljs-base_0g125_run_8	INFO	[0.04012495279312134, 0.3824419677257538, 2900, 0.0008278598238958293]
+2021-04-21 12:58:03,652	ljs-base_0g125_run_8	INFO	Train Epoch: 61 [1280/1562 (83%)]	Loss: 0.449472
+2021-04-21 12:58:03,653	ljs-base_0g125_run_8	INFO	[0.0597880482673645, 0.38968425989151, 2920, 0.0008335652672031747]
+2021-04-21 12:58:11,497	ljs-base_0g125_run_8	INFO	====> Epoch: 61
+2021-04-21 12:58:30,381	ljs-base_0g125_run_8	INFO	====> Epoch: 61
+2021-04-21 12:58:30,382	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 61 to ./logs/ljs-base_0g125_run_8/G_61.pth
+2021-04-21 12:58:51,586	ljs-base_0g125_run_8	INFO	Train Epoch: 62 [0/1562 (0%)]	Loss: 0.404051
+2021-04-21 12:58:51,587	ljs-base_0g125_run_8	INFO	[0.03418838977813721, 0.36986255645751953, 2928, 0.0008358474445261129]
+2021-04-21 12:59:12,251	ljs-base_0g125_run_8	INFO	Train Epoch: 62 [640/1562 (42%)]	Loss: 0.425873
+2021-04-21 12:59:12,252	ljs-base_0g125_run_8	INFO	[0.04775857925415039, 0.3781144618988037, 2948, 0.0008415528878334583]
+2021-04-21 12:59:32,215	ljs-base_0g125_run_8	INFO	Train Epoch: 62 [1280/1562 (83%)]	Loss: 0.448433
+2021-04-21 12:59:32,216	ljs-base_0g125_run_8	INFO	[0.04865467548370361, 0.39977824687957764, 2968, 0.0008472583311408038]
+2021-04-21 12:59:40,124	ljs-base_0g125_run_8	INFO	====> Epoch: 62
+2021-04-21 12:59:58,383	ljs-base_0g125_run_8	INFO	====> Epoch: 62
+2021-04-21 12:59:58,384	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 62 to ./logs/ljs-base_0g125_run_8/G_62.pth
+2021-04-21 13:00:19,721	ljs-base_0g125_run_8	INFO	Train Epoch: 63 [0/1562 (0%)]	Loss: 0.390132
+2021-04-21 13:00:19,722	ljs-base_0g125_run_8	INFO	[0.027961790561676025, 0.36217060685157776, 2976, 0.000849540508463742]
+2021-04-21 13:00:40,384	ljs-base_0g125_run_8	INFO	Train Epoch: 63 [640/1562 (42%)]	Loss: 0.417882
+2021-04-21 13:00:40,386	ljs-base_0g125_run_8	INFO	[0.052250564098358154, 0.3656313121318817, 2996, 0.0008552459517710874]
+2021-04-21 13:01:00,495	ljs-base_0g125_run_8	INFO	Train Epoch: 63 [1280/1562 (83%)]	Loss: 0.411362
+2021-04-21 13:01:00,496	ljs-base_0g125_run_8	INFO	[0.053588688373565674, 0.3577737510204315, 3016, 0.0008609513950784331]
+2021-04-21 13:01:08,307	ljs-base_0g125_run_8	INFO	====> Epoch: 63
+2021-04-21 13:01:26,528	ljs-base_0g125_run_8	INFO	====> Epoch: 63
+2021-04-21 13:01:26,528	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 63 to ./logs/ljs-base_0g125_run_8/G_63.pth
+2021-04-21 13:01:47,696	ljs-base_0g125_run_8	INFO	Train Epoch: 64 [0/1562 (0%)]	Loss: 0.369592
+2021-04-21 13:01:47,696	ljs-base_0g125_run_8	INFO	[0.03511899709701538, 0.3344726860523224, 3024, 0.0008632335724013712]
+2021-04-21 13:02:08,165	ljs-base_0g125_run_8	INFO	Train Epoch: 64 [640/1562 (42%)]	Loss: 0.392744
+2021-04-21 13:02:08,166	ljs-base_0g125_run_8	INFO	[0.02924811840057373, 0.36349624395370483, 3044, 0.0008689390157087167]
+2021-04-21 13:02:28,350	ljs-base_0g125_run_8	INFO	Train Epoch: 64 [1280/1562 (83%)]	Loss: 0.405015
+2021-04-21 13:02:28,351	ljs-base_0g125_run_8	INFO	[0.04944342374801636, 0.35557159781455994, 3064, 0.0008746444590160621]
+2021-04-21 13:02:36,110	ljs-base_0g125_run_8	INFO	====> Epoch: 64
+2021-04-21 13:02:54,516	ljs-base_0g125_run_8	INFO	====> Epoch: 64
+2021-04-21 13:02:54,516	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 64 to ./logs/ljs-base_0g125_run_8/G_64.pth
+2021-04-21 13:03:15,846	ljs-base_0g125_run_8	INFO	Train Epoch: 65 [0/1562 (0%)]	Loss: 0.383850
+2021-04-21 13:03:15,847	ljs-base_0g125_run_8	INFO	[0.027628183364868164, 0.35622212290763855, 3072, 0.0008769266363390004]
+2021-04-21 13:03:36,440	ljs-base_0g125_run_8	INFO	Train Epoch: 65 [640/1562 (42%)]	Loss: 0.407399
+2021-04-21 13:03:36,442	ljs-base_0g125_run_8	INFO	[0.032791852951049805, 0.3746073246002197, 3092, 0.0008826320796463458]
+2021-04-21 13:03:56,770	ljs-base_0g125_run_8	INFO	Train Epoch: 65 [1280/1562 (83%)]	Loss: 0.400591
+2021-04-21 13:03:56,771	ljs-base_0g125_run_8	INFO	[0.04217886924743652, 0.35841214656829834, 3112, 0.0008883375229536913]
+2021-04-21 13:04:04,720	ljs-base_0g125_run_8	INFO	====> Epoch: 65
+2021-04-21 13:04:23,488	ljs-base_0g125_run_8	INFO	====> Epoch: 65
+2021-04-21 13:04:23,489	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 65 to ./logs/ljs-base_0g125_run_8/G_65.pth
+2021-04-21 13:04:45,189	ljs-base_0g125_run_8	INFO	Train Epoch: 66 [0/1562 (0%)]	Loss: 0.354061
+2021-04-21 13:04:45,190	ljs-base_0g125_run_8	INFO	[0.021683335304260254, 0.33237800002098083, 3120, 0.0008906197002766295]
+2021-04-21 13:05:05,736	ljs-base_0g125_run_8	INFO	Train Epoch: 66 [640/1562 (42%)]	Loss: 0.396435
+2021-04-21 13:05:05,737	ljs-base_0g125_run_8	INFO	[0.03759634494781494, 0.35883817076683044, 3140, 0.000896325143583975]
+2021-04-21 13:05:26,370	ljs-base_0g125_run_8	INFO	Train Epoch: 66 [1280/1562 (83%)]	Loss: 0.410774
+2021-04-21 13:05:26,371	ljs-base_0g125_run_8	INFO	[0.03930133581161499, 0.37147271633148193, 3160, 0.0009020305868913204]
+2021-04-21 13:05:34,043	ljs-base_0g125_run_8	INFO	====> Epoch: 66
+2021-04-21 13:05:52,625	ljs-base_0g125_run_8	INFO	====> Epoch: 66
+2021-04-21 13:05:52,626	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 66 to ./logs/ljs-base_0g125_run_8/G_66.pth
+2021-04-21 13:06:13,957	ljs-base_0g125_run_8	INFO	Train Epoch: 67 [0/1562 (0%)]	Loss: 0.376941
+2021-04-21 13:06:13,958	ljs-base_0g125_run_8	INFO	[0.024715423583984375, 0.35222548246383667, 3168, 0.0009043127642142587]
+2021-04-21 13:06:34,588	ljs-base_0g125_run_8	INFO	Train Epoch: 67 [640/1562 (42%)]	Loss: 0.367034
+2021-04-21 13:06:34,589	ljs-base_0g125_run_8	INFO	[0.02927321195602417, 0.33776119351387024, 3188, 0.0009100182075216041]
+2021-04-21 13:06:55,141	ljs-base_0g125_run_8	INFO	Train Epoch: 67 [1280/1562 (83%)]	Loss: 0.396666
+2021-04-21 13:06:55,141	ljs-base_0g125_run_8	INFO	[0.03328382968902588, 0.3633817434310913, 3208, 0.0009157236508289496]
+2021-04-21 13:07:03,018	ljs-base_0g125_run_8	INFO	====> Epoch: 67
+2021-04-21 13:07:21,476	ljs-base_0g125_run_8	INFO	====> Epoch: 67
+2021-04-21 13:07:21,477	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 67 to ./logs/ljs-base_0g125_run_8/G_67.pth
+2021-04-21 13:07:42,991	ljs-base_0g125_run_8	INFO	Train Epoch: 68 [0/1562 (0%)]	Loss: 0.408376
+2021-04-21 13:07:42,992	ljs-base_0g125_run_8	INFO	[0.030270814895629883, 0.3781055808067322, 3216, 0.0009180058281518877]
+2021-04-21 13:08:03,562	ljs-base_0g125_run_8	INFO	Train Epoch: 68 [640/1562 (42%)]	Loss: 0.391198
+2021-04-21 13:08:03,563	ljs-base_0g125_run_8	INFO	[0.031706273555755615, 0.35949206352233887, 3236, 0.0009237112714592334]
+2021-04-21 13:08:23,947	ljs-base_0g125_run_8	INFO	Train Epoch: 68 [1280/1562 (83%)]	Loss: 0.397686
+2021-04-21 13:08:23,948	ljs-base_0g125_run_8	INFO	[0.03651636838912964, 0.36116930842399597, 3256, 0.0009294167147665788]
+2021-04-21 13:08:31,963	ljs-base_0g125_run_8	INFO	====> Epoch: 68
+2021-04-21 13:08:50,461	ljs-base_0g125_run_8	INFO	====> Epoch: 68
+2021-04-21 13:08:50,462	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 68 to ./logs/ljs-base_0g125_run_8/G_68.pth
+2021-04-21 13:09:11,800	ljs-base_0g125_run_8	INFO	Train Epoch: 69 [0/1562 (0%)]	Loss: 0.341294
+2021-04-21 13:09:11,801	ljs-base_0g125_run_8	INFO	[0.020487487316131592, 0.3208061456680298, 3264, 0.000931698892089517]
+2021-04-21 13:09:32,256	ljs-base_0g125_run_8	INFO	Train Epoch: 69 [640/1562 (42%)]	Loss: 0.388006
+2021-04-21 13:09:32,257	ljs-base_0g125_run_8	INFO	[0.03482949733734131, 0.35317686200141907, 3284, 0.0009374043353968624]
+2021-04-21 13:09:52,376	ljs-base_0g125_run_8	INFO	Train Epoch: 69 [1280/1562 (83%)]	Loss: 0.395359
+2021-04-21 13:09:52,377	ljs-base_0g125_run_8	INFO	[0.03159356117248535, 0.36376500129699707, 3304, 0.0009431097787042079]
+2021-04-21 13:10:00,342	ljs-base_0g125_run_8	INFO	====> Epoch: 69
+2021-04-21 13:10:19,121	ljs-base_0g125_run_8	INFO	====> Epoch: 69
+2021-04-21 13:10:19,122	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 69 to ./logs/ljs-base_0g125_run_8/G_69.pth
+2021-04-21 13:10:40,759	ljs-base_0g125_run_8	INFO	Train Epoch: 70 [0/1562 (0%)]	Loss: 0.336632
+2021-04-21 13:10:40,759	ljs-base_0g125_run_8	INFO	[0.016441285610198975, 0.3201904594898224, 3312, 0.0009453919560271461]
+2021-04-21 13:11:01,290	ljs-base_0g125_run_8	INFO	Train Epoch: 70 [640/1562 (42%)]	Loss: 0.365818
+2021-04-21 13:11:01,291	ljs-base_0g125_run_8	INFO	[0.021246373653411865, 0.3445720076560974, 3332, 0.0009510973993344915]
+2021-04-21 13:11:21,605	ljs-base_0g125_run_8	INFO	Train Epoch: 70 [1280/1562 (83%)]	Loss: 0.386747
+2021-04-21 13:11:21,606	ljs-base_0g125_run_8	INFO	[0.03327643871307373, 0.35347092151641846, 3352, 0.000956802842641837]
+2021-04-21 13:11:29,548	ljs-base_0g125_run_8	INFO	====> Epoch: 70
+2021-04-21 13:11:48,555	ljs-base_0g125_run_8	INFO	====> Epoch: 70
+2021-04-21 13:11:48,556	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 70 to ./logs/ljs-base_0g125_run_8/G_70.pth
+2021-04-21 13:12:09,932	ljs-base_0g125_run_8	INFO	Train Epoch: 71 [0/1562 (0%)]	Loss: 0.345438
+2021-04-21 13:12:09,933	ljs-base_0g125_run_8	INFO	[0.015928566455841064, 0.32950934767723083, 3360, 0.0009590850199647753]
+2021-04-21 13:12:30,036	ljs-base_0g125_run_8	INFO	Train Epoch: 71 [640/1562 (42%)]	Loss: 0.367334
+2021-04-21 13:12:30,037	ljs-base_0g125_run_8	INFO	[0.029844999313354492, 0.33748912811279297, 3380, 0.0009647904632721207]
+2021-04-21 13:12:50,446	ljs-base_0g125_run_8	INFO	Train Epoch: 71 [1280/1562 (83%)]	Loss: 0.370637
+2021-04-21 13:12:50,447	ljs-base_0g125_run_8	INFO	[0.021003663539886475, 0.3496331572532654, 3400, 0.0009704959065794662]
+2021-04-21 13:12:58,164	ljs-base_0g125_run_8	INFO	====> Epoch: 71
+2021-04-21 13:13:16,785	ljs-base_0g125_run_8	INFO	====> Epoch: 71
+2021-04-21 13:13:16,786	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 71 to ./logs/ljs-base_0g125_run_8/G_71.pth
+2021-04-21 13:13:37,668	ljs-base_0g125_run_8	INFO	Train Epoch: 72 [0/1562 (0%)]	Loss: 0.342806
+2021-04-21 13:13:37,669	ljs-base_0g125_run_8	INFO	[0.016131818294525146, 0.32667437195777893, 3408, 0.0009727780839024044]
+2021-04-21 13:13:57,775	ljs-base_0g125_run_8	INFO	Train Epoch: 72 [640/1562 (42%)]	Loss: 0.356551
+2021-04-21 13:13:57,777	ljs-base_0g125_run_8	INFO	[0.020072221755981445, 0.3364788293838501, 3428, 0.0009784835272097499]
+2021-04-21 13:14:18,137	ljs-base_0g125_run_8	INFO	Train Epoch: 72 [1280/1562 (83%)]	Loss: 0.404004
+2021-04-21 13:14:18,138	ljs-base_0g125_run_8	INFO	[0.03504514694213867, 0.36895889043807983, 3448, 0.0009841889705170955]
+2021-04-21 13:14:25,851	ljs-base_0g125_run_8	INFO	====> Epoch: 72
+2021-04-21 13:14:44,473	ljs-base_0g125_run_8	INFO	====> Epoch: 72
+2021-04-21 13:14:44,474	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 72 to ./logs/ljs-base_0g125_run_8/G_72.pth
+2021-04-21 13:15:05,683	ljs-base_0g125_run_8	INFO	Train Epoch: 73 [0/1562 (0%)]	Loss: 0.353577
+2021-04-21 13:15:05,684	ljs-base_0g125_run_8	INFO	[0.014327704906463623, 0.3392496705055237, 3456, 0.0009864711478400335]
+2021-04-21 13:15:25,721	ljs-base_0g125_run_8	INFO	Train Epoch: 73 [640/1562 (42%)]	Loss: 0.369979
+2021-04-21 13:15:25,723	ljs-base_0g125_run_8	INFO	[0.024646997451782227, 0.34533247351646423, 3476, 0.000992176591147379]
+2021-04-21 13:15:46,200	ljs-base_0g125_run_8	INFO	Train Epoch: 73 [1280/1562 (83%)]	Loss: 0.370004
+2021-04-21 13:15:46,201	ljs-base_0g125_run_8	INFO	[0.029246628284454346, 0.3407570421695709, 3496, 0.0009978820344547245]
+2021-04-21 13:15:54,153	ljs-base_0g125_run_8	INFO	====> Epoch: 73
+2021-04-21 13:16:12,985	ljs-base_0g125_run_8	INFO	====> Epoch: 73
+2021-04-21 13:16:12,986	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 73 to ./logs/ljs-base_0g125_run_8/G_73.pth
+2021-04-21 13:16:34,805	ljs-base_0g125_run_8	INFO	Train Epoch: 74 [0/1562 (0%)]	Loss: 0.355551
+2021-04-21 13:16:34,805	ljs-base_0g125_run_8	INFO	[0.0034331679344177246, 0.3521175682544708, 3504, 0.0010001642117776627]
+2021-04-21 13:16:55,460	ljs-base_0g125_run_8	INFO	Train Epoch: 74 [640/1562 (42%)]	Loss: 0.351458
+2021-04-21 13:16:55,462	ljs-base_0g125_run_8	INFO	[0.01582413911819458, 0.33563339710235596, 3524, 0.001005869655085008]
+2021-04-21 13:17:15,510	ljs-base_0g125_run_8	INFO	Train Epoch: 74 [1280/1562 (83%)]	Loss: 0.360891
+2021-04-21 13:17:15,512	ljs-base_0g125_run_8	INFO	[0.025752127170562744, 0.3351386487483978, 3544, 0.0010115750983923535]
+2021-04-21 13:17:23,425	ljs-base_0g125_run_8	INFO	====> Epoch: 74
+2021-04-21 13:17:42,539	ljs-base_0g125_run_8	INFO	====> Epoch: 74
+2021-04-21 13:17:42,539	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 74 to ./logs/ljs-base_0g125_run_8/G_74.pth
+2021-04-21 13:18:04,340	ljs-base_0g125_run_8	INFO	Train Epoch: 75 [0/1562 (0%)]	Loss: 0.331453
+2021-04-21 13:18:04,341	ljs-base_0g125_run_8	INFO	[0.008293569087982178, 0.3231591582298279, 3552, 0.001013857275715292]
+2021-04-21 13:18:24,547	ljs-base_0g125_run_8	INFO	Train Epoch: 75 [640/1562 (42%)]	Loss: 0.365934
+2021-04-21 13:18:24,548	ljs-base_0g125_run_8	INFO	[0.012849748134613037, 0.3530847132205963, 3572, 0.0010195627190226373]
+2021-04-21 13:18:44,975	ljs-base_0g125_run_8	INFO	Train Epoch: 75 [1280/1562 (83%)]	Loss: 0.407639
+2021-04-21 13:18:44,976	ljs-base_0g125_run_8	INFO	[0.03301525115966797, 0.37462368607521057, 3592, 0.0010252681623299828]
+2021-04-21 13:18:52,738	ljs-base_0g125_run_8	INFO	====> Epoch: 75
+2021-04-21 13:19:11,653	ljs-base_0g125_run_8	INFO	====> Epoch: 75
+2021-04-21 13:19:11,653	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 75 to ./logs/ljs-base_0g125_run_8/G_75.pth
+2021-04-21 13:19:33,832	ljs-base_0g125_run_8	INFO	Train Epoch: 76 [0/1562 (0%)]	Loss: 0.341697
+2021-04-21 13:19:33,833	ljs-base_0g125_run_8	INFO	[0.012831270694732666, 0.32886549830436707, 3600, 0.0010275503396529211]
+2021-04-21 13:19:54,382	ljs-base_0g125_run_8	INFO	Train Epoch: 76 [640/1562 (42%)]	Loss: 0.345760
+2021-04-21 13:19:54,383	ljs-base_0g125_run_8	INFO	[0.008708834648132324, 0.33705082535743713, 3620, 0.0010332557829602666]
+2021-04-21 13:20:14,825	ljs-base_0g125_run_8	INFO	Train Epoch: 76 [1280/1562 (83%)]	Loss: 0.358829
+2021-04-21 13:20:14,826	ljs-base_0g125_run_8	INFO	[0.014135181903839111, 0.3446940779685974, 3640, 0.001038961226267612]
+2021-04-21 13:20:22,591	ljs-base_0g125_run_8	INFO	====> Epoch: 76
+2021-04-21 13:20:41,637	ljs-base_0g125_run_8	INFO	====> Epoch: 76
+2021-04-21 13:20:41,638	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 76 to ./logs/ljs-base_0g125_run_8/G_76.pth
+2021-04-21 13:21:03,674	ljs-base_0g125_run_8	INFO	Train Epoch: 77 [0/1562 (0%)]	Loss: 0.342769
+2021-04-21 13:21:03,675	ljs-base_0g125_run_8	INFO	[0.004115402698516846, 0.3386535942554474, 3648, 0.0010412434035905502]
+2021-04-21 13:21:23,584	ljs-base_0g125_run_8	INFO	Train Epoch: 77 [640/1562 (42%)]	Loss: 0.362689
+2021-04-21 13:21:23,585	ljs-base_0g125_run_8	INFO	[0.019331514835357666, 0.3433578908443451, 3668, 0.0010469488468978956]
+2021-04-21 13:21:44,068	ljs-base_0g125_run_8	INFO	Train Epoch: 77 [1280/1562 (83%)]	Loss: 0.363695
+2021-04-21 13:21:44,069	ljs-base_0g125_run_8	INFO	[0.02055966854095459, 0.3431352972984314, 3688, 0.0010526542902052412]
+2021-04-21 13:21:51,750	ljs-base_0g125_run_8	INFO	====> Epoch: 77
+2021-04-21 13:22:10,502	ljs-base_0g125_run_8	INFO	====> Epoch: 77
+2021-04-21 13:22:10,502	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 77 to ./logs/ljs-base_0g125_run_8/G_77.pth
+2021-04-21 13:22:31,854	ljs-base_0g125_run_8	INFO	Train Epoch: 78 [0/1562 (0%)]	Loss: 0.329446
+2021-04-21 13:22:31,855	ljs-base_0g125_run_8	INFO	[0.00476306676864624, 0.32468298077583313, 3696, 0.0010549364675281794]
+2021-04-21 13:22:52,579	ljs-base_0g125_run_8	INFO	Train Epoch: 78 [640/1562 (42%)]	Loss: 0.365970
+2021-04-21 13:22:52,580	ljs-base_0g125_run_8	INFO	[0.0169297456741333, 0.34904050827026367, 3716, 0.0010606419108355248]
+2021-04-21 13:23:13,130	ljs-base_0g125_run_8	INFO	Train Epoch: 78 [1280/1562 (83%)]	Loss: 0.356415
+2021-04-21 13:23:13,131	ljs-base_0g125_run_8	INFO	[0.009869098663330078, 0.3465462028980255, 3736, 0.0010663473541428702]
+2021-04-21 13:23:20,871	ljs-base_0g125_run_8	INFO	====> Epoch: 78
+2021-04-21 13:23:39,899	ljs-base_0g125_run_8	INFO	====> Epoch: 78
+2021-04-21 13:23:39,900	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 78 to ./logs/ljs-base_0g125_run_8/G_78.pth
+2021-04-21 13:24:01,769	ljs-base_0g125_run_8	INFO	Train Epoch: 79 [0/1562 (0%)]	Loss: 0.296960
+2021-04-21 13:24:01,769	ljs-base_0g125_run_8	INFO	[-0.00556868314743042, 0.3025285303592682, 3744, 0.0010686295314658084]
+2021-04-21 13:24:22,348	ljs-base_0g125_run_8	INFO	Train Epoch: 79 [640/1562 (42%)]	Loss: 0.343980
+2021-04-21 13:24:22,349	ljs-base_0g125_run_8	INFO	[0.0031139254570007324, 0.34086641669273376, 3764, 0.0010743349747731538]
+2021-04-21 13:24:42,461	ljs-base_0g125_run_8	INFO	Train Epoch: 79 [1280/1562 (83%)]	Loss: 0.369458
+2021-04-21 13:24:42,462	ljs-base_0g125_run_8	INFO	[0.015960752964019775, 0.3534969985485077, 3784, 0.0010800404180804995]
+2021-04-21 13:24:50,254	ljs-base_0g125_run_8	INFO	====> Epoch: 79
+2021-04-21 13:25:08,535	ljs-base_0g125_run_8	INFO	====> Epoch: 79
+2021-04-21 13:25:08,536	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 79 to ./logs/ljs-base_0g125_run_8/G_79.pth
+2021-04-21 13:25:30,200	ljs-base_0g125_run_8	INFO	Train Epoch: 80 [0/1562 (0%)]	Loss: 0.307889
+2021-04-21 13:25:30,201	ljs-base_0g125_run_8	INFO	[0.00021320581436157227, 0.3076755106449127, 3792, 0.0010823225954034376]
+2021-04-21 13:25:50,659	ljs-base_0g125_run_8	INFO	Train Epoch: 80 [640/1562 (42%)]	Loss: 0.331451
+2021-04-21 13:25:50,660	ljs-base_0g125_run_8	INFO	[0.006856322288513184, 0.32459455728530884, 3812, 0.001088028038710783]
+2021-04-21 13:26:11,385	ljs-base_0g125_run_8	INFO	Train Epoch: 80 [1280/1562 (83%)]	Loss: 0.349987
+2021-04-21 13:26:11,386	ljs-base_0g125_run_8	INFO	[0.01520627737045288, 0.33478108048439026, 3832, 0.0010937334820181285]
+2021-04-21 13:26:19,179	ljs-base_0g125_run_8	INFO	====> Epoch: 80
+2021-04-21 13:26:38,442	ljs-base_0g125_run_8	INFO	====> Epoch: 80
+2021-04-21 13:26:38,442	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 80 to ./logs/ljs-base_0g125_run_8/G_80.pth
+2021-04-21 13:26:59,796	ljs-base_0g125_run_8	INFO	Train Epoch: 81 [0/1562 (0%)]	Loss: 0.303909
+2021-04-21 13:26:59,797	ljs-base_0g125_run_8	INFO	[-0.005018174648284912, 0.30892693996429443, 3840, 0.0010960156593410669]
+2021-04-21 13:27:20,347	ljs-base_0g125_run_8	INFO	Train Epoch: 81 [640/1562 (42%)]	Loss: 0.359044
+2021-04-21 13:27:20,349	ljs-base_0g125_run_8	INFO	[0.0059844255447387695, 0.35305917263031006, 3860, 0.0011017211026484123]
+2021-04-21 13:27:40,934	ljs-base_0g125_run_8	INFO	Train Epoch: 81 [1280/1562 (83%)]	Loss: 0.342299
+2021-04-21 13:27:40,935	ljs-base_0g125_run_8	INFO	[0.019500315189361572, 0.322798490524292, 3880, 0.0011074265459557577]
+2021-04-21 13:27:48,729	ljs-base_0g125_run_8	INFO	====> Epoch: 81
+2021-04-21 13:28:07,455	ljs-base_0g125_run_8	INFO	====> Epoch: 81
+2021-04-21 13:28:07,456	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 81 to ./logs/ljs-base_0g125_run_8/G_81.pth
+2021-04-21 13:28:28,908	ljs-base_0g125_run_8	INFO	Train Epoch: 82 [0/1562 (0%)]	Loss: 0.330156
+2021-04-21 13:28:28,908	ljs-base_0g125_run_8	INFO	[8.338689804077148e-05, 0.33007216453552246, 3888, 0.0011097087232786959]
+2021-04-21 13:28:49,002	ljs-base_0g125_run_8	INFO	Train Epoch: 82 [640/1562 (42%)]	Loss: 0.341403
+2021-04-21 13:28:49,004	ljs-base_0g125_run_8	INFO	[0.009149312973022461, 0.3322541117668152, 3908, 0.0011154141665860415]
+2021-04-21 13:29:09,642	ljs-base_0g125_run_8	INFO	Train Epoch: 82 [1280/1562 (83%)]	Loss: 0.358809
+2021-04-21 13:29:09,643	ljs-base_0g125_run_8	INFO	[0.016398251056671143, 0.34241122007369995, 3928, 0.001121119609893387]
+2021-04-21 13:29:17,658	ljs-base_0g125_run_8	INFO	====> Epoch: 82
+2021-04-21 13:29:36,439	ljs-base_0g125_run_8	INFO	====> Epoch: 82
+2021-04-21 13:29:36,440	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 82 to ./logs/ljs-base_0g125_run_8/G_82.pth
+2021-04-21 13:29:57,764	ljs-base_0g125_run_8	INFO	Train Epoch: 83 [0/1562 (0%)]	Loss: 0.296662
+2021-04-21 13:29:57,765	ljs-base_0g125_run_8	INFO	[-0.009160399436950684, 0.3058219254016876, 3936, 0.0011234017872163251]
+2021-04-21 13:30:18,300	ljs-base_0g125_run_8	INFO	Train Epoch: 83 [640/1562 (42%)]	Loss: 0.314435
+2021-04-21 13:30:18,302	ljs-base_0g125_run_8	INFO	[0.004591226577758789, 0.3098435699939728, 3956, 0.0011291072305236705]
+2021-04-21 13:30:38,623	ljs-base_0g125_run_8	INFO	Train Epoch: 83 [1280/1562 (83%)]	Loss: 0.339304
+2021-04-21 13:30:38,624	ljs-base_0g125_run_8	INFO	[0.008674979209899902, 0.3306293785572052, 3976, 0.001134812673831016]
+2021-04-21 13:30:46,557	ljs-base_0g125_run_8	INFO	====> Epoch: 83
+2021-04-21 13:31:05,299	ljs-base_0g125_run_8	INFO	====> Epoch: 83
+2021-04-21 13:31:05,299	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 83 to ./logs/ljs-base_0g125_run_8/G_83.pth
+2021-04-21 13:31:26,718	ljs-base_0g125_run_8	INFO	Train Epoch: 84 [0/1562 (0%)]	Loss: 0.305810
+2021-04-21 13:31:26,718	ljs-base_0g125_run_8	INFO	[-0.0004474520683288574, 0.3062574565410614, 3984, 0.0011370948511539541]
+2021-04-21 13:31:47,032	ljs-base_0g125_run_8	INFO	Train Epoch: 84 [640/1562 (42%)]	Loss: 0.309683
+2021-04-21 13:31:47,034	ljs-base_0g125_run_8	INFO	[-0.0019358396530151367, 0.31161901354789734, 4004, 0.0011402338065646378]
+2021-04-21 13:32:07,310	ljs-base_0g125_run_8	INFO	Train Epoch: 84 [1280/1562 (83%)]	Loss: 0.328568
+2021-04-21 13:32:07,311	ljs-base_0g125_run_8	INFO	[0.01357656717300415, 0.3149910867214203, 4024, 0.001137398105067946]
+2021-04-21 13:32:15,110	ljs-base_0g125_run_8	INFO	====> Epoch: 84
+2021-04-21 13:32:33,441	ljs-base_0g125_run_8	INFO	====> Epoch: 84
+2021-04-21 13:32:33,442	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 84 to ./logs/ljs-base_0g125_run_8/G_84.pth
+2021-04-21 13:32:54,778	ljs-base_0g125_run_8	INFO	Train Epoch: 85 [0/1562 (0%)]	Loss: 0.279307
+2021-04-21 13:32:54,778	ljs-base_0g125_run_8	INFO	[-0.01437830924987793, 0.29368576407432556, 4032, 0.001136269733654195]
+2021-04-21 13:33:15,400	ljs-base_0g125_run_8	INFO	Train Epoch: 85 [640/1562 (42%)]	Loss: 0.336523
+2021-04-21 13:33:15,401	ljs-base_0g125_run_8	INFO	[0.008724331855773926, 0.3277990221977234, 4052, 0.001133463432176023]
+2021-04-21 13:33:35,908	ljs-base_0g125_run_8	INFO	Train Epoch: 85 [1280/1562 (83%)]	Loss: 0.338178
+2021-04-21 13:33:35,909	ljs-base_0g125_run_8	INFO	[0.0070996880531311035, 0.3310786187648773, 4072, 0.001130677821102619]
+2021-04-21 13:33:43,778	ljs-base_0g125_run_8	INFO	====> Epoch: 85
+2021-04-21 13:34:02,533	ljs-base_0g125_run_8	INFO	====> Epoch: 85
+2021-04-21 13:34:02,534	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 85 to ./logs/ljs-base_0g125_run_8/G_85.pth
+2021-04-21 13:34:23,930	ljs-base_0g125_run_8	INFO	Train Epoch: 86 [0/1562 (0%)]	Loss: 0.304006
+2021-04-21 13:34:23,931	ljs-base_0g125_run_8	INFO	[-0.012714207172393799, 0.3167201280593872, 4080, 0.0011295693131683749]
+2021-04-21 13:34:44,212	ljs-base_0g125_run_8	INFO	Train Epoch: 86 [640/1562 (42%)]	Loss: 0.320825
+2021-04-21 13:34:44,213	ljs-base_0g125_run_8	INFO	[-0.0044026970863342285, 0.3252275288105011, 4100, 0.0011268122445874692]
+2021-04-21 13:35:04,432	ljs-base_0g125_run_8	INFO	Train Epoch: 86 [1280/1562 (83%)]	Loss: 0.344755
+2021-04-21 13:35:04,434	ljs-base_0g125_run_8	INFO	[0.0017833113670349121, 0.3429715931415558, 4120, 0.001124075266427137]
+2021-04-21 13:35:12,387	ljs-base_0g125_run_8	INFO	====> Epoch: 86
+2021-04-21 13:35:31,525	ljs-base_0g125_run_8	INFO	====> Epoch: 86
+2021-04-21 13:35:31,525	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 86 to ./logs/ljs-base_0g125_run_8/G_86.pth
+2021-04-21 13:35:53,700	ljs-base_0g125_run_8	INFO	Train Epoch: 87 [0/1562 (0%)]	Loss: 0.301944
+2021-04-21 13:35:53,701	ljs-base_0g125_run_8	INFO	[-0.009607255458831787, 0.3115515112876892, 4128, 0.0011229860459519272]
+2021-04-21 13:36:14,170	ljs-base_0g125_run_8	INFO	Train Epoch: 87 [640/1562 (42%)]	Loss: 0.321157
+2021-04-21 13:36:14,171	ljs-base_0g125_run_8	INFO	[-0.00019174814224243164, 0.3213484585285187, 4148, 0.001120276787370552]
+2021-04-21 13:36:34,254	ljs-base_0g125_run_8	INFO	Train Epoch: 87 [1280/1562 (83%)]	Loss: 0.337973
+2021-04-21 13:36:34,255	ljs-base_0g125_run_8	INFO	[0.00026726722717285156, 0.33770549297332764, 4168, 0.0011175870433037917]
+2021-04-21 13:36:41,791	ljs-base_0g125_run_8	INFO	====> Epoch: 87
+2021-04-21 13:37:00,571	ljs-base_0g125_run_8	INFO	====> Epoch: 87
+2021-04-21 13:37:00,572	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 87 to ./logs/ljs-base_0g125_run_8/G_87.pth
+2021-04-21 13:37:21,856	ljs-base_0g125_run_8	INFO	Train Epoch: 88 [0/1562 (0%)]	Loss: 0.298393
+2021-04-21 13:37:21,856	ljs-base_0g125_run_8	INFO	[-0.01279062032699585, 0.31118398904800415, 4176, 0.001116516557384473]
+2021-04-21 13:37:42,260	ljs-base_0g125_run_8	INFO	Train Epoch: 88 [640/1562 (42%)]	Loss: 0.292795
+2021-04-21 13:37:42,261	ljs-base_0g125_run_8	INFO	[-0.015846967697143555, 0.30864161252975464, 4196, 0.0011138537428198724]
+2021-04-21 13:38:02,366	ljs-base_0g125_run_8	INFO	Train Epoch: 88 [1280/1562 (83%)]	Loss: 0.324919
+2021-04-21 13:38:02,367	ljs-base_0g125_run_8	INFO	[0.0016317963600158691, 0.3232867419719696, 4216, 0.0011112098897138852]
+2021-04-21 13:38:10,224	ljs-base_0g125_run_8	INFO	====> Epoch: 88
+2021-04-21 13:38:28,892	ljs-base_0g125_run_8	INFO	====> Epoch: 88
+2021-04-21 13:38:28,892	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 88 to ./logs/ljs-base_0g125_run_8/G_88.pth
+2021-04-21 13:38:50,580	ljs-base_0g125_run_8	INFO	Train Epoch: 89 [0/1562 (0%)]	Loss: 0.299479
+2021-04-21 13:38:50,581	ljs-base_0g125_run_8	INFO	[-0.014679431915283203, 0.31415802240371704, 4224, 0.0011101576073853324]
+2021-04-21 13:39:10,737	ljs-base_0g125_run_8	INFO	Train Epoch: 89 [640/1562 (42%)]	Loss: 0.305329
+2021-04-21 13:39:10,738	ljs-base_0g125_run_8	INFO	[-0.00851452350616455, 0.3138435482978821, 4244, 0.0011075399248758068]
+2021-04-21 13:39:31,360	ljs-base_0g125_run_8	INFO	Train Epoch: 89 [1280/1562 (83%)]	Loss: 0.301334
+2021-04-21 13:39:31,361	ljs-base_0g125_run_8	INFO	[-0.0048857927322387695, 0.30621978640556335, 4264, 0.0011049406724662916]
+2021-04-21 13:39:39,177	ljs-base_0g125_run_8	INFO	====> Epoch: 89
+2021-04-21 13:39:57,587	ljs-base_0g125_run_8	INFO	====> Epoch: 89
+2021-04-21 13:39:57,588	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 89 to ./logs/ljs-base_0g125_run_8/G_89.pth
+2021-04-21 13:40:19,031	ljs-base_0g125_run_8	INFO	Train Epoch: 90 [0/1562 (0%)]	Loss: 0.269515
+2021-04-21 13:40:19,032	ljs-base_0g125_run_8	INFO	[-0.020903944969177246, 0.29041847586631775, 4272, 0.0011039060835947945]
+2021-04-21 13:40:39,034	ljs-base_0g125_run_8	INFO	Train Epoch: 90 [640/1562 (42%)]	Loss: 0.289989
+2021-04-21 13:40:39,035	ljs-base_0g125_run_8	INFO	[-0.017057418823242188, 0.30704647302627563, 4292, 0.0011013322724836092]
+2021-04-21 13:40:59,419	ljs-base_0g125_run_8	INFO	Train Epoch: 90 [1280/1562 (83%)]	Loss: 0.312197
+2021-04-21 13:40:59,420	ljs-base_0g125_run_8	INFO	[-0.005555987358093262, 0.31775304675102234, 4312, 0.0010987763807289372]
+2021-04-21 13:41:07,018	ljs-base_0g125_run_8	INFO	====> Epoch: 90
+2021-04-21 13:41:25,636	ljs-base_0g125_run_8	INFO	====> Epoch: 90
+2021-04-21 13:41:25,636	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 90 to ./logs/ljs-base_0g125_run_8/G_90.pth
+2021-04-21 13:41:46,827	ljs-base_0g125_run_8	INFO	Train Epoch: 91 [0/1562 (0%)]	Loss: 0.287757
+2021-04-21 13:41:46,828	ljs-base_0g125_run_8	INFO	[-0.02255105972290039, 0.3103077709674835, 4320, 0.001097758994973063]
+2021-04-21 13:42:07,621	ljs-base_0g125_run_8	INFO	Train Epoch: 91 [640/1562 (42%)]	Loss: 0.291915
+2021-04-21 13:42:07,623	ljs-base_0g125_run_8	INFO	[-0.012518584728240967, 0.3044338524341583, 4340, 0.0010952278433574204]
+2021-04-21 13:42:28,295	ljs-base_0g125_run_8	INFO	Train Epoch: 91 [1280/1562 (83%)]	Loss: 0.308509
+2021-04-21 13:42:28,295	ljs-base_0g125_run_8	INFO	[-0.008012771606445312, 0.3165218234062195, 4360, 0.0010927141199528667]
+2021-04-21 13:42:36,099	ljs-base_0g125_run_8	INFO	====> Epoch: 91
+2021-04-21 13:42:54,642	ljs-base_0g125_run_8	INFO	====> Epoch: 91
+2021-04-21 13:42:54,643	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 91 to ./logs/ljs-base_0g125_run_8/G_91.pth
+2021-04-21 13:43:15,972	ljs-base_0g125_run_8	INFO	Train Epoch: 92 [0/1562 (0%)]	Loss: 0.282491
+2021-04-21 13:43:15,973	ljs-base_0g125_run_8	INFO	[-0.030619144439697266, 0.31311026215553284, 4368, 0.0010917134657869828]
+2021-04-21 13:43:36,480	ljs-base_0g125_run_8	INFO	Train Epoch: 92 [640/1562 (42%)]	Loss: 0.303839
+2021-04-21 13:43:36,481	ljs-base_0g125_run_8	INFO	[-0.015590310096740723, 0.3194296956062317, 4388, 0.001089223808120332]
+2021-04-21 13:43:56,604	ljs-base_0g125_run_8	INFO	Train Epoch: 92 [1280/1562 (83%)]	Loss: 0.298880
+2021-04-21 13:43:56,605	ljs-base_0g125_run_8	INFO	[-0.001369476318359375, 0.30024901032447815, 4408, 0.0010867511061610439]
+2021-04-21 13:44:04,537	ljs-base_0g125_run_8	INFO	====> Epoch: 92
+2021-04-21 13:44:23,418	ljs-base_0g125_run_8	INFO	====> Epoch: 92
+2021-04-21 13:44:23,419	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 92 to ./logs/ljs-base_0g125_run_8/G_92.pth
+2021-04-21 13:44:44,758	ljs-base_0g125_run_8	INFO	Train Epoch: 93 [0/1562 (0%)]	Loss: 0.279876
+2021-04-21 13:44:44,759	ljs-base_0g125_run_8	INFO	[-0.025302648544311523, 0.30517876148223877, 4416, 0.0010857667299570824]
+2021-04-21 13:45:04,946	ljs-base_0g125_run_8	INFO	Train Epoch: 93 [640/1562 (42%)]	Loss: 0.293671
+2021-04-21 13:45:04,948	ljs-base_0g125_run_8	INFO	[-0.017260313034057617, 0.31093117594718933, 4436, 0.0010833174447939914]
+2021-04-21 13:45:25,323	ljs-base_0g125_run_8	INFO	Train Epoch: 93 [1280/1562 (83%)]	Loss: 0.303581
+2021-04-21 13:45:25,324	ljs-base_0g125_run_8	INFO	[-0.0014380216598510742, 0.30501919984817505, 4456, 0.0010808846605762888]
+2021-04-21 13:45:33,062	ljs-base_0g125_run_8	INFO	====> Epoch: 93
+2021-04-21 13:45:52,357	ljs-base_0g125_run_8	INFO	====> Epoch: 93
+2021-04-21 13:45:52,357	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 93 to ./logs/ljs-base_0g125_run_8/G_93.pth
+2021-04-21 13:46:13,741	ljs-base_0g125_run_8	INFO	Train Epoch: 94 [0/1562 (0%)]	Loss: 0.268651
+2021-04-21 13:46:13,742	ljs-base_0g125_run_8	INFO	[-0.029027342796325684, 0.29767805337905884, 4464, 0.0010799161257396945]
+2021-04-21 13:46:34,179	ljs-base_0g125_run_8	INFO	Train Epoch: 94 [640/1562 (42%)]	Loss: 0.276609
+2021-04-21 13:46:34,180	ljs-base_0g125_run_8	INFO	[-0.025345146656036377, 0.30195412039756775, 4484, 0.0010775061336133723]
+2021-04-21 13:46:54,838	ljs-base_0g125_run_8	INFO	Train Epoch: 94 [1280/1562 (83%)]	Loss: 0.274895
+2021-04-21 13:46:54,840	ljs-base_0g125_run_8	INFO	[-0.013816893100738525, 0.28871238231658936, 4504, 0.001075112204564808]
+2021-04-21 13:47:02,823	ljs-base_0g125_run_8	INFO	====> Epoch: 94
+2021-04-21 13:47:21,464	ljs-base_0g125_run_8	INFO	====> Epoch: 94
+2021-04-21 13:47:21,464	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 94 to ./logs/ljs-base_0g125_run_8/G_94.pth
+2021-04-21 13:47:42,746	ljs-base_0g125_run_8	INFO	Train Epoch: 95 [0/1562 (0%)]	Loss: 0.267906
+2021-04-21 13:47:42,746	ljs-base_0g125_run_8	INFO	[-0.030071556568145752, 0.2979772090911865, 4512, 0.0010741590907209265]
+2021-04-21 13:48:03,220	ljs-base_0g125_run_8	INFO	Train Epoch: 95 [640/1562 (42%)]	Loss: 0.271288
+2021-04-21 13:48:03,221	ljs-base_0g125_run_8	INFO	[-0.02654731273651123, 0.2978351414203644, 4532, 0.0010717873521442762]
+2021-04-21 13:48:23,514	ljs-base_0g125_run_8	INFO	Train Epoch: 95 [1280/1562 (83%)]	Loss: 0.303601
+2021-04-21 13:48:23,515	ljs-base_0g125_run_8	INFO	[-0.021607041358947754, 0.3252083659172058, 4552, 0.0010694312548736361]
+2021-04-21 13:48:31,592	ljs-base_0g125_run_8	INFO	====> Epoch: 95
+2021-04-21 13:48:50,421	ljs-base_0g125_run_8	INFO	====> Epoch: 95
+2021-04-21 13:48:50,421	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 95 to ./logs/ljs-base_0g125_run_8/G_95.pth
+2021-04-21 13:49:11,823	ljs-base_0g125_run_8	INFO	Train Epoch: 96 [0/1562 (0%)]	Loss: 0.251871
+2021-04-21 13:49:11,823	ljs-base_0g125_run_8	INFO	[-0.03372764587402344, 0.28559839725494385, 4560, 0.0010684931571011034]
+2021-04-21 13:49:32,530	ljs-base_0g125_run_8	INFO	Train Epoch: 96 [640/1562 (42%)]	Loss: 0.276088
+2021-04-21 13:49:32,531	ljs-base_0g125_run_8	INFO	[-0.029865384101867676, 0.30595338344573975, 4580, 0.0010661586706828922]
+2021-04-21 13:49:52,674	ljs-base_0g125_run_8	INFO	Train Epoch: 96 [1280/1562 (83%)]	Loss: 0.283314
+2021-04-21 13:49:52,675	ljs-base_0g125_run_8	INFO	[-0.01629108190536499, 0.29960525035858154, 4600, 0.0010638394191420108]
+2021-04-21 13:50:00,448	ljs-base_0g125_run_8	INFO	====> Epoch: 96
+2021-04-21 13:50:19,562	ljs-base_0g125_run_8	INFO	====> Epoch: 96
+2021-04-21 13:50:19,562	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 96 to ./logs/ljs-base_0g125_run_8/G_96.pth
+2021-04-21 13:50:41,520	ljs-base_0g125_run_8	INFO	Train Epoch: 97 [0/1562 (0%)]	Loss: 0.253836
+2021-04-21 13:50:41,521	ljs-base_0g125_run_8	INFO	[-0.02846461534500122, 0.2823004126548767, 4608, 0.0010629159472499664]
+2021-04-21 13:51:01,571	ljs-base_0g125_run_8	INFO	Train Epoch: 97 [640/1562 (42%)]	Loss: 0.250952
+2021-04-21 13:51:01,573	ljs-base_0g125_run_8	INFO	[-0.03237783908843994, 0.28333017230033875, 4628, 0.0010606177479183649]
+2021-04-21 13:51:22,129	ljs-base_0g125_run_8	INFO	Train Epoch: 97 [1280/1562 (83%)]	Loss: 0.282903
+2021-04-21 13:51:22,130	ljs-base_0g125_run_8	INFO	[-0.02477431297302246, 0.30767741799354553, 4648, 0.001058334391668254]
+2021-04-21 13:51:29,732	ljs-base_0g125_run_8	INFO	====> Epoch: 97
+2021-04-21 13:51:48,530	ljs-base_0g125_run_8	INFO	====> Epoch: 97
+2021-04-21 13:51:48,531	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 97 to ./logs/ljs-base_0g125_run_8/G_97.pth
+2021-04-21 13:52:09,909	ljs-base_0g125_run_8	INFO	Train Epoch: 98 [0/1562 (0%)]	Loss: 0.271265
+2021-04-21 13:52:09,910	ljs-base_0g125_run_8	INFO	[-0.03628957271575928, 0.30755454301834106, 4656, 0.0010574251695144466]
+2021-04-21 13:52:30,359	ljs-base_0g125_run_8	INFO	Train Epoch: 98 [640/1562 (42%)]	Loss: 0.261515
+2021-04-21 13:52:30,360	ljs-base_0g125_run_8	INFO	[-0.03218889236450195, 0.29370400309562683, 4676, 0.001055162326840775]
+2021-04-21 13:52:50,657	ljs-base_0g125_run_8	INFO	Train Epoch: 98 [1280/1562 (83%)]	Loss: 0.271397
+2021-04-21 13:52:50,658	ljs-base_0g125_run_8	INFO	[-0.023553967475891113, 0.29495131969451904, 4696, 0.0010529139494151437]
+2021-04-21 13:52:58,574	ljs-base_0g125_run_8	INFO	====> Epoch: 98
+2021-04-21 13:53:17,500	ljs-base_0g125_run_8	INFO	====> Epoch: 98
+2021-04-21 13:53:17,501	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 98 to ./logs/ljs-base_0g125_run_8/G_98.pth
+2021-04-21 13:53:38,641	ljs-base_0g125_run_8	INFO	Train Epoch: 99 [0/1562 (0%)]	Loss: 0.234532
+2021-04-21 13:53:38,642	ljs-base_0g125_run_8	INFO	[-0.05060833692550659, 0.28514012694358826, 4704, 0.0010520186142622262]
+2021-04-21 13:53:59,344	ljs-base_0g125_run_8	INFO	Train Epoch: 99 [640/1562 (42%)]	Loss: 0.266328
+2021-04-21 13:53:59,346	ljs-base_0g125_run_8	INFO	[-0.03933155536651611, 0.30565953254699707, 4724, 0.001049790230878298]
+2021-04-21 13:54:19,397	ljs-base_0g125_run_8	INFO	Train Epoch: 99 [1280/1562 (83%)]	Loss: 0.268237
+2021-04-21 13:54:19,399	ljs-base_0g125_run_8	INFO	[-0.023861825466156006, 0.29209867119789124, 4744, 0.0010475759482380606]
+2021-04-21 13:54:27,500	ljs-base_0g125_run_8	INFO	====> Epoch: 99
+2021-04-21 13:54:46,429	ljs-base_0g125_run_8	INFO	====> Epoch: 99
+2021-04-21 13:54:46,430	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 99 to ./logs/ljs-base_0g125_run_8/G_99.pth
+2021-04-21 13:55:07,862	ljs-base_0g125_run_8	INFO	Train Epoch: 100 [0/1562 (0%)]	Loss: 0.236883
+2021-04-21 13:55:07,863	ljs-base_0g125_run_8	INFO	[-0.04123890399932861, 0.2781214714050293, 4752, 0.001046694150145569]
+2021-04-21 13:55:28,172	ljs-base_0g125_run_8	INFO	Train Epoch: 100 [640/1562 (42%)]	Loss: 0.248063
+2021-04-21 13:55:28,173	ljs-base_0g125_run_8	INFO	[-0.03377717733383179, 0.28184059262275696, 4772, 0.0010444993602485156]
+2021-04-21 13:55:48,664	ljs-base_0g125_run_8	INFO	Train Epoch: 100 [1280/1562 (83%)]	Loss: 0.269186
+2021-04-21 13:55:48,665	ljs-base_0g125_run_8	INFO	[-0.027417242527008057, 0.29660338163375854, 4792, 0.0010423183193213749]
+2021-04-21 13:55:56,607	ljs-base_0g125_run_8	INFO	====> Epoch: 100
+2021-04-21 13:56:15,420	ljs-base_0g125_run_8	INFO	====> Epoch: 100
+2021-04-21 13:56:15,421	ljs-base_0g125_run_8	INFO	Saving model and optimizer state at iteration 100 to ./logs/ljs-base_0g125_run_8/G_100.pth
