@@ -99,9 +99,21 @@ def make_json(train_files: str, val_files: str, epochs: int, load_mels: bool) ->
         },
     }
 
+
+def make_mel(dataset: [str], new_name: str) -> [str]:
+    mel_dataset = []
+    for s in dataset:
+
+        path, transcript = s.split('|')
+        cleaned_path = '/'.join(path.split('/')[1:])
+        mel_dataset.append(f"{new_name}/{cleaned_path}.org|{transcript}")
+    return mel_dataset
+
+
 def inflate(dataset: [str], factor: int, dataset_dir: str, use_mels: bool) -> [str]:
     inflated_dataset = []
     if factor == 1:
+        dataset = make_mel(dataset, dataset_dir)
         return dataset
     for line in dataset:
 
@@ -139,17 +151,6 @@ def inflate(dataset: [str], factor: int, dataset_dir: str, use_mels: bool) -> [s
         random.shuffle(inflated_dataset)
 
     return inflated_dataset
-
-def make_mel(dataset: [str], new_name: str) -> [str]:
-    mel_dataset = []
-    for s in dataset:
-
-        path, transcript = s.split('|')
-        cleaned_path = '/'.join(path.split('/')[1:])
-        mel_dataset.append(f"{new_name}/{cleaned_path}.org|{transcript}")
-    return mel_dataset
-
-
 
 
 def write_files(directory: str, train: [str], val: [str], test: [str]) -> None:
