@@ -39,13 +39,13 @@ waveglow = waveglow.remove_weightnorm(waveglow)
 _ = waveglow.to(device).eval()
 
 # If you are using your own trained model
-model_dir = "./logs/augmented_model_eighth/"
-hps = utils.get_hparams_from_dir(model_dir)
-checkpoint_path = utils.latest_checkpoint_path(model_dir)
+#model_dir = "./logs/augmented_model_eighth/"
+#hps = utils.get_hparams_from_dir(model_dir)
+#checkpoint_path = utils.latest_checkpoint_path(model_dir)
 
 # If you are using a provided pretrained model
-# hps = utils.get_hparams_from_file("./configs/base.json")
-# checkpoint_path = "../glow_tts_pretrained_models/glow_tts_pretrained.pt"
+hps = utils.get_hparams_from_file("./configs/base.json")
+checkpoint_path = "../glow_tts_pretrained_models/glow_tts_pretrained.pt"
 
 model = models.FlowGenerator(
     len(symbols) + getattr(hps.data, "add_blank", False),
@@ -90,5 +90,5 @@ for index, tst_stn in enumerate(strings):
 
 
     audio = normalize_audio(audio[0].clamp(-1,1).data.cpu().float().numpy())
-    outfile = get_output_filename("augmented_model_eighth", index)
+    outfile = get_output_filename("base_model", index)
     write(outfile, hps.data.sampling_rate, audio)
