@@ -6,7 +6,7 @@ import random
 from random import shuffle
 
 OUT_DIR = "filelists"
-SEED = 4321
+SEED = 3321
 EPOCHS = 100
 SPLIT = {"train": 0.9500, "val": 0.0250, "test": 0.0250}
 
@@ -138,7 +138,7 @@ def inflate(dataset: [str], factor: int, dataset_dir: str, use_mels: bool) -> [s
 
         random.shuffle(inflated_dataset)
 
-    return inflated_dataset 
+    return inflated_dataset
 
 def make_mel(dataset: [str], new_name: str) -> [str]:
     mel_dataset = []
