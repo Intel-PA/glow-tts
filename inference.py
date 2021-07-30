@@ -31,6 +31,8 @@ if device.type == 'cuda':
 def get_output_filename(prefix, index):
   return f"./generated_wavs/{prefix}_speech_{index}.wav"
 
+# get model_name
+m_name = sys.argv[1]
 
 # load WaveGlow
 waveglow_path = '../glow_tts_pretrained_models/waveglow_256channels_ljs_v3.pt' # or change to the latest version of the pretrained WaveGlow.
@@ -39,7 +41,7 @@ waveglow = waveglow.remove_weightnorm(waveglow)
 _ = waveglow.to(device).eval()
 
 # If you are using your own trained model
-model_dir = "./logs/augmented_model_eighth/"
+model_dir = f"./train_logs/{m_name}_run_0/"
 hps = utils.get_hparams_from_dir(model_dir)
 checkpoint_path = utils.latest_checkpoint_path(model_dir)
 
@@ -62,8 +64,8 @@ cmu_dict = cmudict.CMUDict(hps.data.cmudict_path)
 def normalize_audio(x, max_wav_value=hps.data.max_wav_value):
     return np.clip((x / np.abs(x).max()) * max_wav_value, -32768, 32767).astype("int16")
 
-strings = ["What kind of symptoms are you experiencing ?", "Do you have a high temperature ?", "What can I do for you today ?", "Based on what you have told me , I think you need to get checked for diabetes ."]
-# tst_stn = "This was trained for one hundred and twelve epochs with no data augmentation." 
+strings = ["What kind of symptoms are you experiencing ?", "Do you have a high temperature ?", "The enormity of this task sometimes makes me feel a little dizzy but as a scientist and an explorer I have a duty to bear witness to the splendours of the world .", "I have observed that while the statues of a particular hall are more or less uniform in size there is considerable variation in halls .", "In some places the figures are three times the height of a human being in others life sized and in yet others only reach as high as my shoulder ."]
+# tst_stn = "This was trained for one hundred and twelve epochs with no data augmentation."
 
 from scipy.io.wavfile import write
 
@@ -90,5 +92,5 @@ for index, tst_stn in enumerate(strings):
 
 
     audio = normalize_audio(audio[0].clamp(-1,1).data.cpu().float().numpy())
-    outfile = get_output_filename("augmented_model_eighth", index)
+    outfile = get_output_filename(m_name, index)
     write(outfile, hps.data.sampling_rate, audio)
