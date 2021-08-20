@@ -57,7 +57,7 @@ def make_json(train_files: str, val_files: str, epochs: int, load_mels: bool) ->
             "eps": 1e-9,
             "warmup_steps": 4000,
             "scheduler": "noam",
-            "batch_size": 32,
+            "batch_size": 64,
             "ddi": True,
             "fp16_run": True,
         },
