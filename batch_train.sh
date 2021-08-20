@@ -21,6 +21,7 @@ function clean_checkpoints(){
 	num_epochs="$2"
 	interval="$3"
 
+	if [ ! -d tmp ]; then mkdir tmp; fi
 	num_checkpoints=`ls -1 $directory/G_* | wc -l`
 	mv $directory/G_${num_checkpoints}.pth tmp
     for i in $(seq 1 $num_epochs); do
