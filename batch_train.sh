@@ -103,7 +103,7 @@ while read -r run ; do
 	    	exit $?
 	    fi
 	    cp train_logs/$model_name/train.log $new_dir/$run/
-	    python extract_loss.py filelists/$model_prefix/$run/train.log filelists/$model_prefix/$run/$run
+	    python extract_loss.py runs/$model_prefix/$run/train.log runs/$model_prefix/$run/$run
 	    clean_checkpoints train_logs/$model_name $epochs $keep_interval
 	    touch $new_dir/$run/checkpoint.complete
 	    echo ""
