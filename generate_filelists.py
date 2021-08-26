@@ -5,7 +5,7 @@ import json
 import random
 from random import shuffle
 
-OUT_DIR = "filelists"
+OUT_DIR = "runs"
 SEED = 3321
 EPOCHS = 100
 SPLIT = {"train": 0.9500, "val": 0.0250, "test": 0.0250}
