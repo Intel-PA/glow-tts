@@ -11,8 +11,6 @@ import torch.multiprocessing as mp
 import torch.distributed as dist
 from apex.parallel import DistributedDataParallel as DDP
 from apex import amp
-import optuna 
-import wandb
 
 from data_utils import TextMelLoader, TextMelCollate
 import models
@@ -22,56 +20,19 @@ from text.symbols import symbols
                             
 
 global_step = 0
-MODEL_DIR = "models/optuna_trials"
-PROJECT = "glow-tts"
 
-# def main():
-#   """Assume Single Node Multi GPUs Training Only"""
-#   assert torch.cuda.is_available(), "CPU training is not allowed."
 
-#   n_gpus = torch.cuda.device_count()
-#   os.environ['MASTER_ADDR'] = 'localhost'
-#   os.environ['MASTER_PORT'] = '80000'
-
-#   hps = utils.get_hparams()
-#   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
 def main():
-    """Assume Single Node Multi GPUs Training Only"""
-    assert torch.cuda.is_available(), "CPU training is not allowed."
+  """Assume Single Node Multi GPUs Training Only"""
+  assert torch.cuda.is_available(), "CPU training is not allowed."
 
-    n_gpus = torch.cuda.device_count()
-    os.environ['MASTER_ADDR'] = 'localhost'
-    os.environ['MASTER_PORT'] = '80000'
+  n_gpus = torch.cuda.device_count()
+  os.environ['MASTER_ADDR'] = 'localhost'
+  os.environ['MASTER_PORT'] = '80000'
 
-    study = optuna.create_study(study_name=PROJECT, direction='minimize')
-    study.optimize(objective, n_trials=10)
+  hps = utils.get_hparams()
+  mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
 
-
-def setup_dirs(study_name, trial_number):
-    os.makedirs(f"{MODEL_DIR}/{study_name}/{trial_number}", exist_ok=True)
-
-    return f"{MODEL_DIR}/{study_name}/{trial_number}"
-
-
-def hps_set_params(trial, params):
-    params.learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e0, log=True)
-    params.p_dropout = trial.suggest_float("p_dropout", 0, 0.75, step=0.25)
-    return {
-        "learning_rate": params.learning_rate,
-        "p_dropout": params.p_dropout,
-    }
-
-
-def objective(study, trial):
-    hps = utils.get_hparams()
-    model_dir = setup_dirs(study.study_name, trial.number)
-    hps.epochs = 1 #delete this line
-    hps.model_dir = model_dir
-    params = hps_set_params(trial, hps)
-    wandb.init(project=PROJECT, config=params, reinit=True)
-    train_loss, val_loss = hps_train_and_eval(0, n_gpus, hps)
-    wandb.join()
-    return float(val_loss)
 
 def train_and_eval(rank, n_gpus, hps):
   global global_step
@@ -122,25 +83,19 @@ def train_and_eval(rank, n_gpus, hps):
     if hps.train.ddi and os.path.isfile(os.path.join(hps.model_dir, "ddi_G.pth")):
       _ = utils.load_checkpoint(os.path.join(hps.model_dir, "ddi_G.pth"), generator, optimizer_g)
   
-  train_loss = 0
-  eval_loss = 0
   for epoch in range(epoch_str, hps.train.epochs + 1):
     if rank==0:
-      train_loss = train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
-      eval_loss = evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval)
+      train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
+      evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval)
       utils.save_checkpoint(generator, optimizer_g, hps.train.learning_rate, epoch, os.path.join(hps.model_dir, "G_{}.pth".format(epoch)))
-      wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
     else:
       train(rank, epoch, hps, generator, optimizer_g, train_loader, None, None)
-
-  return train_loss, eval_loss
 
 
 def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer):
   train_loader.sampler.set_epoch(epoch)
   global global_step
 
-  final_loss = 0
   generator.train()
   for batch_idx, (x, x_lengths, y, y_lengths) in enumerate(train_loader):
     x, x_lengths = x.cuda(rank, non_blocking=True), x_lengths.cuda(rank, non_blocking=True)
@@ -185,19 +140,16 @@ def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer
             },
           scalars=scalar_dict)
     global_step += 1
-    final_loss = loss_g.item()
   
   if rank == 0:
     logger.info('====> Epoch: {}'.format(epoch))
 
-  return final_loss
  
 def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval):
   if rank == 0:
     global global_step
     generator.eval()
     losses_tot = []
-    final_loss = 0
     with torch.no_grad():
       for batch_idx, (x, x_lengths, y, y_lengths) in enumerate(val_loader):
         x, x_lengths = x.cuda(rank, non_blocking=True), x_lengths.cuda(rank, non_blocking=True)
@@ -227,7 +179,6 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
           100. * batch_idx / len(val_loader),
           loss_g.item()))
         logger.info([x.item() for x in loss_gs])
-        final_loss = loss_g.item()
            
     
     losses_tot = [x/len(val_loader) for x in losses_tot]
@@ -239,7 +190,7 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
       global_step=global_step, 
       scalars=scalar_dict)
     logger.info('====> Epoch: {}'.format(epoch))
-    return final_loss
+
                            
 if __name__ == "__main__":
   main()
