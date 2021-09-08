@@ -23,7 +23,7 @@ from text.symbols import symbols
 
 global_step = 0
 
-N_GPUS = 
+N_GPUS = None
 RANK = 0
 MODEL_DIR = "models/optuna_trials"
 PROJECT = "glow-tts"
