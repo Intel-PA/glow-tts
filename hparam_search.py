@@ -1,4 +1,4 @@
-from .train import *
+from train import *
 
 MODEL_DIR = "models/optuna_trials"
 PROJECT = "glow-tts"
