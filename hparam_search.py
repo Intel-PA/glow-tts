@@ -49,7 +49,7 @@ def main():
 
     dist.init_process_group(backend='nccl', init_method='env://', world_size=N_GPUS, rank=RANK)
     study = optuna.create_study(study_name=PROJECT, direction='minimize')
-    study.optimize(objective, n_trials=15)
+    study.optimize(objective, n_trials=10)
 
 
 def setup_dirs(trial_number):
@@ -60,7 +60,7 @@ def setup_dirs(trial_number):
 
 def hps_set_params(trial, params):
     params.train.learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e0, log=True)
-    params.model.p_dropout = trial.suggest_float("p_dropout", 0, 0.5, step=0.1)
+    params.model.p_dropout = trial.suggest_float("p_dropout", 0, 0.25, step=0.05)
     return {
         "learning_rate": params.train.learning_rate,
         "p_dropout": params.model.p_dropout,
@@ -72,7 +72,7 @@ def objective(trial):
     global_step = 0
     hps = utils.get_hparams()
     model_dir = setup_dirs(trial.number)
-    hps.train.epochs = 1 #delete this line
+    # hps.train.epochs =  #delete this line
     hps.train.batch_size = 64
     hps.model_dir = model_dir
     params = hps_set_params(trial, hps)
