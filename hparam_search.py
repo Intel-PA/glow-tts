@@ -22,6 +22,8 @@ from text.symbols import symbols
                             
 
 global_step = 0
+
+N_GPUS = 
 RANK = 0
 MODEL_DIR = "models/optuna_trials"
 PROJECT = "glow-tts"
@@ -37,10 +39,11 @@ PROJECT = "glow-tts"
 #   hps = utils.get_hparams()
 #   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
 def main():
+    global N_GPUS
     """Assume Single Node Multi GPUs Training Only"""
     assert torch.cuda.is_available(), "CPU training is not allowed."
 
-    n_gpus = torch.cuda.device_count()
+    N_GPUS = torch.cuda.device_count()
     os.environ['MASTER_ADDR'] = 'localhost'
     os.environ['MASTER_PORT'] = '80000'
 
@@ -72,7 +75,7 @@ def objective(trial):
     hps.model_dir = model_dir
     params = hps_set_params(trial, hps)
     wandb.init(project=PROJECT, config=params, reinit=True)
-    train_loss, val_loss = train_and_eval(RANK, n_gpus, hps)
+    train_loss, val_loss = train_and_eval(RANK, N_GPUS, hps)
     wandb.join()
     return float(val_loss)
 
