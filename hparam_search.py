@@ -67,9 +67,9 @@ def objective(trial):
     global global_step
     global_step = 0
     hps = utils.get_hparams()
+    model_dir = setup_dirs(trial.number)
     hps.epochs = 1 #delete this line
     hps.model_dir = model_dir
-    model_dir = setup_dirs(trial.number)
     params = hps_set_params(trial, hps)
     wandb.init(project=PROJECT, config=params, reinit=True)
     train_loss, val_loss = hps_train_and_eval(RANK, n_gpus, hps)
