@@ -22,6 +22,7 @@ from text.symbols import symbols
                             
 
 global_step = 0
+RANK = 0
 MODEL_DIR = "models/optuna_trials"
 PROJECT = "glow-tts"
 
@@ -47,10 +48,10 @@ def main():
     study.optimize(objective, n_trials=10)
 
 
-def setup_dirs(study_name, trial_number):
-    os.makedirs(f"{MODEL_DIR}/{study_name}/{trial_number}", exist_ok=True)
+def setup_dirs(trial_number):
+    os.makedirs(f"{MODEL_DIR}/{PROJECT}/{trial_number}", exist_ok=True)
 
-    return f"{MODEL_DIR}/{study_name}/{trial_number}"
+    return f"{MODEL_DIR}/{PROJECT}/{trial_number}"
 
 
 def hps_set_params(trial, params):
@@ -66,12 +67,12 @@ def objective(trial):
     global global_step
     global_step = 0
     hps = utils.get_hparams()
-    model_dir = setup_dirs(study.study_name, trial.number)
     hps.epochs = 1 #delete this line
     hps.model_dir = model_dir
+    model_dir = setup_dirs(trial.number)
     params = hps_set_params(trial, hps)
     wandb.init(project=PROJECT, config=params, reinit=True)
-    train_loss, val_loss = hps_train_and_eval(0, n_gpus, hps)
+    train_loss, val_loss = hps_train_and_eval(RANK, n_gpus, hps)
     wandb.join()
     return float(val_loss)
 
