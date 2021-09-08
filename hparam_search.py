@@ -72,7 +72,7 @@ def objective(trial):
     hps.model_dir = model_dir
     params = hps_set_params(trial, hps)
     wandb.init(project=PROJECT, config=params, reinit=True)
-    train_loss, val_loss = hps_train_and_eval(RANK, n_gpus, hps)
+    train_loss, val_loss = train_and_eval(RANK, n_gpus, hps)
     wandb.join()
     return float(val_loss)
 
