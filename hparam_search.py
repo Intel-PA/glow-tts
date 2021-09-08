@@ -130,11 +130,13 @@ def train_and_eval(rank, n_gpus, hps):
   
   train_loss = 0
   eval_loss = 0
+  print(f"NUM_EPOCHS: {hps.train.epochs}")
   for epoch in range(epoch_str, hps.train.epochs + 1):
     if rank==0:
       train_loss = train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
       eval_loss = evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval)
       utils.save_checkpoint(generator, optimizer_g, hps.train.learning_rate, epoch, os.path.join(hps.model_dir, "G_{}.pth".format(epoch)))
+      print(f"val_loss: {eval_loss}, train_loss: {train_loss}")
       wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
     else:
       train(rank, epoch, hps, generator, optimizer_g, train_loader, None, None)
