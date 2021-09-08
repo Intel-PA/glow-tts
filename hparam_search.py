@@ -62,7 +62,7 @@ def hps_set_params(trial, params):
     }
 
 
-def objective(study, trial):
+def objective(trial):
     global global_step
     global_step = 0
     hps = utils.get_hparams()
