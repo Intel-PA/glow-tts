@@ -58,11 +58,11 @@ def setup_dirs(trial_number):
 
 
 def hps_set_params(trial, params):
-    params.learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e0, log=True)
-    params.p_dropout = trial.suggest_float("p_dropout", 0, 0.75, step=0.25)
+    params.train.learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e0, log=True)
+    params.model.p_dropout = trial.suggest_float("p_dropout", 0, 0.75, step=0.25)
     return {
-        "learning_rate": params.learning_rate,
-        "p_dropout": params.p_dropout,
+        "learning_rate": params.train.learning_rate,
+        "p_dropout": params.model.p_dropout,
     }
 
 
@@ -71,7 +71,7 @@ def objective(trial):
     global_step = 0
     hps = utils.get_hparams()
     model_dir = setup_dirs(trial.number)
-    hps.epochs = 1 #delete this line
+    hps.train.epochs = 1 #delete this line
     hps.model_dir = model_dir
     params = hps_set_params(trial, hps)
     wandb.init(project=PROJECT, config=params, reinit=True)
