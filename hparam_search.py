@@ -73,7 +73,7 @@ def objective(trial):
     hps = utils.get_hparams()
     model_dir = setup_dirs(trial.number)
     hps.train.epochs = 1 #delete this line
-    hps.train.batch_size = 128
+    hps.train.batch_size = 32
     hps.model_dir = model_dir
     params = hps_set_params(trial, hps)
     wandb.init(project=PROJECT, config=params, reinit=True)
@@ -131,7 +131,6 @@ def train_and_eval(rank, n_gpus, hps):
   
   train_loss = 0
   eval_loss = 0
-  print(f"NUM_EPOCHS: {hps.train.epochs}")
   for epoch in range(epoch_str, hps.train.epochs + 1):
     if rank==0:
       train_loss = train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
