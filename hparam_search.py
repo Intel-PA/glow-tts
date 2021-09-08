@@ -1,3 +1,5 @@
+import optuna
+
 from train import *
 
 MODEL_DIR = "models/optuna_trials"
