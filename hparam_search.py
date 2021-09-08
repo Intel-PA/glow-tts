@@ -47,6 +47,7 @@ def main():
     os.environ['MASTER_ADDR'] = 'localhost'
     os.environ['MASTER_PORT'] = '80000'
 
+    dist.init_process_group(backend='nccl', init_method='env://', world_size=N_GPUS, rank=RANK)
     study = optuna.create_study(study_name=PROJECT, direction='minimize')
     study.optimize(objective, n_trials=10)
 
@@ -72,6 +73,7 @@ def objective(trial):
     hps = utils.get_hparams()
     model_dir = setup_dirs(trial.number)
     hps.train.epochs = 1 #delete this line
+    hps.train.batch_size = 128
     hps.model_dir = model_dir
     params = hps_set_params(trial, hps)
     wandb.init(project=PROJECT, config=params, reinit=True)
@@ -88,7 +90,6 @@ def train_and_eval(rank, n_gpus, hps):
     writer = SummaryWriter(log_dir=hps.model_dir)
     writer_eval = SummaryWriter(log_dir=os.path.join(hps.model_dir, "eval"))
 
-  dist.init_process_group(backend='nccl', init_method='env://', world_size=n_gpus, rank=rank)
   torch.manual_seed(hps.train.seed)
   torch.cuda.set_device(rank)
 
