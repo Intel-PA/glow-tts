@@ -76,7 +76,8 @@ def objective(trial):
     hps.train.batch_size = 256
     hps.model_dir = model_dir
     # params = hps_set_params(trial, hps)
-    wandb.init(project=PROJECT, config=params, reinit=True)
+    # config=params
+    wandb.init(project=PROJECT, reinit=True)
     train_loss, val_loss = train_and_eval(RANK, N_GPUS, hps)
     wandb.join()
     return float(val_loss)
