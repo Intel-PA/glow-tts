@@ -105,10 +105,9 @@ def train_and_eval(rank, n_gpus, hps):
       batch_size=hps.train.batch_size, pin_memory=True,
       drop_last=True, collate_fn=collate_fn, sampler=train_sampler)
   if rank == 0:
-    val_batch_size = 2
     val_dataset = TextMelLoader(hps.data.validation_files, hps.data)
     val_loader = DataLoader(val_dataset, num_workers=8, shuffle=False,
-        batch_size=val_batch_size, pin_memory=True,
+        batch_size=hps.train.val_batch_size, pin_memory=True,
         drop_last=True, collate_fn=collate_fn)
 
   generator = models.FlowGenerator(
