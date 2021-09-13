@@ -207,6 +207,7 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
     generator.eval()
     losses_tot = []
     final_loss = 0
+    print(f"GOT {len(val_loader.dataset)} val items.")
     with torch.no_grad():
       for batch_idx, (x, x_lengths, y, y_lengths) in enumerate(val_loader):
         x, x_lengths = x.cuda(rank, non_blocking=True), x_lengths.cuda(rank, non_blocking=True)
