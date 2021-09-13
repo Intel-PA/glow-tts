@@ -26,7 +26,7 @@ global_step = 0
 N_GPUS = None
 RANK = 0
 MODEL_DIR = "models/optuna_trials"
-PROJECT = "glow-tts"
+PROJECT = "glow-tts-256"
 
 # def main():
 #   """Assume Single Node Multi GPUs Training Only"""
@@ -49,7 +49,7 @@ def main():
 
     dist.init_process_group(backend='nccl', init_method='env://', world_size=N_GPUS, rank=RANK)
     study = optuna.create_study(study_name=PROJECT, direction='minimize')
-    study.optimize(objective, n_trials=10)
+    study.optimize(objective, n_trials=1)
 
 
 def setup_dirs(trial_number):
@@ -73,9 +73,9 @@ def objective(trial):
     hps = utils.get_hparams()
     model_dir = setup_dirs(trial.number)
     # hps.train.epochs =  #delete this line
-    hps.train.batch_size = 64
+    hps.train.batch_size = 256
     hps.model_dir = model_dir
-    params = hps_set_params(trial, hps)
+    # params = hps_set_params(trial, hps)
     wandb.init(project=PROJECT, config=params, reinit=True)
     train_loss, val_loss = train_and_eval(RANK, N_GPUS, hps)
     wandb.join()
