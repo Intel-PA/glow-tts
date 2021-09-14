@@ -26,7 +26,7 @@ global_step = 0
 N_GPUS = None
 RANK = 0
 MODEL_DIR = "models/optuna_trials"
-PROJECT = "glow-tts-256"
+PROJECT = "glow-tts-specaugment"
 
 # def main():
 #   """Assume Single Node Multi GPUs Training Only"""
@@ -74,6 +74,8 @@ def objective(trial):
     model_dir = setup_dirs(trial.number)
     # hps.train.epochs =  #delete this line
     hps.train.batch_size = 256
+    hps.data.training_files = "runs/LJS-specaugment-W2-T30-F20_0g25/run_0/train.txt"
+    hps.data.validation_files = "runs/LJS-specaugment-W2-T30-F20_0g25/run_0/val.txt"
     hps.model_dir = model_dir
     # params = hps_set_params(trial, hps)
     # config=params
