@@ -74,9 +74,9 @@ def objective(trial):
     model_dir = setup_dirs(trial.number)
     # hps.train.epochs =  #delete this line
     hps.train.batch_size = 256
-    hps.data.training_files = "runs/LJS-specaugment-W2-T30-F20_0g25/run_0/train.txt"
-    hps.data.validation_files = "runs/LJS-specaugment-W2-T30-F20_0g25/run_0/val.txt"
-    hps.data.load_mel_from_disk = True
+    hps.data.training_files = "runs/LJS-base_1g0/run_0/train.txt"
+    hps.data.validation_files = "runs/LJS-base_1g0/run_0/val.txt"
+    hps.data.load_mel_from_disk = False
     hps.model_dir = model_dir
     # params = hps_set_params(trial, hps)
     # config=params
