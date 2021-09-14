@@ -26,7 +26,7 @@ global_step = 0
 N_GPUS = None
 RANK = 0
 MODEL_DIR = "models/optuna_trials"
-PROJECT = "glow-tts-specaugment"
+PROJECT = "glow-tts-base"
 
 # def main():
 #   """Assume Single Node Multi GPUs Training Only"""
