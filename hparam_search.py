@@ -88,6 +88,7 @@ def create_symlinks(config):
             mus = aug["params"]["mu"]["values"]
             sigmas = aug["params"]["sigma"]["values"]
             speeds = aug["params"]["speed"]["values"]
+            os.mkdir("DATASETS")
             for m in mus:
                 for s in sigmas:
                     for v in speeds:
@@ -330,7 +331,7 @@ if __name__ == "__main__":
     with open(config_path, "r") as fh:
         config = json.load(fh)
     create_symlinks(config)
-    
+
     gammas = config["gammas"]
     for gamma in gammas:
         start_search(gamma, "sox", config)
