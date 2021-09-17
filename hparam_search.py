@@ -214,7 +214,7 @@ def train_and_eval(rank, n_gpus, hps, trial):
       utils.save_checkpoint(generator, optimizer_g, hps.train.learning_rate, epoch, os.path.join(hps.model_dir, "G_{}.pth".format(epoch)))
       print(f"val_loss: {eval_loss}, train_loss: {train_loss}")
       wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
-      trial.report(eval_loss, step)
+      trial.report(eval_loss, epoch)
       if trial.should_prune():
             raise optuna.TrialPruned()
     else:
