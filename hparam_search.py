@@ -33,6 +33,7 @@ MODEL_DIR = "models/optuna_trials"
 PROJECT = "glow-tts-base"
 KEEP_EVERY = 20
 CHKPT_PATT = r"G_\d+\.pth"
+DATADIR = "/home/kjayathunge/datasets/LJS"
 
 
 def start_search(gamma, aug_method, opt_config):
@@ -80,6 +81,21 @@ def gamma_to_str(gamma):
     return str(gamma).replace(".", "g")
 
 
+def create_symlinks(config):
+    augs = config["augs"]
+    for aug in augs:
+        if aug["name"] == "sox":
+            mus = aug["params"]["mu"]["values"]
+            sigmas = aug["params"]["sigma"]["values"]
+            speeds = aug["params"]["speed"]["values"]
+            for m in mus:
+                for s in sigmas:
+                    for v in speeds:
+                        real_link = f"{DATADIR}/SOX-M{m}-S{s}-V{v}"
+                        sym_link = f"DATASETS/SOX-M{m}-S{s}-V{v}"
+                        os.symlink(real_link, sym_link)
+
+
 def setup_dirs(trial_number):
     os.makedirs(f"{MODEL_DIR}/{PROJECT}/{trial_number}", exist_ok=True)
     return f"{MODEL_DIR}/{PROJECT}/{trial_number}"
@@ -93,6 +109,7 @@ def cleanup_dir(directory, interval):
     for chkpt in checkpoints:
         if chkpt not in to_keep:
             os.remove(f"{directory}/{chkpt}")
+
 
 def optuna_suggest(trial, name, config):
     if config["type"] == "categorical":
@@ -132,7 +149,6 @@ def hps_set_params(trial, gamma, params, filelist_dir, aug_method, opt_params):
     # params.train.learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e0, log=True)
     # params.model.p_dropout = trial.suggest_float("p_dropout", 0, 0.25, step=0.05)
     return trial_params
-
 
 
 def train_and_eval(rank, n_gpus, hps, trial):
@@ -313,8 +329,8 @@ if __name__ == "__main__":
     config_path = sys.argv[1]
     with open(config_path, "r") as fh:
         config = json.load(fh)
-
+    create_symlinks(config)
+    
     gammas = config["gammas"]
-    augs = config["augs"]
     for gamma in gammas:
         start_search(gamma, "sox", config)
