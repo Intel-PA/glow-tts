@@ -66,7 +66,7 @@ def objective(trial, gamma, aug_method, project, opt_config):
     wandb.init(project=project, config=trial_params, reinit=True)
     train_loss, val_loss = train_and_eval(RANK, N_GPUS, all_params, trial)
     wandb.join()
-    cleanup_dir(model_dir, KEEP_EVERY)
+    cleanup_dir(all_params.model_dir, KEEP_EVERY)
     return float(val_loss)
 
 
@@ -338,4 +338,8 @@ if __name__ == "__main__":
 
     gammas = config["gammas"]
     for gamma in gammas:
-        start_search(gamma, "sox", config)
+        try:
+            start_search(gamma, "sox", config)
+        except KeyboardInterrupt:
+            print(f"Study for gamma={gamma} cancelled.")
+            pass
