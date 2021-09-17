@@ -37,15 +37,6 @@ DATADIR = "/home/kjayathunge/datasets/LJS"
 
 
 def start_search(gamma, aug_method, opt_config):
-    global N_GPUS
-    """Assume Single Node Multi GPUs Training Only"""
-    assert torch.cuda.is_available(), "CPU training is not allowed."
-
-    N_GPUS = torch.cuda.device_count()
-    os.environ['MASTER_ADDR'] = 'localhost'
-    os.environ['MASTER_PORT'] = '80000'
-
-    dist.init_process_group(backend='nccl', init_method='env://', world_size=N_GPUS, rank=RANK)
     
     gamma = gamma_to_str(gamma)
     project = f"glow-tts_{aug_method}_{gamma}"
@@ -330,6 +321,15 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
     return final_loss
                            
 if __name__ == "__main__":
+    """Assume Single Node Multi GPUs Training Only"""
+    assert torch.cuda.is_available(), "CPU training is not allowed."
+
+    N_GPUS = torch.cuda.device_count()
+    os.environ['MASTER_ADDR'] = 'localhost'
+    os.environ['MASTER_PORT'] = '80000'
+
+    dist.init_process_group(backend='nccl', init_method='env://', world_size=N_GPUS, rank=RANK)
+    
     config_path = "/home/kjayathunge/audio-augmentation/configs/glow-tts.json"
     # config_path = sys.argv[1]
     with open(config_path, "r") as fh:
@@ -338,6 +338,7 @@ if __name__ == "__main__":
 
     gammas = config["gammas"]
     for gamma in gammas:
+        print(f"Starting study for gamma={gamma}")
         try:
             start_search(gamma, "sox", config)
         except KeyboardInterrupt:
