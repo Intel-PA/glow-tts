@@ -96,7 +96,8 @@ def create_symlinks(config):
                     for v in speeds:
                         real_link = f"{DATADIR}/SOX-M{m}-S{s}-V{v}"
                         sym_link = f"DATASETS/SOX-M{m}-S{s}-V{v}"
-                        os.symlink(real_link, sym_link)
+                        if not os.path.exists(symlink):
+                            os.symlink(real_link, sym_link)
 
 
 def setup_dirs(trial_number):
