@@ -326,8 +326,8 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
     return final_loss
                            
 if __name__ == "__main__":
-    # config_path = "/home/kavi/Desktop/phd/audio-augmentation/configs/glow-tts.json"
-    config_path = sys.argv[1]
+    config_path = "/home/kjayathunge/audio-augmentation/configs/glow-tts.json"
+    # config_path = sys.argv[1]
     with open(config_path, "r") as fh:
         config = json.load(fh)
     create_symlinks(config)
