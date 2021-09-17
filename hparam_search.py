@@ -88,7 +88,9 @@ def create_symlinks(config):
             mus = aug["params"]["mu"]["values"]
             sigmas = aug["params"]["sigma"]["values"]
             speeds = aug["params"]["speed"]["values"]
-            os.mkdir("DATASETS")
+
+            if not os.path.exists("DATASETS"):
+                os.mkdir("DATASETS")
             for m in mus:
                 for s in sigmas:
                     for v in speeds:
