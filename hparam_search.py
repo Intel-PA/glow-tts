@@ -18,6 +18,7 @@ import torch.distributed as dist
 from apex.parallel import DistributedDataParallel as DDP
 from apex import amp
 
+from utils import HParams
 from data_utils import TextMelLoader, TextMelCollate
 import models
 import commons
@@ -144,7 +145,8 @@ def hps_set_params(trial, gamma, params, filelist_dir, aug_method, opt_params):
 
     config_file = f"{filelist_dir}/{gamma}/{aug_method.upper()}-M{trial_params['mu']}-S{trial_params['sigma']}-V{trial_params['speed']}/config.json"
     with open(config_file) as fh:
-        params = json.load(fh)
+        params_dict = json.load(fh)
+        params = HParams(**params_dict)
 
     params.train.batch_size = 256
     params.model_dir = model_dir
