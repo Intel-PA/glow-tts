@@ -62,10 +62,10 @@ def objective(trial, gamma, aug_method, project, opt_config):
     aug = get_aug(opt_config["augs"], aug_method)
     opt_params = aug["params"]
     hps = utils.get_hparams()
-    trial_params = hps_set_params(trial, gamma, hps, filelist_dir, aug_method, opt_params)
+    trial_params, all_params = hps_set_params(trial, gamma, hps, filelist_dir, aug_method, opt_params)
     
     wandb.init(project=project, config=trial_params, reinit=True)
-    train_loss, val_loss = train_and_eval(RANK, N_GPUS, hps, trial)
+    train_loss, val_loss = train_and_eval(RANK, N_GPUS, all_params, trial)
     wandb.join()
     cleanup_dir(model_dir, KEEP_EVERY)
     return float(val_loss)
@@ -146,15 +146,15 @@ def hps_set_params(trial, gamma, params, filelist_dir, aug_method, opt_params):
     config_file = f"{filelist_dir}/{gamma}/{aug_method.upper()}-M{trial_params['mu']}-S{trial_params['sigma']}-V{trial_params['speed']}/config.json"
     with open(config_file) as fh:
         params_dict = json.load(fh)
-        params = HParams(**params_dict)
+        all_params = HParams(**params_dict)
 
-    params.train.batch_size = 256
-    params.model_dir = model_dir
+    all_params.train.batch_size = 256
+    all_params.model_dir = model_dir
     # hps.train.epochs =  100 #delete this line
 
     # params.train.learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e0, log=True)
     # params.model.p_dropout = trial.suggest_float("p_dropout", 0, 0.25, step=0.05)
-    return trial_params
+    return trial_params, all_params
 
 
 def train_and_eval(rank, n_gpus, hps, trial):
