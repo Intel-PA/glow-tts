@@ -31,7 +31,6 @@ global_step = 0
 N_GPUS = None
 RANK = 0
 MODEL_DIR = "models/optuna_trials"
-PROJECT = "glow-tts-base"
 KEEP_EVERY = 20
 CHKPT_PATT = r"G_\d+\.pth"
 DATADIR = "/home/kjayathunge/datasets/LJS"
@@ -62,7 +61,7 @@ def objective(trial, gamma, aug_method, project, opt_config):
     aug = get_aug(opt_config["augs"], aug_method)
     opt_params = aug["params"]
     hps = utils.get_hparams()
-    trial_params, all_params = hps_set_params(trial, gamma, hps, filelist_dir, aug_method, opt_params)
+    trial_params, all_params = hps_set_params(trial, project, gamma, hps, filelist_dir, aug_method, opt_params)
     
     wandb.init(project=project, config=trial_params, reinit=True)
     train_loss, val_loss = train_and_eval(RANK, N_GPUS, all_params, trial)
@@ -101,9 +100,9 @@ def create_symlinks(config):
                             os.symlink(real_link, sym_link)
 
 
-def setup_dirs(trial_number):
-    os.makedirs(f"{MODEL_DIR}/{PROJECT}/{trial_number}", exist_ok=True)
-    return f"{MODEL_DIR}/{PROJECT}/{trial_number}"
+def setup_dirs(trial_number, project):
+    os.makedirs(f"{MODEL_DIR}/{project}/{trial_number}", exist_ok=True)
+    return f"{MODEL_DIR}/{project}/{trial_number}"
 
 
 def cleanup_dir(directory, interval):
@@ -136,9 +135,9 @@ def optuna_suggest(trial, name, config):
         return trial.suggest_float(name, start, end, log=log, step=step)
 
 
-def hps_set_params(trial, gamma, params, filelist_dir, aug_method, opt_params):
+def hps_set_params(trial, project, gamma, params, filelist_dir, aug_method, opt_params):
     trial_params = {}
-    model_dir = setup_dirs(trial.number)
+    model_dir = setup_dirs(trial.number, project)
 
     for param_name, config in opt_params.items():
         trial_params[param_name] = optuna_suggest(trial, param_name, config)
