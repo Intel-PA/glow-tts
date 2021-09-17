@@ -1,8 +1,14 @@
 import os
+import re
+import sys
 import json
-import argparse
 import math
+import glob
+import argparse
+
 import torch
+import optuna 
+import wandb
 from torch import nn, optim
 from torch.nn import functional as F
 from torch.utils.data import DataLoader
@@ -11,8 +17,6 @@ import torch.multiprocessing as mp
 import torch.distributed as dist
 from apex.parallel import DistributedDataParallel as DDP
 from apex import amp
-import optuna 
-import wandb
 
 from data_utils import TextMelLoader, TextMelCollate
 import models
@@ -27,18 +31,11 @@ N_GPUS = None
 RANK = 0
 MODEL_DIR = "models/optuna_trials"
 PROJECT = "glow-tts-base"
+KEEP_EVERY = 20
+CHKPT_PATT = r"G_\d+\.pth"
 
-# def main():
-#   """Assume Single Node Multi GPUs Training Only"""
-#   assert torch.cuda.is_available(), "CPU training is not allowed."
 
-#   n_gpus = torch.cuda.device_count()
-#   os.environ['MASTER_ADDR'] = 'localhost'
-#   os.environ['MASTER_PORT'] = '80000'
-
-#   hps = utils.get_hparams()
-#   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
-def main():
+def start_search(gamma, aug_method, opt_config):
     global N_GPUS
     """Assume Single Node Multi GPUs Training Only"""
     assert torch.cuda.is_available(), "CPU training is not allowed."
@@ -48,44 +45,97 @@ def main():
     os.environ['MASTER_PORT'] = '80000'
 
     dist.init_process_group(backend='nccl', init_method='env://', world_size=N_GPUS, rank=RANK)
-    study = optuna.create_study(study_name=PROJECT, direction='minimize')
-    study.optimize(objective, n_trials=1)
+    
+    gamma = gamma_to_str(gamma)
+    project = f"glow-tts_{aug_method}_{gamma}"
+    study = optuna.create_study(study_name=project, direction='minimize', pruner=optuna.pruners.HyperbandPruner())
+    study.optimize(lambda trial: objective(trial, gamma, aug_method, project, opt_config), n_startup_trials=15)
+
+
+def objective(trial, gamma, aug_method, project, opt_config):
+    global global_step
+    global_step = 0
+
+    filelist_dir = opt_config["filelist_dir"]
+    aug = get_aug(opt_config["augs"], aug_method)
+    opt_params = aug["params"]
+    hps = utils.get_hparams()
+    trial_params = hps_set_params(trial, gamma, hps, filelist_dir, aug_method, opt_params)
+    
+    wandb.init(project=project, config=trial_params, reinit=True)
+    train_loss, val_loss = train_and_eval(RANK, N_GPUS, hps, trial)
+    wandb.join()
+    cleanup_dir(model_dir, KEEP_EVERY)
+    return float(val_loss)
+
+
+def get_aug(augs, aug_name):
+    for aug in augs:
+        if aug["name"] == aug_name:
+            return aug
+    return None
+
+
+def gamma_to_str(gamma):
+    return str(gamma).replace(".", "g")
 
 
 def setup_dirs(trial_number):
     os.makedirs(f"{MODEL_DIR}/{PROJECT}/{trial_number}", exist_ok=True)
-
     return f"{MODEL_DIR}/{PROJECT}/{trial_number}"
 
 
-def hps_set_params(trial, params):
-    params.train.learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e0, log=True)
-    params.model.p_dropout = trial.suggest_float("p_dropout", 0, 0.25, step=0.05)
-    return {
-        "learning_rate": params.train.learning_rate,
-        "p_dropout": params.model.p_dropout,
-    }
+def cleanup_dir(directory, interval):
+    checkpoints = [f for f in os.listdir(directory) if re.match(CHKPT_PATT, f)]
+    num_epochs = len(checkpoints)
+    to_keep = [f"G_{x}.pth" for x in range(0, num_epochs+1, interval)][1:]
+    
+    for chkpt in checkpoints:
+        if chkpt not in to_keep:
+            os.remove(f"{directory}/{chkpt}")
+
+def optuna_suggest(trial, name, config):
+    if config["type"] == "categorical":
+        values = config["values"]
+        return trial.suggest_categorical(name, values)
+    
+    if config["type"] == "int": 
+        start = int(config["start"])
+        end = int(config["end"])
+        step = int(config.get("step", 1))
+        return trial.suggest_int(name, start, end, step)
+    
+    if config["type"] == "float":
+        start = float(config["start"])
+        end = float(config["end"])
+        step = config.get("step", None)
+        step = float(step) if step is not None else None
+        log = config.get("log", False)
+        return trial.suggest_float(name, start, end, log=log, step=step)
 
 
-def objective(trial):
-    global global_step
-    global_step = 0
-    hps = utils.get_hparams()
+def hps_set_params(trial, gamma, params, filelist_dir, aug_method, opt_params):
+    trial_params = {}
     model_dir = setup_dirs(trial.number)
-    # hps.train.epochs =  #delete this line
-    hps.train.batch_size = 256
-    hps.data.training_files = "runs/LJS-base_1g0/run_0/train.txt"
-    hps.data.validation_files = "runs/LJS-base_1g0/run_0/val.txt"
-    hps.data.load_mel_from_disk = False
-    hps.model_dir = model_dir
-    # params = hps_set_params(trial, hps)
-    # config=params
-    wandb.init(project=PROJECT, reinit=True)
-    train_loss, val_loss = train_and_eval(RANK, N_GPUS, hps)
-    wandb.join()
-    return float(val_loss)
 
-def train_and_eval(rank, n_gpus, hps):
+    for param_name, config in opt_params.items():
+        trial_params[param_name] = optuna_suggest(trial, param_name, config)
+
+    config_file = f"{filelist_dir}/{gamma}/{aug_method.upper()}-M{trial_params['mu']}-S{trial_params['sigma']}-V{trial_params['speed']}/config.json"
+    with open(config_file) as fh:
+        params = json.load(fh)
+
+    params.train.batch_size = 256
+    params.model_dir = model_dir
+    # hps.train.epochs =  100 #delete this line
+
+    # params.train.learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e0, log=True)
+    # params.model.p_dropout = trial.suggest_float("p_dropout", 0, 0.25, step=0.05)
+    return trial_params
+
+
+
+def train_and_eval(rank, n_gpus, hps, trial):
   global global_step
   if rank == 0:
     logger = utils.get_logger(hps.model_dir)
@@ -142,6 +192,9 @@ def train_and_eval(rank, n_gpus, hps):
       utils.save_checkpoint(generator, optimizer_g, hps.train.learning_rate, epoch, os.path.join(hps.model_dir, "G_{}.pth".format(epoch)))
       print(f"val_loss: {eval_loss}, train_loss: {train_loss}")
       wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
+      trial.report(eval_loss, step)
+      if trial.should_prune():
+            raise optuna.TrialPruned()
     else:
       train(rank, epoch, hps, generator, optimizer_g, train_loader, None, None)
 
@@ -204,6 +257,7 @@ def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer
 
   return final_loss
  
+
 def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval):
   if rank == 0:
     global global_step
@@ -255,4 +309,12 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
     return final_loss
                            
 if __name__ == "__main__":
-  main()
+    # config_path = "/home/kavi/Desktop/phd/audio-augmentation/configs/glow-tts.json"
+    config_path = sys.argv[1]
+    with open(config_path, "r") as fh:
+        config = json.load(fh)
+
+    gammas = config["gammas"]
+    augs = config["augs"]
+    for gamma in gammas:
+        start_search(gamma, "sox", config)
