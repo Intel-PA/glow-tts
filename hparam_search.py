@@ -50,10 +50,10 @@ def start_search(gamma, aug_method, opt_config, resume=False):
     else:
         study = optuna.create_study(study_name=project, direction='minimize', pruner=optuna.pruners.HyperbandPruner())
     
-    study.optimize(lambda trial: objective(trial, gamma, aug_method, project, opt_config))
+    study.optimize(lambda trial: objective(trial, study, gamma, aug_method, project, opt_config))
 
 
-def objective(trial, gamma, aug_method, project, opt_config):
+def objective(trial, study, gamma, aug_method, project, opt_config):
     global global_step
     global_step = 0
 
