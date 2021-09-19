@@ -357,7 +357,7 @@ if __name__ == "__main__":
 
     gammas = config["gammas"]
     resumes = [
-        f"{MODEL_DIR}/glow-tts_sox_0g25/0/study.pkl", 
+        False, 
         False,
         False
     ]
