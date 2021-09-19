@@ -356,10 +356,15 @@ if __name__ == "__main__":
     create_symlinks(config)
 
     gammas = config["gammas"]
-    for gamma in gammas:
+    resumes = [
+        f"{MODEL_DIR}/glow-tts_sox_0g25/0/study.pkl", 
+        False,
+        False
+    ]
+    for gamma, resume in zip(gammas, resumes):
         print(f"Starting study for gamma={gamma}")
         try:
-            start_search(gamma, "sox", config)
+            start_search(gamma, "sox", config, resume)
         except KeyboardInterrupt:
             print(f"Study for gamma={gamma} cancelled.")
             pass
