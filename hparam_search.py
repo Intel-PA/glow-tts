@@ -4,6 +4,7 @@ import sys
 import json
 import math
 import glob
+import joblib
 import argparse
 
 import torch
@@ -36,11 +37,19 @@ CHKPT_PATT = r"G_\d+\.pth"
 DATADIR = "/home/kjayathunge/datasets/LJS"
 
 
-def start_search(gamma, aug_method, opt_config):
-    
+def start_search(gamma, aug_method, opt_config, resume=False):
     gamma = gamma_to_str(gamma)
     project = f"glow-tts_{aug_method}_{gamma}"
-    study = optuna.create_study(study_name=project, direction='minimize', pruner=optuna.pruners.HyperbandPruner())
+
+    if resume:
+        study = joblib.load(resume)
+        print(f"Best trial until now: {study.best_trial.value}")
+        print(f"Params: ")
+        for key, value in study.best_trial.params.items():
+            print(f"    {key}: {value}")
+    else:
+        study = optuna.create_study(study_name=project, direction='minimize', pruner=optuna.pruners.HyperbandPruner())
+    
     study.optimize(lambda trial: objective(trial, gamma, aug_method, project, opt_config))
 
 
@@ -54,11 +63,20 @@ def objective(trial, gamma, aug_method, project, opt_config):
     hps = utils.get_hparams()
     trial_params, all_params = hps_set_params(trial, project, gamma, hps, filelist_dir, aug_method, opt_params)
     
+    joblib.dump(study, f"{all_params.model_dir}/study.pkl")
     wandb.init(project=project, config=trial_params, reinit=True)
-    train_loss, val_loss = train_and_eval(RANK, N_GPUS, all_params, trial)
+    try:
+        train_loss, val_loss = train_and_eval(RANK, N_GPUS, all_params, trial)
+    except RuntimeError as e:
+        print(f"Trial {trial.number} encountered a runtime error: {e}")
+        pass
     wandb.join()
     cleanup_dir(all_params.model_dir, KEEP_EVERY)
     return float(val_loss)
+
+
+def get_model_dir_name(trial_number, project):
+    return f"{MODEL_DIR}/{project}/{trial_number}"
 
 
 def get_aug(augs, aug_name):
@@ -92,8 +110,9 @@ def create_symlinks(config):
 
 
 def setup_dirs(trial_number, project):
-    os.makedirs(f"{MODEL_DIR}/{project}/{trial_number}", exist_ok=True)
-    return f"{MODEL_DIR}/{project}/{trial_number}"
+    model_dir = get_model_dir_name(trial_number, project)
+    os.makedirs(model_dir, exist_ok=True)
+    return model_dir
 
 
 def cleanup_dir(directory, interval):
