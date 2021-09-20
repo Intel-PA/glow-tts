@@ -65,9 +65,11 @@ def objective(trial, study, gamma, aug_method, project, opt_config):
     
     joblib.dump(study, f"{all_params.model_dir}/study.pkl")
     wandb.init(project=project, config=trial_params, reinit=True)
+
     try:
         train_loss, val_loss = train_and_eval(RANK, N_GPUS, all_params, trial)
     except RuntimeError as e:
+        val_loss = -1
         print(f"Trial {trial.number} encountered a runtime error: {e}")
         pass
     wandb.join()
