@@ -359,7 +359,7 @@ if __name__ == "__main__":
 
     gammas = config["gammas"]
     resumes = [
-        False, 
+        "models/optuna_trials/glow-tts_sox_0g25/4/study.pkl", 
         False,
         False
     ]
