@@ -359,8 +359,8 @@ if __name__ == "__main__":
 
     gammas = config["gammas"]
     resumes = [
-        "models/optuna_trials/glow-tts_sox_0g25/4/study.pkl", 
-        False,
+        False, 
+        "models/optuna_trials/glow-tts_sox_0g5/9/study.pkl",
         False
     ]
     for gamma, resume in zip(gammas, resumes):
