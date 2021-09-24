@@ -37,11 +37,13 @@ CHKPT_PATT = r"G_\d+\.pth"
 DATADIR = "/home/kjayathunge/datasets/LJS"
 
 
-def start_search(gamma, aug_method, opt_config, resume=False):
+def start_search(gamma, aug_method, opt_config, resume):
     gamma = gamma_to_str(gamma)
     project = f"glow-tts_{aug_method}_{gamma}"
 
     if resume:
+        if resume == "skip":
+            raise KeyboardInterrupt()
         study = joblib.load(resume)
         print(f"Best trial until now: {study.best_trial.value}")
         print(f"Params: ")
@@ -359,8 +361,8 @@ if __name__ == "__main__":
 
     gammas = config["gammas"]
     resumes = [
-        False, 
-        "models/optuna_trials/glow-tts_sox_0g5/9/study.pkl",
+        "skip", 
+        "models/optuna_trials/glow-tts_sox_0g5/8/study.pkl",
         False
     ]
     for gamma, resume in zip(gammas, resumes):
