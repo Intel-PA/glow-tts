@@ -2,6 +2,8 @@ import os
 import json
 import argparse
 import math
+
+import wandb
 import torch
 from torch import nn, optim
 from torch.nn import functional as F
@@ -29,10 +31,11 @@ def main():
   n_gpus = torch.cuda.device_count()
   os.environ['MASTER_ADDR'] = 'localhost'
   os.environ['MASTER_PORT'] = '80000'
-
   hps = utils.get_hparams()
+  wandb.init(project="sox_augmentation_limits", reinit=True)
+  wandb.run.name = "_".join(hps["training_files"].split("/")[1:-1])
   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
-
+  wandb.join()
 
 def train_and_eval(rank, n_gpus, hps):
   global global_step
@@ -85,8 +88,9 @@ def train_and_eval(rank, n_gpus, hps):
   
   for epoch in range(epoch_str, hps.train.epochs + 1):
     if rank==0:
-      train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
-      evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval)
+      train_loss = train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
+      eval_loss = evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval)
+      wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
       utils.save_checkpoint(generator, optimizer_g, hps.train.learning_rate, epoch, os.path.join(hps.model_dir, "G_{}.pth".format(epoch)))
     else:
       train(rank, epoch, hps, generator, optimizer_g, train_loader, None, None)
@@ -96,6 +100,7 @@ def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer
   train_loader.sampler.set_epoch(epoch)
   global global_step
 
+  final_loss = 0
   generator.train()
   for batch_idx, (x, x_lengths, y, y_lengths) in enumerate(train_loader):
     x, x_lengths = x.cuda(rank, non_blocking=True), x_lengths.cuda(rank, non_blocking=True)
@@ -140,16 +145,19 @@ def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer
             },
           scalars=scalar_dict)
     global_step += 1
-  
+    final_loss = loss_g.item()
+
   if rank == 0:
     logger.info('====> Epoch: {}'.format(epoch))
 
+  return final_loss
  
 def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval):
   if rank == 0:
     global global_step
     generator.eval()
     losses_tot = []
+    final_loss = 0
     with torch.no_grad():
       for batch_idx, (x, x_lengths, y, y_lengths) in enumerate(val_loader):
         x, x_lengths = x.cuda(rank, non_blocking=True), x_lengths.cuda(rank, non_blocking=True)
@@ -179,6 +187,7 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
           100. * batch_idx / len(val_loader),
           loss_g.item()))
         logger.info([x.item() for x in loss_gs])
+        final_loss = loss_g.item()
            
     
     losses_tot = [x/len(val_loader) for x in losses_tot]
@@ -190,6 +199,7 @@ def evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, write
       global_step=global_step, 
       scalars=scalar_dict)
     logger.info('====> Epoch: {}'.format(epoch))
+    return final_loss
 
                            
 if __name__ == "__main__":
