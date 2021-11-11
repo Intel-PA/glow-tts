@@ -32,12 +32,11 @@ def main():
   os.environ['MASTER_ADDR'] = 'localhost'
   os.environ['MASTER_PORT'] = '80000'
   hps = utils.get_hparams()
-  wandb.init(project="sox_augmentation_limits", reinit=True)
-  wandb.run.name = "_".join(hps["data"]["training_files"].split("/")[1:-1])
   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
-  wandb.join()
 
 def train_and_eval(rank, n_gpus, hps):
+  wandb.init(project="sox_augmentation_limits", reinit=True)
+  wandb.run.name = "_".join(hps["data"]["training_files"].split("/")[1:-1])
   global global_step
   if rank == 0:
     logger = utils.get_logger(hps.model_dir)
@@ -67,8 +66,8 @@ def train_and_eval(rank, n_gpus, hps):
         drop_last=True, collate_fn=collate_fn)
 
   generator = models.FlowGenerator(
-      n_vocab=len(symbols) + getattr(hps.data, "add_blank", False), 
-      out_channels=hps.data.n_mel_channels, 
+      n_vocab=len(symbols) + getattr(hps.data, "add_blank", False),
+      out_channels=hps.data.n_mel_channels,
       **hps.model).cuda(rank)
   optimizer_g = commons.Adam(generator.parameters(), scheduler=hps.train.scheduler, dim_model=hps.model.hidden_channels, warmup_steps=hps.train.warmup_steps, lr=hps.train.learning_rate, betas=hps.train.betas, eps=hps.train.eps)
   if hps.train.fp16_run:
@@ -85,7 +84,7 @@ def train_and_eval(rank, n_gpus, hps):
   except:
     if hps.train.ddi and os.path.isfile(os.path.join(hps.model_dir, "ddi_G.pth")):
       _ = utils.load_checkpoint(os.path.join(hps.model_dir, "ddi_G.pth"), generator, optimizer_g)
-  
+
   for epoch in range(epoch_str, hps.train.epochs + 1):
     if rank==0:
       train_loss = train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
@@ -94,6 +93,7 @@ def train_and_eval(rank, n_gpus, hps):
       utils.save_checkpoint(generator, optimizer_g, hps.train.learning_rate, epoch, os.path.join(hps.model_dir, "G_{}.pth".format(epoch)))
     else:
       train(rank, epoch, hps, generator, optimizer_g, train_loader, None, None)
+  wandb.join()
 
 
 def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer):
@@ -108,7 +108,7 @@ def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer
 
     # Train Generator
     optimizer_g.zero_grad()
-    
+
     (z, z_m, z_logs, logdet, z_mask), (x_m, x_logs, x_mask), (attn, logw, logw_) = generator(x, x_lengths, y, y_lengths, gen=False)
     l_mle = commons.mle_loss(z, z_m, z_logs, logdet, z_mask)
     l_length = commons.duration_loss(logw, logw_, x_lengths)
