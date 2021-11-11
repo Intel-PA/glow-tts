@@ -33,7 +33,7 @@ def main():
   os.environ['MASTER_PORT'] = '80000'
   hps = utils.get_hparams()
   wandb.init(project="sox_augmentation_limits", reinit=True)
-  wandb.run.name = "_".join(hps["training_files"].split("/")[1:-1])
+  wandb.run.name = "_".join(hps["data"]["training_files"].split("/")[1:-1])
   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
   wandb.join()
 
