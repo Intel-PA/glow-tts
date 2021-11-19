@@ -35,7 +35,7 @@ def main():
   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
 
 def train_and_eval(rank, n_gpus, hps):
-  wandb.init(project="sox_augmentation_limits", reinit=True)
+  wandb.init(project="SOX_augmentation_limits", reinit=True)
   wandb.run.name = "_".join(hps["data"]["training_files"].split("/")[1:-1])
   global global_step
   if rank == 0:
