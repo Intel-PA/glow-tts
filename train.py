@@ -35,8 +35,8 @@ def main():
   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
 
 def train_and_eval(rank, n_gpus, hps):
-  wandb.init(project="SPEC_aug_limits", reinit=True)
-  wandb.run.name = "_".join(hps["data"]["training_files"].split("/")[1:-1])
+  wandb.init(project="glow-tts_sox-smote_performance", reinit=True)
+  wandb.run.name = hps["data"]["training_files"].split("/")[-2] #"_".join(hps["data"]["training_files"].split("/")[1:-1])
   global global_step
   if rank == 0:
     logger = utils.get_logger(hps.model_dir)
