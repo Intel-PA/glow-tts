@@ -32,7 +32,7 @@ def main():
   torch.manual_seed(hps.train.seed)
 
   train_dataset = TextMelLoader(hps.data.training_files, hps.data)
-  collate_fn = TextMelCollate(1)
+  collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1)
   train_loader = DataLoader(train_dataset, num_workers=8, shuffle=True,
       batch_size=hps.train.batch_size, pin_memory=True,
       drop_last=True, collate_fn=collate_fn)

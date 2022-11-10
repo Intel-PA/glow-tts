@@ -92,12 +92,12 @@ class TextMelCollate():
         """Collate's training batch from normalized text and mel-spectrogram
         PARAMS
         ------
-        batch: [text_normalized, Audio]
+        batch: [text_normalized, signal]
         """
         if self.augmenter is not None:
             # augment the batch
             # no need for self.get_mel, augmenter will handle this
-            batch = self.augmenter.augment_batch(batch, self.sampling_rate)
+            batch = self.augmenter.augment_batch(batch)
         else:
             batch = [[t, self.get_mel(signal)] for t, signal in batch]
 
@@ -116,13 +116,13 @@ class TextMelCollate():
 
 
         # Right zero-pad mel-spec
-        num_mels = batch[0][1].size(0)
         max_target_len = max([x[1].size(1) for x in batch])
         if max_target_len % self.n_frames_per_step != 0:
             max_target_len += self.n_frames_per_step - max_target_len % self.n_frames_per_step
             assert max_target_len % self.n_frames_per_step == 0
 
         # include mel padded
+        num_mels = batch[0][1].size(0)
         mel_padded = torch.FloatTensor(len(batch), num_mels, max_target_len)
         mel_padded.zero_()
         output_lengths = torch.LongTensor(len(batch))

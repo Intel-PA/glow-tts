@@ -19,11 +19,11 @@ import models
 import commons
 import utils
 from text.symbols import symbols
-                            
+from audio_aug.spec import SpecAugment
+from audio_aug.adsmote import AdSmoteAugment
 
 global_step = 0
-
-
+NUM_CPUS = 1 #  mp.cpu_count()
 def main():
   """Assume Single Node Multi GPUs Training Only"""
   assert torch.cuda.is_available(), "CPU training is not allowed."
@@ -35,8 +35,8 @@ def main():
   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
 
 def train_and_eval(rank, n_gpus, hps):
-  wandb.init(project="glow-tts_sox-smote_performance", reinit=True)
-  wandb.run.name = hps["data"]["training_files"].split("/")[-2] #"_".join(hps["data"]["training_files"].split("/")[1:-1])
+  #wandb.init(project="glow-tts-testing", reinit=True)
+  #wandb.run.name = hps["data"]["training_files"].split("/")[-2] #"_".join(hps["data"]["training_files"].split("/")[1:-1])
   global global_step
   if rank == 0:
     logger = utils.get_logger(hps.model_dir)
@@ -55,15 +55,16 @@ def train_and_eval(rank, n_gpus, hps):
       num_replicas=n_gpus,
       rank=rank,
       shuffle=True)
-  collate_fn = TextMelCollate(1)
-  train_loader = DataLoader(train_dataset, num_workers=8, shuffle=False,
+  train_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1, augmenter=AdSmoteAugment)
+  val_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1)
+  train_loader = DataLoader(train_dataset, num_workers=NUM_CPUS, shuffle=False,
       batch_size=hps.train.batch_size, pin_memory=True,
-      drop_last=True, collate_fn=collate_fn, sampler=train_sampler)
+      drop_last=True, collate_fn=train_collate_fn, sampler=train_sampler)
   if rank == 0:
     val_dataset = TextMelLoader(hps.data.validation_files, hps.data)
-    val_loader = DataLoader(val_dataset, num_workers=8, shuffle=False,
+    val_loader = DataLoader(val_dataset, num_workers=NUM_CPUS, shuffle=False,
         batch_size=hps.train.batch_size, pin_memory=True,
-        drop_last=True, collate_fn=collate_fn)
+        drop_last=True, collate_fn=val_collate_fn)
 
   generator = models.FlowGenerator(
       n_vocab=len(symbols) + getattr(hps.data, "add_blank", False),
@@ -89,11 +90,11 @@ def train_and_eval(rank, n_gpus, hps):
     if rank==0:
       train_loss = train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
       eval_loss = evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval)
-      wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
+      #wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
       utils.save_checkpoint(generator, optimizer_g, hps.train.learning_rate, epoch, os.path.join(hps.model_dir, "G_{}.pth".format(epoch)))
     else:
       train(rank, epoch, hps, generator, optimizer_g, train_loader, None, None)
-  wandb.join()
+  #wandb.join()
 
 
 def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer):
