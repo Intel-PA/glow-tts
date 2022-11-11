@@ -49,13 +49,21 @@ def train_and_eval(rank, n_gpus, hps):
   torch.manual_seed(hps.train.seed)
   torch.cuda.set_device(rank)
 
+  adsmote_args = {
+    "features_path": "adsmote_features.ptf",
+    "dataset_filelist": "./filelists/train.txt",
+    "sampling_rate": hps.data.sampling_rate,
+    "filelist_delim": "|"
+  }
   train_dataset = TextMelLoader(hps.data.training_files, hps.data)
   train_sampler = torch.utils.data.distributed.DistributedSampler(
       train_dataset,
       num_replicas=n_gpus,
       rank=rank,
       shuffle=True)
-  train_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1, augmenter=AdSmoteAugment)
+  train_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1,
+                                    augmenter=AdSmoteAugment,
+                                    augmenter_kwargs=adsmote_args)
   val_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1)
   train_loader = DataLoader(train_dataset, num_workers=NUM_CPUS, shuffle=False,
       batch_size=hps.train.batch_size, pin_memory=True,

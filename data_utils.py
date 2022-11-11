@@ -64,9 +64,9 @@ class TextMelCollate():
     """ Zero-pads model inputs and targets based on number of frames per step
         add augmented samples to batch
     """
-    def __init__(self, hparams, n_frames_per_step=1, augmenter=None):
+    def __init__(self, hparams, n_frames_per_step=1, augmenter=None, augmenter_kwargs: dict={}):
         if augmenter is not None:
-            self.augmenter = augmenter(gamma=0.875, get_mel_fn=self.get_mel)
+            self.augmenter = augmenter(gamma=0.875, get_mel_fn=self.get_mel, **augmenter_kwargs)
         else:
             self.augmenter = None
         self.n_frames_per_step = n_frames_per_step
