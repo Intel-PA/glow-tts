@@ -19,22 +19,24 @@ import models
 import commons
 import utils
 from text.symbols import symbols
-from audio_aug.spec import SpecAugment
-from audio_aug.adsmote import AdSmoteAugment
+from audio_aug.augment import Augmentor
 
 global_step = 0
 NUM_CPUS = 1 #  mp.cpu_count()
-def main():
+aug_config = "./audio_aug/adsmote_scheme.yml"
+
+
+def main(hps, augmentor):
   """Assume Single Node Multi GPUs Training Only"""
   assert torch.cuda.is_available(), "CPU training is not allowed."
 
   n_gpus = torch.cuda.device_count()
   os.environ['MASTER_ADDR'] = 'localhost'
   os.environ['MASTER_PORT'] = '80000'
-  hps = utils.get_hparams()
-  mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps,))
+  #hps = utils.get_hparams()
+  mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps, augmentor,))
 
-def train_and_eval(rank, n_gpus, hps):
+def train_and_eval(rank, n_gpus, hps, augmentor):
   #wandb.init(project="glow-tts-testing", reinit=True)
   #wandb.run.name = hps["data"]["training_files"].split("/")[-2] #"_".join(hps["data"]["training_files"].split("/")[1:-1])
   global global_step
@@ -49,12 +51,6 @@ def train_and_eval(rank, n_gpus, hps):
   torch.manual_seed(hps.train.seed)
   torch.cuda.set_device(rank)
 
-  adsmote_args = {
-    "features_path": "adsmote_features.ptf",
-    "dataset_filelist": "./filelists/train.txt",
-    "sampling_rate": hps.data.sampling_rate,
-    "filelist_delim": "|"
-  }
   train_dataset = TextMelLoader(hps.data.training_files, hps.data)
   train_sampler = torch.utils.data.distributed.DistributedSampler(
       train_dataset,
@@ -62,8 +58,7 @@ def train_and_eval(rank, n_gpus, hps):
       rank=rank,
       shuffle=True)
   train_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1,
-                                    augmenter=AdSmoteAugment,
-                                    augmenter_kwargs=adsmote_args)
+                                    augmentor=augmentor, aug_config=aug_config)
   val_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1)
   train_loader = DataLoader(train_dataset, num_workers=NUM_CPUS, shuffle=False,
       batch_size=hps.train.batch_size, pin_memory=True,

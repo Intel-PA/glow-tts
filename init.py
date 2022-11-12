@@ -23,8 +23,8 @@ class FlowGenerator_DDI(models.FlowGenerator):
         f.set_ddi(True)
 
 
-def main():
-  hps = utils.get_hparams()
+def main(hps):
+  # hps = utils.get_hparams()
   logger = utils.get_logger(hps.model_dir)
   logger.info(hps)
   utils.check_git_hash(hps.model_dir)
