@@ -16,7 +16,7 @@
   },
   "data": {
     "load_mel_from_disk": false,
-    "training_files":"filelists/train.txt",
+    "training_files":"filelists/train_1000.txt",
     "validation_files":"filelists/val.txt",
     "text_cleaners":["english_cleaners"],
     "max_wav_value": 32768.0,

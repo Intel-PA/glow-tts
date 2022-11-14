@@ -5,7 +5,8 @@ channels:
 dependencies:
   - cudatoolkit=11.1
   - python=3.8
-  - pytorch-gpu=1.8.0 
+  - pytorch-gpu=1.8.0
+  - torchaudio=0.8.0
   - sox=14.4.2
   - pip:
     - cython==0.29.12 

@@ -64,11 +64,11 @@ class TextMelCollate():
     """ Zero-pads model inputs and targets based on number of frames per step
         add augmented samples to batch
     """
-    def __init__(self, hparams, n_frames_per_step=1, augmenter=None, augmenter_kwargs: dict={}):
-        if augmenter is not None:
-            self.augmenter = augmenter(gamma=0.875, get_mel_fn=self.get_mel, **augmenter_kwargs)
+    def __init__(self, hparams, n_frames_per_step=1, augmentor=None):
+        if augmentor is not None:
+            self.augmentor = augmentor.get(self.get_mel)
         else:
-            self.augmenter = None
+            self.augmentor = None
         self.n_frames_per_step = n_frames_per_step
         self.load_mel_from_disk = hparams.load_mel_from_disk
         self.max_wav_value = hparams.max_wav_value
@@ -80,6 +80,8 @@ class TextMelCollate():
 
     def get_mel(self, signal):
         if not self.load_mel_from_disk:
+            if isinstance(signal, np.ndarray):
+                signal = torch.from_numpy(signal)
             signal = signal.unsqueeze(0)
             melspec = self.stft.mel_spectrogram(signal)
             melspec = torch.squeeze(melspec, 0)
@@ -94,10 +96,10 @@ class TextMelCollate():
         ------
         batch: [text_normalized, signal]
         """
-        if self.augmenter is not None:
+        if self.augmentor is not None:
             # augment the batch
             # no need for self.get_mel, augmenter will handle this
-            batch = self.augmenter.augment_batch(batch)
+            batch = self.augmentor.augment_batch(batch)
         else:
             batch = [[t, self.get_mel(signal)] for t, signal in batch]
 

@@ -26,19 +26,21 @@ NUM_CPUS = 1 #  mp.cpu_count()
 aug_config = "./audio_aug/adsmote_scheme.yml"
 
 
-def main(hps, augmentor):
+def main(hps, augmentor, run_num):
   """Assume Single Node Multi GPUs Training Only"""
   assert torch.cuda.is_available(), "CPU training is not allowed."
 
   n_gpus = torch.cuda.device_count()
   os.environ['MASTER_ADDR'] = 'localhost'
-  os.environ['MASTER_PORT'] = '80000'
+  os.environ['MASTER_PORT'] = str(10000 + run_num)
   #hps = utils.get_hparams()
   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps, augmentor,))
 
 def train_and_eval(rank, n_gpus, hps, augmentor):
-  #wandb.init(project="glow-tts-testing", reinit=True)
-  #wandb.run.name = hps["data"]["training_files"].split("/")[-2] #"_".join(hps["data"]["training_files"].split("/")[1:-1])
+  run_name_elements = augmentor.config["run_name"].split("_")
+  project_name = "_".join(run_name_elements[:2]) # Use experiment and kind names
+  wandb.init(project=project_name, reinit=True)
+  wandb.run.name = augmentor.config["run_name"]
   global global_step
   if rank == 0:
     logger = utils.get_logger(hps.model_dir)
@@ -58,7 +60,7 @@ def train_and_eval(rank, n_gpus, hps, augmentor):
       rank=rank,
       shuffle=True)
   train_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1,
-                                    augmentor=augmentor, aug_config=aug_config)
+                                    augmentor=augmentor)
   val_collate_fn = TextMelCollate(hparams=hps.data, n_frames_per_step=1)
   train_loader = DataLoader(train_dataset, num_workers=NUM_CPUS, shuffle=False,
       batch_size=hps.train.batch_size, pin_memory=True,
@@ -93,11 +95,11 @@ def train_and_eval(rank, n_gpus, hps, augmentor):
     if rank==0:
       train_loss = train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer)
       eval_loss = evaluate(rank, epoch, hps, generator, optimizer_g, val_loader, logger, writer_eval)
-      #wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
+      wandb.log({"val_loss": eval_loss, "train_loss": train_loss}, step=epoch)
       utils.save_checkpoint(generator, optimizer_g, hps.train.learning_rate, epoch, os.path.join(hps.model_dir, "G_{}.pth".format(epoch)))
     else:
       train(rank, epoch, hps, generator, optimizer_g, train_loader, None, None)
-  #wandb.join()
+  wandb.join()
 
 
 def train(rank, epoch, hps, generator, optimizer_g, train_loader, logger, writer):
