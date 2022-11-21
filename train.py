@@ -23,7 +23,6 @@ from audio_aug.augment import Augmentor
 
 global_step = 0
 NUM_CPUS = 1 #  mp.cpu_count()
-aug_config = "./audio_aug/adsmote_scheme.yml"
 
 
 def main(hps, augmentor, run_num):
@@ -32,7 +31,7 @@ def main(hps, augmentor, run_num):
 
   n_gpus = torch.cuda.device_count()
   os.environ['MASTER_ADDR'] = 'localhost'
-  os.environ['MASTER_PORT'] = str(10000 + run_num)
+  os.environ['MASTER_PORT'] = str(50000 + run_num)
   #hps = utils.get_hparams()
   mp.spawn(train_and_eval, nprocs=n_gpus, args=(n_gpus, hps, augmentor,))
 
