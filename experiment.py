@@ -60,10 +60,10 @@ def cleanup(run_name: str, log_dir: str = "./train_logs"):
 
 
 if __name__ == '__main__':
-    experiment_name = "proportionExperiment"
+    experiment_name = "onlyWarp"
     base_args = sys.argv[1:]  # Remove script name
-    template = "audio_aug/adsmote_scheme.yml"
-    runs = get_augment_schemes(gammas=[1, 0.875, 0.75, 0.5],
+    template = "audio_aug/specaugment_scheme.yml"
+    runs = get_augment_schemes(gammas=[0.75, 0.5, 1],
                                num_runs=1,
                                template_file=template,
                                name_prefix=experiment_name)
