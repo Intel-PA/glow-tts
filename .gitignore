@@ -20,3 +20,10 @@ tmp
 test_clean
 train_logs
 env_setup_done
+
+.idea/
+*.ptf
+apex/
+audio_aug/
+wandb/
+
